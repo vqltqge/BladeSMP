@@ -21,6 +21,12 @@ public class FrostAbilityOne {
     private final DurationManager durationManager;
     private final BladeSMP plugin;
 
+    private final Set<UUID> freezePlayers = new HashSet<>();
+
+    public Set<UUID> getFreezePlayers() {
+        return freezePlayers;
+    }
+
     private final long cooldown;
     private final double dashVelocity;
     private final long freezeDuration;
@@ -84,24 +90,17 @@ public class FrostAbilityOne {
 
                     if (player.getBoundingBox().overlaps(other.getBoundingBox())) {
                         hitPlayers.add(other.getUniqueId());
+                        freezePlayers.add(other.getUniqueId());
 
                         other.damage(damage);
 
                         new BukkitRunnable() {
-                            int ticks = 0;
-
                             @Override
                             public void run() {
-                                if (ticks >= freezeDuration || !other.isOnline()) {
-                                    cancel();
-                                    return;
-                                }
-
-                                other.setFreezeTicks(other.getMaxFreezeTicks());
-
-                                ticks++;
+                                freezePlayers.remove(other.getUniqueId());
                             }
-                        }.runTaskTimer(plugin, 0L, 1L);
+                        }.runTaskLater(plugin, freezeDuration);
+
                     }
                 }
 

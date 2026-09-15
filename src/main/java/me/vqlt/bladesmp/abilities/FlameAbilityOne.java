@@ -45,12 +45,12 @@ public class FlameAbilityOne {
 
         if (cooldownManager.isOnCooldown(id, "flameone")) {
             int seconds = (int) Math.ceil(cooldownManager.getRemainingMillis(id, "flameone") / 1000.0);
-            player.sendMessage(Component.text("♨ Flame Sweep is on cooldown for " + seconds + "s").color(FLAME_COLOR));
+            player.sendMessage(Component.text("🔥 Flame Sweep is on cooldown for " + seconds + "s").color(FLAME_COLOR));
             return;
         }
 
         if (durationManager.isActive(id, "flameone")) {
-            player.sendMessage(Component.text("♨ Flame Sweep is already active").color(FLAME_COLOR));
+            player.sendMessage(Component.text("🔥 Flame Sweep is already active").color(FLAME_COLOR));
             return;
         }
 
@@ -60,7 +60,7 @@ public class FlameAbilityOne {
             return;
         }
 
-        player.sendMessage(Component.text("♨ Flame Sweep activated").color(FLAME_COLOR));
+        player.sendMessage(Component.text("🔥 Flame Sweep activated").color(FLAME_COLOR));
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
 
         Vector direction = player.getLocation().getDirection().normalize();

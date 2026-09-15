@@ -42,6 +42,7 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(new FortuneExperienceListener(bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(stormAbilityOne, this);
+        getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne), this);
 
     }
 
