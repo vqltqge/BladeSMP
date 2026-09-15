@@ -34,10 +34,10 @@ public class FlameAbilityOne {
         this.durationManager = durationManager;
         this.plugin = plugin;
 
-        this.damage = plugin.getConfig().getDouble("flame.ability-one.damage");
-        this.knockback = plugin.getConfig().getDouble("flame.ability-one.knockback");
-        this.cooldown = plugin.getConfig().getLong("flame.ability-one.cooldown") * 1000L;
-        this.range = plugin.getConfig().getDouble("flame.ability-one.range");
+        this.damage = plugin.getConfig().getDouble("flame.ability-one.damage", 24.0);
+        this.knockback = plugin.getConfig().getDouble("flame.ability-one.knockback", 1.2);
+        this.cooldown = plugin.getConfig().getLong("flame.ability-one.cooldown", 60) * 1000L;
+        this.range = plugin.getConfig().getDouble("flame.ability-one.range", 4);
     }
 
     public void activate(Player player) {

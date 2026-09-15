@@ -22,7 +22,7 @@ public final class BladeSMP extends JavaPlugin {
         CooldownManager cooldownManager = new CooldownManager();
         AbilityManager abilityManager = new AbilityManager(this, bladeManager);
         StormAbilityOne stormAbilityOne = new StormAbilityOne(this, bladeManager, cooldownManager, durationManager);
-        PulseAbilityOne pulseAbilityOne = new PulseAbilityOne(cooldownManager, bladeManager);
+        PulseAbilityOne pulseAbilityOne = new PulseAbilityOne(this, cooldownManager, bladeManager);
         BloomAbilityOne bloomAbilityOne = new BloomAbilityOne(this, bladeManager, cooldownManager, durationManager);
         FlameAbilityOne flameAbilityOne = new FlameAbilityOne(bladeManager, cooldownManager, durationManager, this);
         FrostAbilityOne frostAbilityOne = new FrostAbilityOne(this, durationManager, cooldownManager, bladeManager);
@@ -38,9 +38,9 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new WeaponsGUIListener(), this);
         getServer().getPluginManager().registerEvents(new FallDamageListener(bladeManager), this);
         getServer().getPluginManager().registerEvents(new FrostHitListener(bladeManager, passiveManager), this);
-        getServer().getPluginManager().registerEvents(new BloomHitListener(bladeManager, passiveManager), this);
+        getServer().getPluginManager().registerEvents(new BloomHitListener(this, bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager), this);
-        getServer().getPluginManager().registerEvents(new FortuneExperienceListener(bladeManager, passiveManager), this);
+        getServer().getPluginManager().registerEvents(new FortuneExperienceListener(this, bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(stormAbilityOne, this);
         getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne), this);
 

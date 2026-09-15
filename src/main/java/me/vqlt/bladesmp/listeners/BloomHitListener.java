@@ -1,5 +1,6 @@
 package me.vqlt.bladesmp.listeners;
 
+import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.PassiveManager;
 import org.bukkit.attribute.Attribute;
@@ -15,14 +16,20 @@ import java.util.UUID;
 
 public class BloomHitListener implements Listener {
 
+    private final BladeSMP plugin;
     private final BladeManager bladeManager;
     private final PassiveManager passiveManager;
     private final HashMap<UUID, Integer> bloomHits = new HashMap<UUID, Integer>();
     int count = 0;
 
-    public BloomHitListener(BladeManager bladeManager, PassiveManager passiveManager) {
+    private final int activateHits;
+
+    public BloomHitListener(BladeSMP plugin, BladeManager bladeManager, PassiveManager passiveManager) {
+        this.plugin = plugin;
         this.bladeManager = bladeManager;
         this.passiveManager = passiveManager;
+
+        this.activateHits = plugin.getConfig().getInt("bloom.passive.hits-to-activate");
     }
 
     @EventHandler
@@ -61,7 +68,7 @@ public class BloomHitListener implements Listener {
 
         bloomHits.put(id, hits);
 
-        if (hits >= 10) {
+        if (hits >= activateHits) {
             damager.setHealth(Math.min(damager.getHealth() + event.getFinalDamage(), damager.getMaxHealth()));
 
             bloomHits.put(id, 0);
