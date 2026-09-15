@@ -7,6 +7,7 @@ import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
@@ -65,7 +66,12 @@ public class StormAbilityOne implements Listener {
         player.playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 0.25F, 2);
         armedPlayers.add(id);
 
-
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            if (armedPlayers.remove(id)) {
+                player.sendMessage(Component.text("⚡ Thunderstorm charge expired").color(STORM_COLOR));
+                player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 0.5F, 0.8F);
+            }
+        }, 1200L);
     }
 
     @EventHandler
