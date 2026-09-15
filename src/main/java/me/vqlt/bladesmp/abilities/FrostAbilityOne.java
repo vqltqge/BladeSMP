@@ -63,7 +63,8 @@ public class FrostAbilityOne {
         }
 
         player.sendMessage(Component.text("✻ Frozen Dash activated").color(FROST_COLOR));
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+        player.playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, 0.25f, 1.8f);
+        player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_JUMP, 0.55f, 1.5f);
 
         player.setVelocity(player.getLocation().getDirection().multiply(dashVelocity));
 

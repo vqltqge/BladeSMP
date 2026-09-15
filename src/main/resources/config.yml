@@ -24,7 +24,7 @@ frost:
   ability-one:
     cooldown: 45
     dash-velocity: 2
-    freeze-duration: 3.0 # In seconds
+    freeze-duration: 3 # In seconds
     damage: 16.0
 
 

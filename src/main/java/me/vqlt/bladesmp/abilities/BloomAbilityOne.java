@@ -71,7 +71,7 @@ public class BloomAbilityOne {
         durationManager.startDuration(id, "bloomone", duration);
 
         player.sendMessage(Component.text("♥ Vital Surge activated").color(BLOOM_COLOR));
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1, 1);
         maxHealth.setBaseValue(maxHearts);
         if (healHearts) {
             player.setHealth(maxHearts);

@@ -40,7 +40,7 @@ public class DurationManager {
         long remaining = expiryTime - System.currentTimeMillis();
 
         if (remaining <= 0) {
-            playerDurations.remove(id);
+            playerDurations.remove(abilityId);
 
             if (playerDurations.isEmpty()) {
                 durations.remove(id);

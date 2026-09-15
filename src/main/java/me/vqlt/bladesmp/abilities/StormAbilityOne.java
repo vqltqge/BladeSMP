@@ -5,7 +5,10 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,11 +24,13 @@ public class StormAbilityOne implements Listener {
     private final DurationManager durationManager;
     private final BladeSMP plugin;
 
+
     private final long cooldown;
     private final long duration;
     private final int strikeHits;
-    private final Set<UUID> armedPlayers = new HashSet<>();
 
+    private static final TextColor STORM_COLOR = TextColor.fromHexString("#FFE44D");
+    private final Set<UUID> armedPlayers = new HashSet<>();
     private final Map<UUID, Integer> hitCount = new HashMap<>();
 
 
@@ -44,11 +49,20 @@ public class StormAbilityOne implements Listener {
     public void activate(Player player) {
         UUID id = player.getUniqueId();
 
-        if (cooldownManager.isOnCooldown(id, "stormone")) {
-            player.sendMessage("Ability One is on cooldown");
+        if (durationManager.isActive(id, "stormone")) {
+            player.sendMessage(Component.text("⚡ Thunderstorm is already active").color(STORM_COLOR));
             return;
         }
 
+        if (cooldownManager.isOnCooldown(id, "stormone")) {
+            int seconds = (int) Math.ceil(cooldownManager.getRemainingMillis(id, "stormone") / 1000.0);
+            player.sendMessage(Component.text("⚡ Thunderstorm is on cooldown for " + seconds + "s").color(STORM_COLOR));
+            return;
+        }
+
+        player.sendMessage(Component.text("⚡ Thunderstorm charged").color(STORM_COLOR));
+        player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_CHARGE, 0.5F, 1.5F);
+        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 0.25F, 2);
         armedPlayers.add(id);
 
 
@@ -74,10 +88,11 @@ public class StormAbilityOne implements Listener {
             return;
         }
 
+
         if (armedPlayers.contains(id)) {
+            attacker.sendMessage(Component.text("⚡ Thunderstorm activated").color(STORM_COLOR));
             durationManager.startDuration(id, "stormone", duration);
-            // When I make the config - define COOLDOWN as the config value plus the value of the duration, as this starts the cooldown when the duration starts
-            cooldownManager.startCooldown(id, "stormone", cooldown);
+            cooldownManager.startCooldown(id, "stormone", cooldown + duration);
             armedPlayers.remove(id);
 
             hitCount.put(id, 0);

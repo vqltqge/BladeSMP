@@ -3,6 +3,9 @@ package me.vqlt.bladesmp.abilities;
 import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,6 +18,8 @@ public class PulseAbilityOne {
 
     private final long cooldown;
     private final double dashVelocity;
+
+    private static final TextColor PULSE_COLOR = TextColor.fromHexString("#A855F7");
 
     public PulseAbilityOne(BladeSMP plugin, CooldownManager cooldownManager, BladeManager bladeManager) {
         this.plugin = plugin;
@@ -29,7 +34,8 @@ public class PulseAbilityOne {
         UUID id = player.getUniqueId();
 
         if (cooldownManager.isOnCooldown(id, "pulseone")) {
-            player.sendMessage("Ability One is on cooldown");
+            int seconds = (int) Math.ceil(cooldownManager.getRemainingMillis(id, "pulseone") / 1000.0);
+            player.sendMessage(Component.text("➤ Velocity is on cooldown for " + seconds + "s").color(PULSE_COLOR));
             return;
         }
 
@@ -39,6 +45,9 @@ public class PulseAbilityOne {
             return;
         }
 
+        player.sendMessage(Component.text("➤ Velocity activated").color(PULSE_COLOR));
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 0.45f, 1.6f);
+        player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_JUMP, 0.7f, 1.4f);
         player.setVelocity(player.getLocation().getDirection().multiply(dashVelocity));
 
         cooldownManager.startCooldown(id, "pulseone", cooldown);

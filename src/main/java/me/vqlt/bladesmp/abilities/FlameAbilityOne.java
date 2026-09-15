@@ -61,7 +61,9 @@ public class FlameAbilityOne {
         }
 
         player.sendMessage(Component.text("🔥 Flame Sweep activated").color(FLAME_COLOR));
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 1f, 0.85f);
+        player.playSound(player.getLocation(), Sound.ENTITY_BLAZE_SHOOT, 0.55f, 1.35f);
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_STRONG, 0.45f, 0.8f);
 
         Vector direction = player.getLocation().getDirection().normalize();
 
