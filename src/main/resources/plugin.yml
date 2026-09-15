@@ -1,0 +1,23 @@
+name: BladeSMP
+version: '1.0.0'
+
+main: me.vqlt.bladesmp.BladeSMP
+api-version: '1.21.8'
+load: POSTWORLD
+
+commands:
+  weapons:
+    description: Opens a GUI with all the weapons in it, that you can take
+    usage: /weapons
+
+  cooldown:
+    description: Resets the cooldown of the player specified, if none are specified it will reset your own cooldown
+    usage: /cooldown <player>
+
+  ability1:
+    description: Activates your first ability
+    usage: /ability1
+
+  ability2:
+    description: Activates your second ability
+    usage: /ability2

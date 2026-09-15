@@ -1,0 +1,26 @@
+storm:
+  ability-one:
+    cooldown: 45 # in seconds
+    duration: 10 # in seconds
+    strike-hits: 1 # How often should lightning strike - 1 is every hit, 2 is every second hit, 3 is every third hit etc.
+
+bloom:
+  ability-one:
+    cooldown: 60 # in seconds
+    duration: 15 # in seconds
+    max-hearts: 30 # in HP (1 heart = 2HP)
+    heal-hearts: true # determines if you should heal the hearts you gain
+
+flame:
+  ability-one:
+    cooldown: 60 # in seconds
+    knockback: 1.2
+    damage: 24.0
+    range: 4.0
+
+frost:
+  ability-one:
+    cooldown: 60
+    dash-velocity: 2
+    freeze-duration: 3.0 # In seconds
+    damage: 16.0

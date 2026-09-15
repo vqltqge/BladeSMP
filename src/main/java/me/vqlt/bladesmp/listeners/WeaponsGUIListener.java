@@ -1,0 +1,48 @@
+package me.vqlt.bladesmp.listeners;
+
+import me.vqlt.bladesmp.other.WeaponsGUI;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.HashMap;
+
+public class WeaponsGUIListener implements Listener {
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
+        Inventory clickedInventory = event.getClickedInventory();
+
+        if (clickedInventory == null) {
+            return;
+        }
+
+        if (!(clickedInventory.getHolder(false) instanceof WeaponsGUI)) {
+            return;
+        }
+
+        event.setCancelled(true);
+
+        if (!(event.getWhoClicked() instanceof Player player)) {
+            return;
+        }
+
+        ItemStack clickedItem = event.getCurrentItem();
+
+        if (clickedItem == null || clickedItem.getType().isAir()) {
+            return;
+        }
+
+        ItemStack itemToGive = clickedItem.clone();
+
+        HashMap<Integer, ItemStack> leftovers = player.getInventory().addItem(itemToGive);
+
+        for (ItemStack leftover : leftovers.values()) {
+            player.getWorld().dropItemNaturally(player.getLocation(), leftover);
+        }
+    }
+
+}
