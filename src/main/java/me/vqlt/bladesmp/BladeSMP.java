@@ -6,10 +6,7 @@ import me.vqlt.bladesmp.commands.ConfigCommand;
 import me.vqlt.bladesmp.commands.CooldownCommand;
 import me.vqlt.bladesmp.commands.WeaponsCommand;
 import me.vqlt.bladesmp.listeners.*;
-import me.vqlt.bladesmp.managers.BladeManager;
-import me.vqlt.bladesmp.managers.CooldownManager;
-import me.vqlt.bladesmp.managers.DurationManager;
-import me.vqlt.bladesmp.managers.PassiveManager;
+import me.vqlt.bladesmp.managers.*;
 import me.vqlt.bladesmp.other.PassiveTask;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,7 +29,8 @@ public final class BladeSMP extends JavaPlugin {
         FortuneAbilityOne fortuneAbilityOne = new FortuneAbilityOne(bladeManager, cooldownManager, durationManager, this);
         TidalAbilityOne tidalAbilityOne = new TidalAbilityOne(bladeManager, cooldownManager, durationManager, this);
 
-
+        ActionBarManager actionBarManager = new ActionBarManager(cooldownManager, durationManager, bladeManager, this);
+        actionBarManager.start();
         PassiveTask passiveTask = new PassiveTask(this, passiveManager, bladeManager);
         passiveTask.start();
 
