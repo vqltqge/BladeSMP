@@ -65,7 +65,6 @@ public class TidalAbilityOne {
         durationManager.startDuration(id, "tidalone", duration);
         durationManager.runAfter(duration / 1000, () -> cooldownManager.startCooldown(id, "tidalone", cooldown));
         player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, ((int) duration / 1000) * 20, resistanceAmplifier));
-        // Think of sound
         player.playSound(player.getLocation(), Sound.BLOCK_CONDUIT_ACTIVATE, 0.7f, 0.7f);
         player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 0.45f, 1.3f);
 
@@ -88,7 +87,7 @@ public class TidalAbilityOne {
                     target.setRemainingAir(0);
 
                     if (ticksleft % 20 == 0) {
-                        target.damage(2.0);
+                        target.damage(2.0, player);
                         target.playSound(target.getLocation(), Sound.ENTITY_PLAYER_HURT_DROWN, 1, 1);
                     }
 

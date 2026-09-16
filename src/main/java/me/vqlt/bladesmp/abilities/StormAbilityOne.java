@@ -29,6 +29,7 @@ public class StormAbilityOne implements Listener {
     private final long cooldown;
     private final long duration;
     private final int strikeHits;
+    private final long chargeDuration;
 
     private static final TextColor STORM_COLOR = TextColor.fromHexString("#FFE44D");
     private final Set<UUID> armedPlayers = new HashSet<>();
@@ -44,6 +45,7 @@ public class StormAbilityOne implements Listener {
         this.cooldown = plugin.getConfig().getLong("storm.ability-one.cooldown", 45) * 1000L;
         this.duration = plugin.getConfig().getLong("storm.ability-one.duration", 10) * 1000L;
         this.strikeHits = plugin.getConfig().getInt("storm.ability-one.strike-hits", 1);
+        this.chargeDuration = plugin.getConfig().getLong("storm.ability-one.charge-duration", 60) * 1000L;
     }
 
 
@@ -71,7 +73,7 @@ public class StormAbilityOne implements Listener {
                 player.sendMessage(Component.text("⚡ Thunderstorm charge expired").color(STORM_COLOR));
                 player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 0.5F, 0.8F);
             }
-        }, 1200L);
+        }, chargeDuration / 50);
     }
 
     @EventHandler

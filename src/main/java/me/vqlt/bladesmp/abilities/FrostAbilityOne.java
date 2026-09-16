@@ -41,7 +41,7 @@ public class FrostAbilityOne {
         this.bladeManager = bladeManager;
 
         this.cooldown = plugin.getConfig().getLong("frost.ability-one.cooldown", 45) * 1000L;
-        this.freezeDuration = plugin.getConfig().getLong("frost.ability-one.freeze-duration", 20) * 20L;
+        this.freezeDuration = plugin.getConfig().getLong("frost.ability-one.freeze-duration", 3) * 20L;
         this.dashVelocity = plugin.getConfig().getDouble("frost.ability-one.dash-velocity", 2);
         this.damage = plugin.getConfig().getDouble("frost.ability-one.damage", 16.0);
 

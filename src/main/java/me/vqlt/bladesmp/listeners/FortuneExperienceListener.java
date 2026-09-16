@@ -36,6 +36,6 @@ public class FortuneExperienceListener implements Listener {
 
         int num = event.getAmount();
 
-        event.setAmount(num * (int) xpMultiplier);
+        event.setAmount((int) Math.round(num * xpMultiplier));
     }
 }

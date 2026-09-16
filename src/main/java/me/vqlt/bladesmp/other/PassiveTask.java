@@ -25,7 +25,7 @@ public class PassiveTask {
                 ItemStack hand = player.getInventory().getItemInMainHand();
 
                 if (!(bladeManager.isFlameBlade(hand)) && !(bladeManager.isTidalBlade(hand))) {
-                    return;
+                    continue;
                 }
 
                 if (bladeManager.isFlameBlade(hand)) {

@@ -1,7 +1,6 @@
 package me.vqlt.bladesmp.commands;
 
 import me.vqlt.bladesmp.abilities.*;
-import me.vqlt.bladesmp.managers.AbilityManager;
 import me.vqlt.bladesmp.managers.BladeManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class AbilityOneCommand implements CommandExecutor {
 
-    private final AbilityManager abilityManager;
     private final BladeManager bladeManager;
     private final StormAbilityOne stormAbilityOne;
     private final PulseAbilityOne pulseAbilityOne;
@@ -23,8 +21,7 @@ public class AbilityOneCommand implements CommandExecutor {
     private final TidalAbilityOne tidalAbilityOne;
 
 
-    public AbilityOneCommand(AbilityManager abilityManager, BladeManager bladeManager, StormAbilityOne stormAbilityOne, PulseAbilityOne pulseAbilityOne, BloomAbilityOne bloomAbilityOne, FlameAbilityOne flameAbilityOne, FrostAbilityOne frostAbilityOne, FortuneAbilityOne fortuneAbilityOne, TidalAbilityOne tidalAbilityOne) {
-        this.abilityManager = abilityManager;
+    public AbilityOneCommand(BladeManager bladeManager, StormAbilityOne stormAbilityOne, PulseAbilityOne pulseAbilityOne, BloomAbilityOne bloomAbilityOne, FlameAbilityOne flameAbilityOne, FrostAbilityOne frostAbilityOne, FortuneAbilityOne fortuneAbilityOne, TidalAbilityOne tidalAbilityOne) {
         this.bladeManager = bladeManager;
         this.stormAbilityOne = stormAbilityOne;
         this.pulseAbilityOne = pulseAbilityOne;

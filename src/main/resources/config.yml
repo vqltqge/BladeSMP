@@ -1,4 +1,6 @@
 storm:
+  passive:
+    hits-to-strike: 10
   ability-one:
     cooldown: 45 # in seconds
     duration: 10 # in seconds
@@ -8,7 +10,7 @@ bloom:
   passive:
     hits-to-activate: 10
   ability-one:
-    cooldown: 60 # in seconds
+    cooldown: 45 # in seconds
     duration: 15 # in seconds
     max-hearts: 30 # in HP (1 heart = 2HP)
     heal-hearts: true # determines if you should heal the hearts you gain
@@ -21,6 +23,8 @@ flame:
     range: 4.0
 
 frost:
+  passive:
+    hits-to-freeze: 10
   ability-one:
     cooldown: 45
     dash-velocity: 2
@@ -36,3 +40,13 @@ pulse:
 fortune:
   passive:
     xp-multiplier: 2
+  ability-one:
+    cooldown: 60
+    duration: 15
+
+tidal:
+  ability-one:
+    cooldown: 60
+    duration: 10
+    resistance-amplifier: 2
+    radius: 3

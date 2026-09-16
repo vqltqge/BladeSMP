@@ -15,8 +15,14 @@ public class PassiveManager {
     private final HashMap<UUID, Integer> frostHits = new HashMap<UUID, Integer>();
     private final HashMap<UUID, Integer> staticHits = new HashMap<UUID, Integer>();
 
+    private final int staticHitsToStrike;
+    private final int frostHitsToFreeze;
+
     public PassiveManager(BladeSMP plugin) {
         this.plugin = plugin;
+
+        this.staticHitsToStrike = plugin.getConfig().getInt("storm.passive.hits-to-strike", 10);
+        this.frostHitsToFreeze = plugin.getConfig().getInt("frost.passive.hits-to-freeze", 10);
     }
 
     public void freezePassive(Player target, Player damager) {
@@ -28,7 +34,7 @@ public class PassiveManager {
 
         frostHits.put(id, hits);
 
-        if (hits >= 10) {
+        if (hits >= frostHitsToFreeze) {
             target.setFreezeTicks(120);
 
             frostHits.put(id, 0);
@@ -45,7 +51,7 @@ public class PassiveManager {
 
         staticHits.put(id, hits);
 
-        if (hits >= 10) {
+        if (hits >= staticHitsToStrike) {
             world.strikeLightning(location);
 
             staticHits.put(id, 0);

@@ -27,7 +27,7 @@ public class PulseAbilityOne {
         this.bladeManager = bladeManager;
 
         this.cooldown = plugin.getConfig().getLong("pulse.ability-one.cooldown", 30) * 1000L;
-        this.dashVelocity = plugin.getConfig().getLong("pulse.ability-one.dash-velocity", 2);
+        this.dashVelocity = plugin.getConfig().getDouble("pulse.ability-one.dash-velocity", 2.0);
     }
 
     public void activate(Player player) {

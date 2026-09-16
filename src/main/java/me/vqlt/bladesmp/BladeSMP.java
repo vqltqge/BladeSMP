@@ -2,10 +2,14 @@ package me.vqlt.bladesmp;
 
 import me.vqlt.bladesmp.abilities.*;
 import me.vqlt.bladesmp.commands.AbilityOneCommand;
+import me.vqlt.bladesmp.commands.ConfigCommand;
 import me.vqlt.bladesmp.commands.CooldownCommand;
 import me.vqlt.bladesmp.commands.WeaponsCommand;
 import me.vqlt.bladesmp.listeners.*;
-import me.vqlt.bladesmp.managers.*;
+import me.vqlt.bladesmp.managers.BladeManager;
+import me.vqlt.bladesmp.managers.CooldownManager;
+import me.vqlt.bladesmp.managers.DurationManager;
+import me.vqlt.bladesmp.managers.PassiveManager;
 import me.vqlt.bladesmp.other.PassiveTask;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,7 +24,6 @@ public final class BladeSMP extends JavaPlugin {
         PassiveManager passiveManager = new PassiveManager(this);
         DurationManager durationManager = new DurationManager(this);
         CooldownManager cooldownManager = new CooldownManager();
-        AbilityManager abilityManager = new AbilityManager(this, bladeManager);
         StormAbilityOne stormAbilityOne = new StormAbilityOne(this, bladeManager, cooldownManager, durationManager);
         PulseAbilityOne pulseAbilityOne = new PulseAbilityOne(this, cooldownManager, bladeManager);
         BloomAbilityOne bloomAbilityOne = new BloomAbilityOne(this, bladeManager, cooldownManager, durationManager);
@@ -34,8 +37,9 @@ public final class BladeSMP extends JavaPlugin {
         passiveTask.start();
 
         getCommand("weapons").setExecutor(new WeaponsCommand(bladeManager));
-        getCommand("ability1").setExecutor(new AbilityOneCommand(abilityManager, bladeManager, stormAbilityOne, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, tidalAbilityOne));
+        getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, stormAbilityOne, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, tidalAbilityOne));
         getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
+        getCommand("config").setExecutor(new ConfigCommand(this));
 
         getServer().getPluginManager().registerEvents(new WeaponsGUIListener(), this);
         getServer().getPluginManager().registerEvents(new FallDamageListener(bladeManager), this);

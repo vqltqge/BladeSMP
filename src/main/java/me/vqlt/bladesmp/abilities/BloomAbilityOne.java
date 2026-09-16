@@ -81,10 +81,10 @@ public class BloomAbilityOne {
     }
 
     public void revertHealth(Player player, AttributeInstance maxHealth, Double originalMaxHealth, UUID id) {
-        maxHealth.setBaseValue(20.0);
+        maxHealth.setBaseValue(originalMaxHealth);
 
-        if (player.getHealth() > 20.0) {
-            player.setHealth(20.0);
+        if (player.getHealth() > originalMaxHealth) {
+            player.setHealth(originalMaxHealth);
         }
 
         cooldownManager.startCooldown(id, "bloomone", cooldown);
