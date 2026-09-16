@@ -72,6 +72,8 @@ public class FortuneAbilityOne {
 
         durationManager.runAfter((duration / 1000), () -> {
             conservationPlayers.remove(id);
+            player.sendMessage(Component.text("♣ Conservation on cooldown").color(FORTUNE_COLOR));
+            player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
             cooldownManager.startCooldown(id, "fortuneone", cooldown);
         });
     }

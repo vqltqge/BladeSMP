@@ -182,7 +182,7 @@ public class BladeManager {
         );
 
         meta.displayName(
-                Component.text("≋ TIDAL BLADE ≋")
+                Component.text("≈ TIDAL BLADE ≈")
                         .color(TextColor.fromHexString("#20BFFF"))
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false)

@@ -67,6 +67,7 @@ public class TidalAbilityOne {
         player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, ((int) duration / 1000) * 20, resistanceAmplifier));
         player.playSound(player.getLocation(), Sound.BLOCK_CONDUIT_ACTIVATE, 0.7f, 0.7f);
         player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 0.45f, 1.3f);
+        durationManager.runAfter(duration / 1000, () -> startCooldown(id, player));
 
         for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
 
@@ -95,5 +96,11 @@ public class TidalAbilityOne {
                 }
             }.runTaskTimer(plugin, 0L, 1L);
         }
+    }
+
+    public void startCooldown(UUID id, Player player) {
+        cooldownManager.startCooldown(id, "tidalone", cooldown);
+        player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
+        player.sendMessage(Component.text("≈ Drowning Field on cooldown").color(TIDAL_COLOR));
     }
 }

@@ -109,6 +109,7 @@ public class FrostAbilityOne {
             }
         }.runTaskTimer(plugin, 0L, 1L);
 
+        // No need to say it is on cooldown as the ability is instant
         cooldownManager.startCooldown(id, "frostone", cooldown);
     }
 }

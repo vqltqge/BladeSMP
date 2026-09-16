@@ -100,15 +100,15 @@ public class StormAbilityOne implements Listener {
         if (armedPlayers.contains(id)) {
             attacker.sendMessage(Component.text("⚡ Thunderstorm activated").color(STORM_COLOR));
             durationManager.startDuration(id, "stormone", duration);
-            cooldownManager.startCooldown(id, "stormone", cooldown + duration);
+            durationManager.runAfter(duration / 1000, () -> startCooldown(id, attacker));
             armedPlayers.remove(id);
 
             hitCount.put(id, 0);
         }
 
-        if (!durationManager.isActive(id, "stormone")) {
-            return;
-        }
+//        if (!durationManager.isActive(id, "stormone")) {
+//            return;
+//        }
 
         int hits = hitCount.getOrDefault(id, 0) + 1;
 
@@ -119,5 +119,11 @@ public class StormAbilityOne implements Listener {
             hitCount.put(id, hits);
         }
 
+    }
+
+    public void startCooldown(UUID id, Player player) {
+        cooldownManager.startCooldown(id, "stormone", cooldown);
+        player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
+        player.sendMessage(Component.text("⚡ Thunderstorm on cooldown").color(STORM_COLOR));
     }
 }

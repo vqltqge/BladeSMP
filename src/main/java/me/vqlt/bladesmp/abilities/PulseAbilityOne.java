@@ -50,6 +50,7 @@ public class PulseAbilityOne {
         player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_JUMP, 0.7f, 1.4f);
         player.setVelocity(player.getLocation().getDirection().multiply(dashVelocity));
 
+        // No need to say it is on cooldown as the ability is instant
         cooldownManager.startCooldown(id, "pulseone", cooldown);
     }
 }
