@@ -26,13 +26,14 @@ public final class BladeSMP extends JavaPlugin {
         BloomAbilityOne bloomAbilityOne = new BloomAbilityOne(this, bladeManager, cooldownManager, durationManager);
         FlameAbilityOne flameAbilityOne = new FlameAbilityOne(bladeManager, cooldownManager, durationManager, this);
         FrostAbilityOne frostAbilityOne = new FrostAbilityOne(this, durationManager, cooldownManager, bladeManager);
+        FortuneAbilityOne fortuneAbilityOne = new FortuneAbilityOne(bladeManager, cooldownManager, durationManager, this);
 
 
         PassiveTask passiveTask = new PassiveTask(this, passiveManager, bladeManager);
         passiveTask.start();
 
         getCommand("weapons").setExecutor(new WeaponsCommand(bladeManager));
-        getCommand("ability1").setExecutor(new AbilityOneCommand(abilityManager, bladeManager, stormAbilityOne, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne));
+        getCommand("ability1").setExecutor(new AbilityOneCommand(abilityManager, bladeManager, stormAbilityOne, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne));
         getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
 
         getServer().getPluginManager().registerEvents(new WeaponsGUIListener(), this);
@@ -43,7 +44,7 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FortuneExperienceListener(this, bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(stormAbilityOne, this);
         getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne), this);
-
+        getServer().getPluginManager().registerEvents(new PlayerConsumeListener(fortuneAbilityOne, this), this);
     }
 
     @Override
