@@ -18,8 +18,11 @@ public class ActionBarManager {
     private final BladeManager bladeManager;
     private final BladeSMP plugin;
 
-    private static final TextColor FLAME_COLOR = TextColor.fromHexString("#FF4A1C");
+    private static final TextColor FLAME_COLOR = TextColor.fromHexString("#FF7A2F");
     private static final TextColor READY_COLOR = TextColor.fromHexString("#00ff00");
+    private static final TextColor ACTIVE_COLOR = TextColor.fromHexString("#ff0000");
+    private static final TextColor COOLDOWN_COLOR = TextColor.color(NamedTextColor.GRAY);
+
 
     public ActionBarManager(CooldownManager cooldownManager, DurationManager durationManager, BladeManager bladeManager, BladeSMP plugin) {
         this.cooldownManager = cooldownManager;
@@ -79,27 +82,76 @@ public class ActionBarManager {
                         if (oneActive) {
                             // IMPORTANT CHANGE LATER
                             if (twoActive) {
-                                // active - active
+                                player.sendActionBar(
+                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
+                                                .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD))
+                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
+                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
+                                                .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD)));
 
 
                             } else if (twoCooldown) {
                                 // active - cooldown
+                                player.sendActionBar(Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
+                                        .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD))
+                                        .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
+                                        .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
+                                        .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flametwo") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD))
+                                );
+
                             } else {
                                 // active - ready
+                                player.sendActionBar(
+                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
+                                                .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD))
+                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
+                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
+                                                .append(Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD)));
                             }
                         } else if (oneCooldown) {
                             if (twoActive) {
                                 // cooldown - active
+                                player.sendActionBar(
+                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
+                                                .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flameone") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD))
+                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
+                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
+                                                .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD)));
+
                             } else if (twoCooldown) {
                                 // cooldown - cooldown
+                                player.sendActionBar(
+                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
+                                                .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flameone") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD))
+                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
+                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
+                                                .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flametwo") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD)));
                             } else {
                                 // cooldown - ready
+                                player.sendActionBar(
+                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
+                                                .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flameone") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD))
+                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
+                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
+                                                .append(Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD)));
                             }
                         } else {
                             if (twoActive) {
                                 // ready - active
+                                player.sendActionBar(
+                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
+                                                .append(Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD))
+                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
+                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
+                                                .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD)));
                             } else if (twoCooldown) {
                                 // ready - cooldown
+                                player.sendActionBar(
+                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
+                                                .append(Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD))
+                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
+                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
+                                                .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flametwo") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD)));
                             } else {
                                 // ready - ready
                                 player.sendActionBar(
