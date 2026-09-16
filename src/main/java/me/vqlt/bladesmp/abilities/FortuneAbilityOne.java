@@ -67,8 +67,8 @@ public class FortuneAbilityOne {
         durationManager.startDuration(id, "fortuneone", duration);
 
         player.sendMessage(Component.text("♣ Conservation activated").color(FORTUNE_COLOR));
-        // Change the sound
-        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1, 1);
+        player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_CHIME, 0.6f, 1.5f);
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5f, 1.25f);
 
         durationManager.runAfter((duration / 1000), () -> {
             conservationPlayers.remove(id);

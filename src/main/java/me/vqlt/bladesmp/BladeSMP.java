@@ -27,13 +27,14 @@ public final class BladeSMP extends JavaPlugin {
         FlameAbilityOne flameAbilityOne = new FlameAbilityOne(bladeManager, cooldownManager, durationManager, this);
         FrostAbilityOne frostAbilityOne = new FrostAbilityOne(this, durationManager, cooldownManager, bladeManager);
         FortuneAbilityOne fortuneAbilityOne = new FortuneAbilityOne(bladeManager, cooldownManager, durationManager, this);
+        TidalAbilityOne tidalAbilityOne = new TidalAbilityOne(bladeManager, cooldownManager, durationManager, this);
 
 
         PassiveTask passiveTask = new PassiveTask(this, passiveManager, bladeManager);
         passiveTask.start();
 
         getCommand("weapons").setExecutor(new WeaponsCommand(bladeManager));
-        getCommand("ability1").setExecutor(new AbilityOneCommand(abilityManager, bladeManager, stormAbilityOne, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne));
+        getCommand("ability1").setExecutor(new AbilityOneCommand(abilityManager, bladeManager, stormAbilityOne, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, tidalAbilityOne));
         getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
 
         getServer().getPluginManager().registerEvents(new WeaponsGUIListener(), this);

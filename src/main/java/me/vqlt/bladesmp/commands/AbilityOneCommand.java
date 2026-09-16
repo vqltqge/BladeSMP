@@ -20,9 +20,10 @@ public class AbilityOneCommand implements CommandExecutor {
     private final FlameAbilityOne flameAbilityOne;
     private final FrostAbilityOne frostAbilityOne;
     private final FortuneAbilityOne fortuneAbilityOne;
+    private final TidalAbilityOne tidalAbilityOne;
 
 
-    public AbilityOneCommand(AbilityManager abilityManager, BladeManager bladeManager, StormAbilityOne stormAbilityOne, PulseAbilityOne pulseAbilityOne, BloomAbilityOne bloomAbilityOne, FlameAbilityOne flameAbilityOne, FrostAbilityOne frostAbilityOne, FortuneAbilityOne fortuneAbilityOne) {
+    public AbilityOneCommand(AbilityManager abilityManager, BladeManager bladeManager, StormAbilityOne stormAbilityOne, PulseAbilityOne pulseAbilityOne, BloomAbilityOne bloomAbilityOne, FlameAbilityOne flameAbilityOne, FrostAbilityOne frostAbilityOne, FortuneAbilityOne fortuneAbilityOne, TidalAbilityOne tidalAbilityOne) {
         this.abilityManager = abilityManager;
         this.bladeManager = bladeManager;
         this.stormAbilityOne = stormAbilityOne;
@@ -31,6 +32,7 @@ public class AbilityOneCommand implements CommandExecutor {
         this.flameAbilityOne = flameAbilityOne;
         this.frostAbilityOne = frostAbilityOne;
         this.fortuneAbilityOne = fortuneAbilityOne;
+        this.tidalAbilityOne = tidalAbilityOne;
     }
 
     @Override
@@ -66,8 +68,14 @@ public class AbilityOneCommand implements CommandExecutor {
             fortuneAbilityOne.activate(player);
         }
 
-        // Once all abilities are done add this
-        // player.sendMessage("§aYou must be holding a blade to use an ability.");
+        if (bladeManager.isTidalBlade(hand)) {
+            tidalAbilityOne.activate(player);
+        }
+
+        if (!bladeManager.isTidalBlade(hand) && !bladeManager.isBloomBlade(hand) && !bladeManager.isFlameBlade(hand) && !bladeManager.isStormBlade(hand) && !bladeManager.isFortuneBlade(hand) && !bladeManager.isPulseBlade(hand) && !bladeManager.isFrostBlade(hand)) {
+            player.sendMessage("§aYou must be holding a blade to use an ability.");
+        }
+
         return true;
     }
 }
