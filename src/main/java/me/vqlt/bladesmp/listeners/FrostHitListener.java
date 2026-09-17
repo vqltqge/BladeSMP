@@ -24,20 +24,20 @@ public class FrostHitListener implements Listener {
     @EventHandler
     public void onMeleeHit(EntityDamageByEntityEvent event) {
 
-        Player damager = (Player) event.getDamager();
-
-        Player target = (Player) event.getEntity();
-
-        if (frostAbilityTwo.getFreezePlayers().contains(target.getUniqueId())) {
-            event.setDamage(event.getDamage() * frostAbilityTwo.getDamageMultiplier());
-        }
-
-        ItemStack hand = damager.getInventory().getItemInMainHand();
-
-        if (!(bladeManager.isFrostBlade(hand))) {
+        if (!(event.getDamager() instanceof Player attacker)) {
             return;
         }
 
-        passiveManager.freezePassive(target, damager);
+        if (!(event.getEntity() instanceof Player victim)) {
+            return;
+        }
+
+        ItemStack hand = attacker.getInventory().getItemInMainHand();
+
+        if (!bladeManager.isFrostBlade(hand)) {
+            return;
+        }
+
+        passiveManager.freezePassive(victim, attacker);
     }
 }

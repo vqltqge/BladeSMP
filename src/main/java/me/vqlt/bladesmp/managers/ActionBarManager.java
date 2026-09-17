@@ -13,18 +13,30 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.UUID;
 
 public class ActionBarManager {
+
     private final CooldownManager cooldownManager;
     private final DurationManager durationManager;
     private final BladeManager bladeManager;
     private final BladeSMP plugin;
 
     private static final TextColor FLAME_COLOR = TextColor.fromHexString("#FF7A2F");
+    private static final TextColor FROST_COLOR = TextColor.fromHexString("#6EE7FF");
+    private static final TextColor BLOOM_COLOR = TextColor.fromHexString("#F50CAB");
+    private static final TextColor STORM_COLOR = TextColor.fromHexString("#FFE44D");
+    private static final TextColor TIDAL_COLOR = TextColor.fromHexString("#20BFFF");
+    private static final TextColor PULSE_COLOR = TextColor.fromHexString("#A855F7");
+    private static final TextColor FORTUNE_COLOR = TextColor.fromHexString("#FFD700");
+
     private static final TextColor READY_COLOR = TextColor.fromHexString("#00ff00");
     private static final TextColor ACTIVE_COLOR = TextColor.fromHexString("#ff0000");
     private static final TextColor COOLDOWN_COLOR = TextColor.color(NamedTextColor.GRAY);
 
-
-    public ActionBarManager(CooldownManager cooldownManager, DurationManager durationManager, BladeManager bladeManager, BladeSMP plugin) {
+    public ActionBarManager(
+            CooldownManager cooldownManager,
+            DurationManager durationManager,
+            BladeManager bladeManager,
+            BladeSMP plugin
+    ) {
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
         this.bladeManager = bladeManager;
@@ -36,300 +48,120 @@ public class ActionBarManager {
             @Override
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    UUID id = player.getUniqueId();
+
                     ItemStack hand = player.getInventory().getItemInMainHand();
-                    if (bladeManager.isBloomBlade(hand)) {
-                        boolean oneCooldown = cooldownManager.isOnCooldown(id, "bloomone");
-                        boolean oneActive = durationManager.isActive(id, "bloomone");
 
-                        boolean twoCooldown = cooldownManager.isOnCooldown(id, "bloomtwo");
-                        boolean twoActive = durationManager.isActive(id, "bloomtwo");
-
-                        if (oneActive) {
-                            if (twoActive) {
-                                // active - active
-
-                            } else if (twoCooldown) {
-                                // active - cooldown
-                            } else {
-                                // active - ready
-                            }
-                        } else if (oneCooldown) {
-                            if (twoActive) {
-                                // cooldown - active
-                            } else if (twoCooldown) {
-                                // cooldown - cooldown
-                            } else {
-                                // cooldown - ready
-                            }
-                        } else {
-                            if (twoActive) {
-                                // ready - active
-                            } else if (twoCooldown) {
-                                // ready - cooldown
-                            } else {
-                                // ready - ready
-                            }
-                        }
-                    }
                     if (bladeManager.isFlameBlade(hand)) {
-                        boolean oneCooldown = cooldownManager.isOnCooldown(id, "flameone");
-                        boolean oneActive = durationManager.isActive(id, "flameone");
+                        sendAbilityBar(
+                                player,
+                                "🔥 Flame Sweep", "flameone",
+                                "🔥 Inferno", "flametwo",
+                                FLAME_COLOR
+                        );
 
-                        boolean twoCooldown = cooldownManager.isOnCooldown(id, "flametwo");
-                        boolean twoActive = durationManager.isActive(id, "flametwo");
+                    } else if (bladeManager.isFrostBlade(hand)) {
+                        sendAbilityBar(
+                                player,
+                                "❄ Frozen Dash", "frostone",
+                                "❄ Frozen Domain", "frosttwo",
+                                FROST_COLOR
+                        );
 
-                        if (oneActive) {
-                            // IMPORTANT CHANGE LATER
-                            if (twoActive) {
-                                player.sendActionBar(
-                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
-                                                .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD))
-                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
-                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
-                                                .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD)));
+                    } else if (bladeManager.isTidalBlade(hand)) {
+                        sendAbilityBar(
+                                player,
+                                "≋ Drowning Field", "tidalone",
+                                "≋ Tsunami", "tidaltwo",
+                                TIDAL_COLOR
+                        );
 
+                    } else if (bladeManager.isBloomBlade(hand)) {
+                        sendAbilityBar(
+                                player,
+                                "❤ Vital Surge", "bloomone",
+                                "❤ Lifebind", "bloomtwo",
+                                BLOOM_COLOR
+                        );
 
-                            } else if (twoCooldown) {
-                                // active - cooldown
-                                player.sendActionBar(Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
-                                        .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD))
-                                        .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
-                                        .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
-                                        .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flametwo") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD))
-                                );
+                    } else if (bladeManager.isPulseBlade(hand)) {
+                        sendAbilityBar(
+                                player,
+                                "➜ Velocity", "pulseone",
+                                "✦ Shockwave", "pulsetwo",
+                                PULSE_COLOR
+                        );
 
-                            } else {
-                                // active - ready
-                                player.sendActionBar(
-                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
-                                                .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD))
-                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
-                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
-                                                .append(Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD)));
-                            }
-                        } else if (oneCooldown) {
-                            if (twoActive) {
-                                // cooldown - active
-                                player.sendActionBar(
-                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
-                                                .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flameone") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD))
-                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
-                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
-                                                .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD)));
+                    } else if (bladeManager.isStormBlade(hand)) {
+                        sendAbilityBar(
+                                player,
+                                "⚡ Thunderstorm", "stormone",
+                                "⚡ Thunderfield", "stormtwo",
+                                STORM_COLOR
+                        );
 
-                            } else if (twoCooldown) {
-                                // cooldown - cooldown
-                                player.sendActionBar(
-                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
-                                                .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flameone") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD))
-                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
-                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
-                                                .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flametwo") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD)));
-                            } else {
-                                // cooldown - ready
-                                player.sendActionBar(
-                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
-                                                .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flameone") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD))
-                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
-                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
-                                                .append(Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD)));
-                            }
-                        } else {
-                            if (twoActive) {
-                                // ready - active
-                                player.sendActionBar(
-                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
-                                                .append(Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD))
-                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
-                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
-                                                .append(Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD)));
-                            } else if (twoCooldown) {
-                                // ready - cooldown
-                                player.sendActionBar(
-                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
-                                                .append(Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD))
-                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
-                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
-                                                .append(Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, "flametwo") / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD)));
-                            } else {
-                                // ready - ready
-                                player.sendActionBar(
-                                        Component.text("🔥 Flame Sweep ").color(FLAME_COLOR)
-                                                .append(Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD))
-                                                .append(Component.text("  |  ").color(NamedTextColor.DARK_GRAY))
-                                                .append(Component.text("🔥 Inferno ").color(FLAME_COLOR))
-                                                .append(Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD)));
-                            }
-                        }
-                    }
-                    if (bladeManager.isStormBlade(hand)) {
-                        boolean oneCooldown = cooldownManager.isOnCooldown(id, "stormone");
-                        boolean oneActive = durationManager.isActive(id, "stormone");
-
-                        boolean twoCooldown = cooldownManager.isOnCooldown(id, "stormtwo");
-                        boolean twoActive = durationManager.isActive(id, "stormtwo");
-
-                        if (oneActive) {
-                            if (twoActive) {
-                                // active - active
-                            } else if (twoCooldown) {
-                                // active - cooldown
-                            } else {
-                                // active - ready
-                            }
-                        } else if (oneCooldown) {
-                            if (twoActive) {
-                                // cooldown - active
-                            } else if (twoCooldown) {
-                                // cooldown - cooldown
-                            } else {
-                                // cooldown - ready
-                            }
-                        } else {
-                            if (twoActive) {
-                                // ready - active
-                            } else if (twoCooldown) {
-                                // ready - cooldown
-                            } else {
-                                // ready - ready
-                            }
-                        }
-                    }
-                    if (bladeManager.isTidalBlade(hand)) {
-                        boolean oneCooldown = cooldownManager.isOnCooldown(id, "tidalone");
-                        boolean oneActive = durationManager.isActive(id, "tidalone");
-
-                        boolean twoCooldown = cooldownManager.isOnCooldown(id, "tidaltwo");
-                        boolean twoActive = durationManager.isActive(id, "tidaltwo");
-
-                        if (oneActive) {
-                            if (twoActive) {
-                                // active - active
-                            } else if (twoCooldown) {
-                                // active - cooldown
-                            } else {
-                                // active - ready
-                            }
-                        } else if (oneCooldown) {
-                            if (twoActive) {
-                                // cooldown - active
-                            } else if (twoCooldown) {
-                                // cooldown - cooldown
-                            } else {
-                                // cooldown - ready
-                            }
-                        } else {
-                            if (twoActive) {
-                                // ready - active
-                            } else if (twoCooldown) {
-                                // ready - cooldown
-                            } else {
-                                // ready - ready
-                            }
-                        }
-                    }
-                    if (bladeManager.isFortuneBlade(hand)) {
-                        boolean oneCooldown = cooldownManager.isOnCooldown(id, "fortuneone");
-                        boolean oneActive = durationManager.isActive(id, "fortuneone");
-
-                        boolean twoCooldown = cooldownManager.isOnCooldown(id, "fortunetwo");
-                        boolean twoActive = durationManager.isActive(id, "fortunetwo");
-
-                        if (oneActive) {
-                            if (twoActive) {
-                                // active - active
-                            } else if (twoCooldown) {
-                                // active - cooldown
-                            } else {
-                                // active - ready
-                            }
-                        } else if (oneCooldown) {
-                            if (twoActive) {
-                                // cooldown - active
-                            } else if (twoCooldown) {
-                                // cooldown - cooldown
-                            } else {
-                                // cooldown - ready
-                            }
-                        } else {
-                            if (twoActive) {
-                                // ready - active
-                            } else if (twoCooldown) {
-                                // ready - cooldown
-                            } else {
-                                // ready - ready
-                            }
-                        }
-                    }
-                    if (bladeManager.isFrostBlade(hand)) {
-                        boolean oneCooldown = cooldownManager.isOnCooldown(id, "frostone");
-                        boolean oneActive = durationManager.isActive(id, "frostone");
-
-                        boolean twoCooldown = cooldownManager.isOnCooldown(id, "frosttwo");
-                        boolean twoActive = durationManager.isActive(id, "frosttwo");
-
-                        if (oneActive) {
-                            if (twoActive) {
-                                // active - active
-                            } else if (twoCooldown) {
-                                // active - cooldown
-                            } else {
-                                // active - ready
-                            }
-                        } else if (oneCooldown) {
-                            if (twoActive) {
-                                // cooldown - active
-                            } else if (twoCooldown) {
-                                // cooldown - cooldown
-                            } else {
-                                // cooldown - ready
-                            }
-                        } else {
-                            if (twoActive) {
-                                // ready - active
-                            } else if (twoCooldown) {
-                                // ready - cooldown
-                            } else {
-                                // ready - ready
-                            }
-                        }
-                    }
-                    if (bladeManager.isPulseBlade(hand)) {
-                        boolean oneCooldown = cooldownManager.isOnCooldown(id, "pulseone");
-                        boolean oneActive = durationManager.isActive(id, "pulseone");
-
-                        boolean twoCooldown = cooldownManager.isOnCooldown(id, "pulsetwo");
-                        boolean twoActive = durationManager.isActive(id, "pulsetwo");
-
-                        if (oneActive) {
-                            if (twoActive) {
-                                // active - active
-                            } else if (twoCooldown) {
-                                // active - cooldown
-                            } else {
-                                // active - ready
-                            }
-                        } else if (oneCooldown) {
-                            if (twoActive) {
-                                // cooldown - active
-                            } else if (twoCooldown) {
-                                // cooldown - cooldown
-                            } else {
-                                // cooldown - ready
-                            }
-                        } else {
-                            if (twoActive) {
-                                // ready - active
-                            } else if (twoCooldown) {
-                                // ready - cooldown
-                            } else {
-                                // ready - ready
-                            }
-                        }
+                    } else if (bladeManager.isFortuneBlade(hand)) {
+                        sendAbilityBar(
+                                player,
+                                "★ Conservation", "fortuneone",
+                                "★ Lucky Strike", "fortunetwo",
+                                FORTUNE_COLOR
+                        );
                     }
                 }
             }
         }.runTaskTimer(plugin, 0L, 2L);
+    }
+
+    private void sendAbilityBar(
+            Player player,
+            String abilityOneName,
+            String abilityOneKey,
+            String abilityTwoName,
+            String abilityTwoKey,
+            TextColor bladeColor
+    ) {
+
+        UUID id = player.getUniqueId();
+
+        Component abilityOne = Component.text(abilityOneName + " ")
+                .color(bladeColor)
+                .append(getAbilityState(id, abilityOneKey));
+
+        Component separator = Component.text("  |  ")
+                .color(NamedTextColor.DARK_GRAY);
+
+        Component abilityTwo = Component.text(abilityTwoName + " ")
+                .color(bladeColor)
+                .append(getAbilityState(id, abilityTwoKey));
+
+        player.sendActionBar(
+                abilityOne
+                        .append(separator)
+                        .append(abilityTwo)
+        );
+    }
+
+    private Component getAbilityState(UUID id, String abilityKey) {
+
+        if (durationManager.isActive(id, abilityKey)) {
+            return Component.text("Active")
+                    .color(ACTIVE_COLOR)
+                    .decorate(TextDecoration.BOLD);
+        }
+
+        if (cooldownManager.isOnCooldown(id, abilityKey)) {
+            return Component.text(
+                            String.format(
+                                    "%.1fs",
+                                    cooldownManager.getRemainingMillis(id, abilityKey) / 1000.0
+                            )
+                    )
+                    .color(COOLDOWN_COLOR)
+                    .decorate(TextDecoration.BOLD);
+        }
+
+        return Component.text("Ready")
+                .color(READY_COLOR)
+                .decorate(TextDecoration.BOLD);
     }
 }
