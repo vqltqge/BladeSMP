@@ -1,4 +1,4 @@
-package me.vqlt.bladesmp.abilities;
+package me.vqlt.bladesmp.abilityone;
 
 import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
@@ -49,10 +49,10 @@ public class FlameAbilityOne {
             return;
         }
 
-        if (durationManager.isActive(id, "flameone")) {
-            player.sendMessage(Component.text("🔥 Flame Sweep is already active").color(FLAME_COLOR));
-            return;
-        }
+//        if (durationManager.isActive(id, "flameone")) {
+//            player.sendMessage(Component.text("🔥 Flame Sweep is already active").color(FLAME_COLOR));
+//            return;
+//        }
 
         ItemStack hand = player.getInventory().getItemInMainHand();
 

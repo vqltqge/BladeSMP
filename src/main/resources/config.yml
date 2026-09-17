@@ -21,6 +21,12 @@ flame:
     knockback: 1.2
     damage: 24.0
     range: 4.0
+  flame-ability-two:
+    cooldown-seconds: 90
+    damage: 10.0
+    radius: 5.0
+    knockback: 2.0
+    upward-knockback: 0.7
 
 frost:
   passive:

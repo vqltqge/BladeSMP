@@ -1,5 +1,6 @@
 package me.vqlt.bladesmp.listeners;
 
+import me.vqlt.bladesmp.abilitytwo.FrostAbilityTwo;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.PassiveManager;
 import org.bukkit.entity.Player;
@@ -12,26 +13,24 @@ public class FrostHitListener implements Listener {
 
     private final BladeManager bladeManager;
     private final PassiveManager passiveManager;
+    private final FrostAbilityTwo frostAbilityTwo;
 
-    public FrostHitListener(BladeManager bladeManager, PassiveManager passiveManager) {
+    public FrostHitListener(BladeManager bladeManager, PassiveManager passiveManager, FrostAbilityTwo frostAbilityTwo) {
         this.bladeManager = bladeManager;
         this.passiveManager = passiveManager;
+        this.frostAbilityTwo = frostAbilityTwo;
     }
 
     @EventHandler
     public void onMeleeHit(EntityDamageByEntityEvent event) {
 
-        if (!(event.getDamager() instanceof Player attacker)) {
-            return;
-        }
-
-        if (!(event.getEntity() instanceof Player victim)) {
-            return;
-        }
-
         Player damager = (Player) event.getDamager();
 
         Player target = (Player) event.getEntity();
+
+        if (frostAbilityTwo.getFreezePlayers().contains(target.getUniqueId())) {
+            event.setDamage(event.getDamage() * frostAbilityTwo.getDamageMultiplier());
+        }
 
         ItemStack hand = damager.getInventory().getItemInMainHand();
 
@@ -40,6 +39,5 @@ public class FrostHitListener implements Listener {
         }
 
         passiveManager.freezePassive(target, damager);
-
     }
 }

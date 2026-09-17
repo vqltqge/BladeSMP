@@ -1,4 +1,4 @@
-package me.vqlt.bladesmp.abilities;
+package me.vqlt.bladesmp.abilityone;
 
 
 import me.vqlt.bladesmp.BladeSMP;

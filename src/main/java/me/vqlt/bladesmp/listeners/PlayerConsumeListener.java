@@ -1,7 +1,7 @@
 package me.vqlt.bladesmp.listeners;
 
 import me.vqlt.bladesmp.BladeSMP;
-import me.vqlt.bladesmp.abilities.FortuneAbilityOne;
+import me.vqlt.bladesmp.abilityone.FortuneAbilityOne;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
