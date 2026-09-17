@@ -68,6 +68,7 @@ public class BladeManager {
                 Component.text("Deals bonus damage and knocks enemies back.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
+            // add cooldown
 
                 Component.empty(),
 
@@ -135,6 +136,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
+            // remove this and replace with cooldown
                 Component.text("Freeze Duration: 3s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
@@ -154,6 +156,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
+            // remove this
                 Component.text("Duration: 5s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
@@ -213,6 +216,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
+            // replace duration with cooldown
                 Component.text("Duration: 10s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
@@ -302,6 +306,7 @@ public class BladeManager {
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
+            // remove this
                 Component.text("Duration: 20s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
