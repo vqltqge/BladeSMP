@@ -6,6 +6,8 @@ import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -16,6 +18,7 @@ import org.bukkit.util.Vector;
 import java.util.UUID;
 
 public class FlameAbilityOne {
+
     private final BladeManager bladeManager;
     private final CooldownManager cooldownManager;
     private final DurationManager durationManager;
@@ -26,71 +29,163 @@ public class FlameAbilityOne {
     private final long cooldown;
     private final double range;
 
-    private static final TextColor FLAME_COLOR = TextColor.fromHexString("#FF4A1C");
+    private static final TextColor FLAME_COLOR =
+            TextColor.fromHexString("#FF4A1C");
 
-    public FlameAbilityOne(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin) {
+    public FlameAbilityOne(
+            BladeManager bladeManager,
+            CooldownManager cooldownManager,
+            DurationManager durationManager,
+            BladeSMP plugin
+    ) {
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
         this.plugin = plugin;
 
-        this.damage = plugin.getConfig().getDouble("flame.ability-one.damage", 24.0);
-        this.knockback = plugin.getConfig().getDouble("flame.ability-one.knockback", 1.2);
-        this.cooldown = plugin.getConfig().getLong("flame.ability-one.cooldown", 60) * 1000L;
-        this.range = plugin.getConfig().getDouble("flame.ability-one.range", 4);
+        this.damage = plugin.getConfig().getDouble(
+                "flame.ability-one.damage", 24.0
+        );
+
+        this.knockback = plugin.getConfig().getDouble(
+                "flame.ability-one.knockback", 1.2
+        );
+
+        this.cooldown = plugin.getConfig().getLong(
+                "flame.ability-one.cooldown", 60
+        ) * 1000L;
+
+        this.range = plugin.getConfig().getDouble(
+                "flame.ability-one.range", 4
+        );
     }
 
     public void activate(Player player) {
+
         UUID id = player.getUniqueId();
 
+        // Cooldown check
         if (cooldownManager.isOnCooldown(id, "flameone")) {
-            int seconds = (int) Math.ceil(cooldownManager.getRemainingMillis(id, "flameone") / 1000.0);
-            player.sendMessage(Component.text("🔥 Flame Sweep is on cooldown for " + seconds + "s").color(FLAME_COLOR));
+
+            int seconds = (int) Math.ceil(
+                    cooldownManager.getRemainingMillis(id, "flameone") / 1000.0
+            );
+
+            player.sendMessage(
+                    Component.text(
+                            "🔥 Flame Sweep is on cooldown for " + seconds + "s"
+                    ).color(FLAME_COLOR)
+            );
+
             return;
         }
 
-//        if (durationManager.isActive(id, "flameone")) {
-//            player.sendMessage(Component.text("🔥 Flame Sweep is already active").color(FLAME_COLOR));
-//            return;
-//        }
-
+        // Check blade
         ItemStack hand = player.getInventory().getItemInMainHand();
 
-        if (!(bladeManager.isFlameBlade(hand))) {
+        if (!bladeManager.isFlameBlade(hand)) {
             return;
         }
 
-        player.sendMessage(Component.text("🔥 Flame Sweep activated").color(FLAME_COLOR));
-        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 1f, 0.85f);
-        player.playSound(player.getLocation(), Sound.ENTITY_BLAZE_SHOOT, 0.55f, 1.35f);
-        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_STRONG, 0.45f, 0.8f);
+        // Activation message + sounds
+        player.sendMessage(
+                Component.text("🔥 Flame Sweep activated")
+                        .color(FLAME_COLOR)
+        );
 
-        Vector direction = player.getLocation().getDirection().normalize();
+        player.playSound(
+                player.getLocation(),
+                Sound.ENTITY_PLAYER_ATTACK_SWEEP,
+                1f,
+                0.85f
+        );
 
-        for (Entity entity : player.getNearbyEntities(range, range, range)) {
+        player.playSound(
+                player.getLocation(),
+                Sound.ENTITY_BLAZE_SHOOT,
+                0.55f,
+                1.35f
+        );
+
+        player.playSound(
+                player.getLocation(),
+                Sound.ENTITY_PLAYER_ATTACK_STRONG,
+                0.45f,
+                0.8f
+        );
+
+        // -------------------------
+        // DAMAGE
+        // -------------------------
+
+        Vector direction = player.getLocation()
+                .getDirection()
+                .normalize();
+
+        for (Entity entity : player.getNearbyEntities(
+                range,
+                range,
+                range
+        )) {
 
             if (!(entity instanceof LivingEntity target)) {
                 continue;
             }
 
-            Vector toTarget = target.getLocation().toVector().subtract(player.getLocation().toVector()).normalize();
+            Vector toTarget = target.getLocation()
+                    .toVector()
+                    .subtract(player.getLocation().toVector())
+                    .normalize();
 
-            double angle = Math.toDegrees(direction.angle(toTarget));
+            double targetAngle = Math.toDegrees(
+                    direction.angle(toTarget)
+            );
 
-            if (angle > 60) {
+            // 60 degrees either side = 120 degree sweep
+            if (targetAngle > 60) {
                 continue;
             }
 
             target.damage(damage, player);
 
-            Vector knockbackVelocity = toTarget.multiply(knockback);
+            Vector knockbackVelocity =
+                    toTarget.multiply(knockback);
+
             knockbackVelocity.setY(0.4);
 
             target.setVelocity(knockbackVelocity);
         }
 
-        cooldownManager.startCooldown(id, "flameone", cooldown);
+        // -------------------------
+        // PARTICLES
+        // -------------------------
 
+        double yaw = Math.toRadians(player.getLocation().getYaw());
+        double radius = range;
 
+        for (double angle = -60; angle <= 60; angle += 2) {
+
+            double radians = Math.toRadians(angle);
+
+            double x = -Math.sin(yaw + radians) * radius;
+            double z = Math.cos(yaw + radians) * radius;
+
+            Location particleLocation = player.getLocation()
+                    .clone()
+                    .add(x, 1, z);
+
+            player.getWorld().spawnParticle(
+                    Particle.FLAME,
+                    particleLocation,
+                    1
+            );
+        }
+
+        // Start cooldown
+        cooldownManager.startCooldown(
+                id,
+                "flameone",
+                cooldown
+        );
     }
 }
