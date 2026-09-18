@@ -65,10 +65,12 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Deals bonus damage and knocks enemies back.")
+                Component.text("Deals damage and knocks enemies back.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
-            // add cooldown
+                Component.text("⌛ Cooldown: 60s")
+                        .color(NamedTextColor.DARK_GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
 
                 Component.empty(),
 
@@ -136,8 +138,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-            // remove this and replace with cooldown
-                Component.text("Freeze Duration: 3s")
+                Component.text("⌛ Cooldown: 45s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -154,11 +155,6 @@ public class BladeManager {
 
                 Component.text("Frozen players take 2x damage.")
                         .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-            // remove this
-                Component.text("Duration: 5s")
-                        .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
                 Component.text("⌛ Cooldown: 90s")
@@ -216,23 +212,22 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-            // replace duration with cooldown
-                Component.text("Duration: 10s")
+                Component.text("⌛ Cooldown: 60s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
                 Component.empty(),
 
-                Component.text("◆ ABILITY II • Tidal Surge")
+                Component.text("◆ ABILITY II • Riptide")
                         .color(TextColor.fromHexString("#7CEBFF"))
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Send out a wave in a 3 block radius.")
+                Component.text("Pull enemies within 3 blocks towards you")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Launches enemies up and deals 3 hearts.")
+                Component.text("Blast them outwards a moment later")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -287,7 +282,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 60s")
+                Component.text("⌛ Cooldown: 45s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -303,11 +298,6 @@ public class BladeManager {
                         .decoration(TextDecoration.ITALIC, false),
 
                 Component.text("Minimum: 4 hearts")
-                        .color(NamedTextColor.DARK_GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-            // remove this
-                Component.text("Duration: 20s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -432,10 +422,6 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Duration: 10s")
-                        .color(NamedTextColor.DARK_GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
                 Component.text("⌛ Cooldown: 45s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
@@ -457,10 +443,6 @@ public class BladeManager {
 
                 Component.text("Enemies gain Weakness and Slowness.")
                         .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Duration: 20s")
-                        .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
                 Component.text("⌛ Cooldown: 120s")
@@ -505,21 +487,13 @@ public class BladeManager {
 
                 Component.empty(),
 
-                Component.text("✦ ABILITY I • Golden Guard")
+                Component.text("✦ ABILITY I • Conservation")
                         .color(TextColor.fromHexString("#F6C85F"))
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Summon 5 Iron Golems around you.")
+                Component.text("Any food that you eat is not consumed")
                         .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("They attack every nearby player except you.")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Duration: 15s")
-                        .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
                 Component.text("⌛ Cooldown: 60s")
@@ -528,7 +502,7 @@ public class BladeManager {
 
                 Component.empty(),
 
-                Component.text("◆ ABILITY II • Loaded Dice")
+                Component.text("◆ ABILITY II • Lucky Strike")
                         .color(TextColor.fromHexString("#A7E76B"))
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
@@ -537,12 +511,8 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Damage ranges from 1.1x to 2x.")
+                Component.text("Damage ranges from 1.1x to 1.5x.")
                         .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Duration: 7s")
-                        .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
                 Component.text("⌛ Cooldown: 60s")

@@ -1,8 +1,6 @@
 package me.vqlt.bladesmp.commands;
 
-import me.vqlt.bladesmp.abilitytwo.BloomAbilityTwo;
-import me.vqlt.bladesmp.abilitytwo.FlameAbilityTwo;
-import me.vqlt.bladesmp.abilitytwo.FrostAbilityTwo;
+import me.vqlt.bladesmp.abilitytwo.*;
 import me.vqlt.bladesmp.managers.BladeManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,12 +14,20 @@ public class AbilityTwoCommand implements CommandExecutor {
     private final FlameAbilityTwo flameAbilityTwo;
     private final FrostAbilityTwo frostAbilityTwo;
     private final BloomAbilityTwo bloomAbilityTwo;
+    private final FortuneAbilityTwo fortuneAbilityTwo;
+    private final PulseAbilityTwo pulseAbilityTwo;
+    private final TidalAbilityTwo tidalAbilityTwo;
+    private final StormAbilityTwo stormAbilityTwo;
 
-    public AbilityTwoCommand(BladeManager bladeManager, FlameAbilityTwo flameAbilityTwo, FrostAbilityTwo frostAbilityTwo, BloomAbilityTwo bloomAbilityTwo) {
+    public AbilityTwoCommand(BladeManager bladeManager, FlameAbilityTwo flameAbilityTwo, FrostAbilityTwo frostAbilityTwo, BloomAbilityTwo bloomAbilityTwo, FortuneAbilityTwo fortuneAbilityTwo, PulseAbilityTwo pulseAbilityTwo, TidalAbilityTwo tidalAbilityTwo, StormAbilityTwo stormAbilityTwo) {
         this.bladeManager = bladeManager;
         this.flameAbilityTwo = flameAbilityTwo;
         this.frostAbilityTwo = frostAbilityTwo;
         this.bloomAbilityTwo = bloomAbilityTwo;
+        this.fortuneAbilityTwo = fortuneAbilityTwo;
+        this.pulseAbilityTwo = pulseAbilityTwo;
+        this.tidalAbilityTwo = tidalAbilityTwo;
+        this.stormAbilityTwo = stormAbilityTwo;
     }
 
     @Override
@@ -34,13 +40,11 @@ public class AbilityTwoCommand implements CommandExecutor {
         ItemStack hand = player.getInventory().getItemInMainHand();
 
         if (bladeManager.isStormBlade(hand)) {
-            // stormAbilityOne.activate(player);
-            player.sendMessage("Activated storm2");
+            stormAbilityTwo.activate(player);
         }
 
         if (bladeManager.isPulseBlade(hand)) {
-//            pulseAbilityOne.activate(player);
-            player.sendMessage("Activated pulse2");
+            pulseAbilityTwo.activate(player);
         }
 
         if (bladeManager.isBloomBlade(hand)) {
@@ -56,13 +60,11 @@ public class AbilityTwoCommand implements CommandExecutor {
         }
 
         if (bladeManager.isFortuneBlade(hand)) {
-//            fortuneAbilityOne.activate(player);
-            player.sendMessage("Activated fortune2");
+            fortuneAbilityTwo.activate(player);
         }
 
         if (bladeManager.isTidalBlade(hand)) {
-//            tidalAbilityOne.activate(player);
-            player.sendMessage("Activated tidal2");
+            tidalAbilityTwo.activate(player);
         }
 
 

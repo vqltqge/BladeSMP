@@ -1,58 +1,193 @@
+# ==============================
+#          BLADE SMP
+#          config.yml
+# ==============================
+#
+# Time values are in seconds unless stated otherwise.
+# Damage values use Minecraft HP:
+# 1 heart = 2 HP.
+
+
+# ==============================
+#          STORM BLADE
+# ==============================
+
 storm:
+
   passive:
+    # Number of hits required to trigger the lightning passive.
     hits-to-strike: 10
+
   ability-one:
-    cooldown: 45 # in seconds
-    duration: 10 # in seconds
-    strike-hits: 1 # How often should lightning strike - 1 is every hit, 2 is every second hit, 3 is every third hit etc.
+    # Thunderstorm
+    cooldown: 60
+    duration: 10
+
+    # 1 = lightning every hit
+    # 2 = every second hit
+    # 3 = every third hit, etc.
+    strike-hits: 1
+
+    # How long the player has to land the first hit
+    # after charging the ability.
+    charge-duration: 60
+# ability two will have 120 second cooldown
+
+# ==============================
+#          BLOOM BLADE
+# ==============================
 
 bloom:
+
   passive:
+    # Number of hits required to activate the healing passive.
     hits-to-activate: 10
+
   ability-one:
-    cooldown: 45 # in seconds
-    duration: 15 # in seconds
-    max-hearts: 30 # in HP (1 heart = 2HP)
-    heal-hearts: true # determines if you should heal the hearts you gain
+    # Vital Surge
+    cooldown: 60
+    duration: 15
+
+    # Maximum health while the ability is active.
+    # Measured in HP: 30 HP = 15 hearts.
+    max-hearts: 30
+
+    # If true, the extra health gained is also healed.
+    heal-hearts: true
+
+  ability-two:
+    cooldown: 100
+    duration: 10
+
+    # Radius of the ability in blocks.
+    radius: 3.0
+
+    # Minimum HP used by the ability.
+    # 8 HP = 4 hearts.
+    min-hp: 8
+
+
+# ==============================
+#          FLAME BLADE
+# ==============================
 
 flame:
+
   ability-one:
-    cooldown: 60 # in seconds
-    knockback: 1.2
+    # Flame Sweep
+    cooldown: 60
+
     damage: 24.0
+    knockback: 1.2
     range: 4.0
-  flame-ability-two:
-    cooldown-seconds: 90
+
+  ability-two:
+    # Inferno
+    cooldown: 90
+
     damage: 10.0
     radius: 5.0
+
+    # Horizontal knockback strength.
     knockback: 2.0
+
+    # Vertical launch strength.
     upward-knockback: 0.7
 
+
+# ==============================
+#          FROST BLADE
+# ==============================
+
 frost:
+
   passive:
+    # Number of hits required to freeze the enemy.
     hits-to-freeze: 10
+
   ability-one:
+    # Frozen Dash
     cooldown: 45
-    dash-velocity: 2
-    freeze-duration: 3 # In seconds
+
+    dash-velocity: 2.0
+
+    # Freeze duration in seconds.
+    freeze-duration: 3
+
     damage: 16.0
 
+  ability-two:
+    cooldown: 60
+    duration: 5
+
+    # Radius in blocks.
+    radius: 3.0
+
+    # Damage dealt to affected/frozen targets.
+    # 2.0 = 2x damage.
+    damage-multiplier: 2.0
+
+
+# ==============================
+#          PULSE BLADE
+# ==============================
 
 pulse:
+
   ability-one:
-    cooldown: 30 # in seconds
-    dash-velocity: 2
+    cooldown: 30
+    dash-velocity: 2.0
+
+
+# ==============================
+#         FORTUNE BLADE
+# ==============================
 
 fortune:
+
   passive:
-    xp-multiplier: 2
+    # 2.0 = double XP.
+    xp-multiplier: 2.0
+
   ability-one:
     cooldown: 60
     duration: 15
 
+    # Items affected by the ability.
+    #
+    # IMPORTANT:
+    # Your PlayerConsumeListener currently reads this list.
+    # Add Bukkit Material names here.
+    items: [ ]
+
+  ability-two:
+    # Lucky Strike
+    cooldown: 60
+    duration: 15
+
+    # Maximum random damage multiplier.
+    # 1.5 = maximum of 1.5x damage.
+    max-damage: 1.5
+
+    # Time allowed to land the hit after charging.
+    charge-duration: 60
+
+
+# ==============================
+#          TIDAL BLADE
+# ==============================
+
 tidal:
+
   ability-one:
     cooldown: 60
     duration: 10
+
+    # Potion amplifier as displayed in-game.
+    # 1 = Resistance I
+    # 2 = Resistance II
+    # 3 = Resistance III
     resistance-amplifier: 2
-    radius: 3
+
+    # Ability radius in blocks.
+    radius: 3.0
