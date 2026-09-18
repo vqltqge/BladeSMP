@@ -1,5 +1,6 @@
 package me.vqlt.bladesmp.commands;
 
+import me.vqlt.bladesmp.abilitytwo.BloomAbilityTwo;
 import me.vqlt.bladesmp.abilitytwo.FlameAbilityTwo;
 import me.vqlt.bladesmp.abilitytwo.FrostAbilityTwo;
 import me.vqlt.bladesmp.managers.BladeManager;
@@ -14,11 +15,13 @@ public class AbilityTwoCommand implements CommandExecutor {
     private final BladeManager bladeManager;
     private final FlameAbilityTwo flameAbilityTwo;
     private final FrostAbilityTwo frostAbilityTwo;
+    private final BloomAbilityTwo bloomAbilityTwo;
 
-    public AbilityTwoCommand(BladeManager bladeManager, FlameAbilityTwo flameAbilityTwo, FrostAbilityTwo frostAbilityTwo) {
+    public AbilityTwoCommand(BladeManager bladeManager, FlameAbilityTwo flameAbilityTwo, FrostAbilityTwo frostAbilityTwo, BloomAbilityTwo bloomAbilityTwo) {
         this.bladeManager = bladeManager;
         this.flameAbilityTwo = flameAbilityTwo;
         this.frostAbilityTwo = frostAbilityTwo;
+        this.bloomAbilityTwo = bloomAbilityTwo;
     }
 
     @Override
@@ -41,8 +44,7 @@ public class AbilityTwoCommand implements CommandExecutor {
         }
 
         if (bladeManager.isBloomBlade(hand)) {
-//            bloomAbilityOne.activate(player);
-            player.sendMessage("Activated bloom2");
+            bloomAbilityTwo.activate(player);
         }
 
         if (bladeManager.isFlameBlade(hand)) {

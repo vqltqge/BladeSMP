@@ -1,6 +1,7 @@
 package me.vqlt.bladesmp;
 
 import me.vqlt.bladesmp.abilityone.*;
+import me.vqlt.bladesmp.abilitytwo.BloomAbilityTwo;
 import me.vqlt.bladesmp.abilitytwo.FlameAbilityTwo;
 import me.vqlt.bladesmp.abilitytwo.FrostAbilityTwo;
 import me.vqlt.bladesmp.commands.*;
@@ -31,6 +32,7 @@ public final class BladeSMP extends JavaPlugin {
 
         FlameAbilityTwo flameAbilityTwo = new FlameAbilityTwo(bladeManager, cooldownManager, durationManager, this);
         FrostAbilityTwo frostAbilityTwo = new FrostAbilityTwo(bladeManager, cooldownManager, durationManager, this);
+        BloomAbilityTwo bloomAbilityTwo = new BloomAbilityTwo(bladeManager, cooldownManager, durationManager, this);
 
         ActionBarManager actionBarManager = new ActionBarManager(cooldownManager, durationManager, bladeManager, this);
         actionBarManager.start();
@@ -39,7 +41,7 @@ public final class BladeSMP extends JavaPlugin {
 
         getCommand("weapons").setExecutor(new WeaponsCommand(bladeManager));
         getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, stormAbilityOne, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, tidalAbilityOne));
-        getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, flameAbilityTwo, frostAbilityTwo));
+        getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, flameAbilityTwo, frostAbilityTwo, bloomAbilityTwo));
         getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
         getCommand("config").setExecutor(new ConfigCommand(this));
 
