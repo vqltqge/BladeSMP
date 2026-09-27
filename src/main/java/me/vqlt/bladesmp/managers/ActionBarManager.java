@@ -71,7 +71,7 @@ public class ActionBarManager {
                         sendAbilityBar(
                                 player,
                                 "≋ Drowning Field", "tidalone",
-                                "≋ Tsunami", "tidaltwo",
+                                "≋ Riptide", "tidaltwo",
                                 TIDAL_COLOR
                         );
 

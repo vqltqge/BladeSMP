@@ -6,8 +6,6 @@ import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
-import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -154,31 +152,6 @@ public class FlameAbilityOne {
             knockbackVelocity.setY(0.4);
 
             target.setVelocity(knockbackVelocity);
-        }
-
-        // -------------------------
-        // PARTICLES
-        // -------------------------
-
-        double yaw = Math.toRadians(player.getLocation().getYaw());
-        double radius = range;
-
-        for (double angle = -60; angle <= 60; angle += 2) {
-
-            double radians = Math.toRadians(angle);
-
-            double x = -Math.sin(yaw + radians) * radius;
-            double z = Math.cos(yaw + radians) * radius;
-
-            Location particleLocation = player.getLocation()
-                    .clone()
-                    .add(x, 1, z);
-
-            player.getWorld().spawnParticle(
-                    Particle.FLAME,
-                    particleLocation,
-                    1
-            );
         }
 
         // Start cooldown

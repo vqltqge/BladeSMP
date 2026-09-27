@@ -31,7 +31,17 @@ storm:
     # How long the player has to land the first hit
     # after charging the ability.
     charge-duration: 60
-# ability two will have 120 second cooldown
+
+  ability-two:
+    # Thunderfield
+    cooldown: 120
+    duration: 10
+    radius: 10.0
+    # Strike one player, then cycle to the next every N ticks.
+    strike-interval: 5
+    regen-amplifier: 1
+    slowness-amplifier: 0
+    weakness-amplifier: 0
 
 # ==============================
 #          BLOOM BLADE
@@ -138,6 +148,16 @@ pulse:
     cooldown: 30
     dash-velocity: 2.0
 
+  ability-two:
+    # Shockwave
+    cooldown: 60
+    upwardVelocity: 1.5
+    downwardVelocity: 1.5
+    damage: 6.0
+    radius: 3.0
+    knockback: 1.2
+    upward-knockback: 0.7
+
 
 # ==============================
 #         FORTUNE BLADE
@@ -191,3 +211,11 @@ tidal:
 
     # Ability radius in blocks.
     radius: 3.0
+  ability-two:
+    # Riptide - pulls nearby enemies inward, then launches them away.
+    cooldown: 60
+    radius: 8.0
+    pull-velocity: 0.6
+    knockback: 2.0
+    damage: 8.0
+

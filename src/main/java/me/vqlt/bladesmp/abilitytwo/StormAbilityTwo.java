@@ -4,7 +4,17 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class StormAbilityTwo {
     private final BladeManager bladeManager;
@@ -19,6 +29,8 @@ public class StormAbilityTwo {
     private final int regenAmplifier;
     private final int slownessAmplifier;
     private final int weaknessAmplifier;
+
+    private static final TextColor STORM_COLOR = TextColor.fromHexString("#FFE44D");
 
     public StormAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin) {
         this.bladeManager = bladeManager;
@@ -36,6 +48,99 @@ public class StormAbilityTwo {
     }
 
     public void activate(Player player) {
-        // hi
+        UUID id = player.getUniqueId();
+
+        ItemStack hand = player.getInventory().getItemInMainHand();
+
+        if (!(bladeManager.isStormBlade(hand))) {
+            return;
+        }
+
+        if (cooldownManager.isOnCooldown(id, "stormtwo")) {
+            int seconds = (int) Math.ceil(cooldownManager.getRemainingMillis(id, "stormtwo") / 1000.0);
+            player.sendMessage(Component.text("⚡ Thunderfield is on cooldown for " + seconds + "s").color(STORM_COLOR));
+            return;
+        }
+
+        if (durationManager.isActive(id, "stormtwo")) {
+            player.sendMessage(Component.text("⚡ Thunderfield is already active").color(STORM_COLOR));
+            return;
+        }
+
+        durationManager.startDuration(id, "stormtwo", duration);
+
+        player.sendMessage(Component.text("⚡ Thunderfield activated").color(STORM_COLOR));
+        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1, 1);
+
+        // Cooldown begins when Thunderfield ends, so the action bar shows Active first.
+        durationManager.runAfter(duration / 1000, () -> {
+            cooldownManager.startCooldown(id, "stormtwo", cooldown);
+            if (player.isOnline()) {
+                player.sendMessage(Component.text("⚡ Thunderfield on cooldown").color(STORM_COLOR));
+                player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
+            }
+        });
+
+        List<Player> targets = new ArrayList<>();
+
+        for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
+            if (!(entity instanceof Player target)) {
+                continue;
+            }
+
+            if (entity.getLocation().distanceSquared(player.getLocation()) > radius * radius) {
+                continue;
+            }
+
+
+            targets.add(target);
+        }
+
+        new BukkitRunnable() {
+
+            int index = 0;
+
+            @Override
+            public void run() {
+
+                // Stop when Thunderfield duration ends
+                if (!durationManager.isActive(player.getUniqueId(), "stormtwo")) {
+                    cancel();
+                    return;
+                }
+
+                // Refresh the field so players who enter after activation can also be struck.
+                targets.clear();
+                for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
+                    if (entity instanceof Player target
+                            && target.isOnline()
+                            && !target.isDead()
+                            && target.getLocation().distanceSquared(player.getLocation()) <= radius * radius) {
+                        targets.add(target);
+                    }
+                }
+
+                if (targets.isEmpty()) {
+                    index = 0;
+                    return;
+                }
+
+                // Make sure index is still valid after removing players
+                if (index >= targets.size()) {
+                    index = 0;
+                }
+
+                Player target = targets.get(index);
+
+                target.getWorld().strikeLightning(target.getLocation());
+
+                index++;
+
+                if (index >= targets.size()) {
+                    index = 0;
+                }
+            }
+
+        }.runTaskTimer(plugin, 0L, Math.max(1, strikeInterval));
     }
 }
