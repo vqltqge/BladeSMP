@@ -12,24 +12,20 @@ import org.jetbrains.annotations.NotNull;
 public class AbilityOneCommand implements CommandExecutor {
 
     private final BladeManager bladeManager;
-    private final StormAbilityOne stormAbilityOne;
     private final PulseAbilityOne pulseAbilityOne;
     private final BloomAbilityOne bloomAbilityOne;
     private final FlameAbilityOne flameAbilityOne;
     private final FrostAbilityOne frostAbilityOne;
     private final FortuneAbilityOne fortuneAbilityOne;
-    private final TidalAbilityOne tidalAbilityOne;
 
 
-    public AbilityOneCommand(BladeManager bladeManager, StormAbilityOne stormAbilityOne, PulseAbilityOne pulseAbilityOne, BloomAbilityOne bloomAbilityOne, FlameAbilityOne flameAbilityOne, FrostAbilityOne frostAbilityOne, FortuneAbilityOne fortuneAbilityOne, TidalAbilityOne tidalAbilityOne) {
+    public AbilityOneCommand(BladeManager bladeManager, PulseAbilityOne pulseAbilityOne, BloomAbilityOne bloomAbilityOne, FlameAbilityOne flameAbilityOne, FrostAbilityOne frostAbilityOne, FortuneAbilityOne fortuneAbilityOne) {
         this.bladeManager = bladeManager;
-        this.stormAbilityOne = stormAbilityOne;
         this.pulseAbilityOne = pulseAbilityOne;
         this.bloomAbilityOne = bloomAbilityOne;
         this.flameAbilityOne = flameAbilityOne;
         this.frostAbilityOne = frostAbilityOne;
         this.fortuneAbilityOne = fortuneAbilityOne;
-        this.tidalAbilityOne = tidalAbilityOne;
     }
 
     @Override
@@ -40,10 +36,6 @@ public class AbilityOneCommand implements CommandExecutor {
         }
 
         ItemStack hand = player.getInventory().getItemInMainHand();
-
-        if (bladeManager.isStormBlade(hand)) {
-            stormAbilityOne.activate(player);
-        }
 
         if (bladeManager.isPulseBlade(hand)) {
             pulseAbilityOne.activate(player);
@@ -63,10 +55,6 @@ public class AbilityOneCommand implements CommandExecutor {
 
         if (bladeManager.isFortuneBlade(hand)) {
             fortuneAbilityOne.activate(player);
-        }
-
-        if (bladeManager.isTidalBlade(hand)) {
-            tidalAbilityOne.activate(player);
         }
 
         if (!bladeManager.isTidalBlade(hand) && !bladeManager.isBloomBlade(hand) && !bladeManager.isFlameBlade(hand) && !bladeManager.isStormBlade(hand) && !bladeManager.isFortuneBlade(hand) && !bladeManager.isPulseBlade(hand) && !bladeManager.isFrostBlade(hand)) {

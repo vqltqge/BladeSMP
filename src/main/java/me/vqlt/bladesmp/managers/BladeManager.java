@@ -167,80 +167,6 @@ public class BladeManager {
     }
 
     // =========================
-    // TIDAL BLADE
-    // =========================
-
-    public ItemStack createTidalBlade() {
-        ItemStack blade = new ItemStack(Material.NETHERITE_SWORD);
-        ItemMeta meta = blade.getItemMeta();
-
-        meta.getPersistentDataContainer().set(
-                bladeKey,
-                PersistentDataType.STRING,
-                "tidalBlade"
-        );
-
-        meta.displayName(
-                Component.text("≈ TIDAL BLADE ≈")
-                        .color(TextColor.fromHexString("#20BFFF"))
-                        .decorate(TextDecoration.BOLD)
-                        .decoration(TextDecoration.ITALIC, false)
-        );
-
-        meta.lore(List.of(
-                Component.text("◈ PASSIVE • Waterborn")
-                        .color(TextColor.fromHexString("#58D7FF"))
-                        .decorate(TextDecoration.BOLD)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Gain Dolphin's Grace and Water Breathing.")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.empty(),
-
-                Component.text("✦ ABILITY I • Drowning Field")
-                        .color(TextColor.fromHexString("#36C8FF"))
-                        .decorate(TextDecoration.BOLD)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Create an area where enemies begin drowning.")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("You gain Resistance II while active.")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("⌛ Cooldown: 60s")
-                        .color(NamedTextColor.DARK_GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.empty(),
-
-                Component.text("◆ ABILITY II • Riptide")
-                        .color(TextColor.fromHexString("#7CEBFF"))
-                        .decorate(TextDecoration.BOLD)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Pull enemies within 3 blocks towards you")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Blast them outwards a moment later")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("⌛ Cooldown: 90s")
-                        .color(NamedTextColor.DARK_GRAY)
-                        .decoration(TextDecoration.ITALIC, false)
-        ));
-
-        blade.setItemMeta(meta);
-        return blade;
-    }
-
-    // =========================
     // BLOOM BLADE
     // =========================
 
@@ -381,80 +307,6 @@ public class BladeManager {
     }
 
     // =========================
-    // STORM BLADE
-    // =========================
-
-    public ItemStack createStormBlade() {
-        ItemStack blade = new ItemStack(Material.NETHERITE_SWORD);
-        ItemMeta meta = blade.getItemMeta();
-
-        meta.getPersistentDataContainer().set(
-                bladeKey,
-                PersistentDataType.STRING,
-                "stormBlade"
-        );
-
-        meta.displayName(
-                Component.text("⚡ STORM BLADE ⚡")
-                        .color(TextColor.fromHexString("#FFE44D"))
-                        .decorate(TextDecoration.BOLD)
-                        .decoration(TextDecoration.ITALIC, false)
-        );
-
-        meta.lore(List.of(
-                Component.text("⚡ PASSIVE • Static")
-                        .color(TextColor.fromHexString("#FFF176"))
-                        .decorate(TextDecoration.BOLD)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Every 5th hit strikes lightning.")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.empty(),
-
-                Component.text("✦ ABILITY I • Overcharge")
-                        .color(TextColor.fromHexString("#69DCFF"))
-                        .decorate(TextDecoration.BOLD)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Every hit strikes lightning while active.")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("⌛ Cooldown: 45s")
-                        .color(NamedTextColor.DARK_GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.empty(),
-
-                Component.text("◆ ABILITY II • Thunderstorm")
-                        .color(TextColor.fromHexString("#FFE76A"))
-                        .decorate(TextDecoration.BOLD)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Create a storm in a 10 block radius.")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("You gain Regeneration II.")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("Enemies gain Weakness and Slowness.")
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false),
-
-                Component.text("⌛ Cooldown: 120s")
-                        .color(NamedTextColor.DARK_GRAY)
-                        .decoration(TextDecoration.ITALIC, false)
-        ));
-
-        blade.setItemMeta(meta);
-        return blade;
-    }
-
-    // =========================
     // FORTUNE BLADE
     // =========================
 
@@ -540,16 +392,8 @@ public class BladeManager {
         return isBlade(item, "frostBlade");
     }
 
-    public boolean isTidalBlade(ItemStack item) {
-        return isBlade(item, "tidalBlade");
-    }
-
     public boolean isBloomBlade(ItemStack item) {
         return isBlade(item, "bloomBlade");
-    }
-
-    public boolean isStormBlade(ItemStack item) {
-        return isBlade(item, "stormBlade");
     }
 
     public boolean isFortuneBlade(ItemStack item) {

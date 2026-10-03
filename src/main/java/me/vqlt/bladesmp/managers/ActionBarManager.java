@@ -22,8 +22,6 @@ public class ActionBarManager {
     private static final TextColor FLAME_COLOR = TextColor.fromHexString("#FF7A2F");
     private static final TextColor FROST_COLOR = TextColor.fromHexString("#6EE7FF");
     private static final TextColor BLOOM_COLOR = TextColor.fromHexString("#F50CAB");
-    private static final TextColor STORM_COLOR = TextColor.fromHexString("#FFE44D");
-    private static final TextColor TIDAL_COLOR = TextColor.fromHexString("#20BFFF");
     private static final TextColor PULSE_COLOR = TextColor.fromHexString("#A855F7");
     private static final TextColor FORTUNE_COLOR = TextColor.fromHexString("#FFD700");
 
@@ -67,14 +65,6 @@ public class ActionBarManager {
                                 FROST_COLOR
                         );
 
-                    } else if (bladeManager.isTidalBlade(hand)) {
-                        sendAbilityBar(
-                                player,
-                                "≋ Drowning Field", "tidalone",
-                                "≋ Riptide", "tidaltwo",
-                                TIDAL_COLOR
-                        );
-
                     } else if (bladeManager.isBloomBlade(hand)) {
                         sendAbilityBar(
                                 player,
@@ -89,14 +79,6 @@ public class ActionBarManager {
                                 "➜ Velocity", "pulseone",
                                 "✦ Shockwave", "pulsetwo",
                                 PULSE_COLOR
-                        );
-
-                    } else if (bladeManager.isStormBlade(hand)) {
-                        sendAbilityBar(
-                                player,
-                                "⚡ Thunderstorm", "stormone",
-                                "⚡ Thunderfield", "stormtwo",
-                                STORM_COLOR
                         );
 
                     } else if (bladeManager.isFortuneBlade(hand)) {

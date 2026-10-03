@@ -23,10 +23,8 @@ public class WeaponsGUI implements InventoryHolder {
         inventory.setItem(1, bladeManager.createFlameBlade());
         inventory.setItem(2, bladeManager.createFrostBlade());
         inventory.setItem(3, bladeManager.createBloomBlade());
-        inventory.setItem(4, bladeManager.createTidalBlade());
-        inventory.setItem(5, bladeManager.createPulseBlade());
-        inventory.setItem(6, bladeManager.createStormBlade());
-        inventory.setItem(7, bladeManager.createFortuneBlade());
+        inventory.setItem(4, bladeManager.createPulseBlade());
+        inventory.setItem(5, bladeManager.createFortuneBlade());
 
     }
 
