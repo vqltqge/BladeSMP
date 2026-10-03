@@ -1,6 +1,7 @@
 package me.vqlt.bladesmp.listeners;
 
-import me.vqlt.bladesmp.other.WeaponsGUI;
+import me.vqlt.bladesmp.other.BladesGUI;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
-public class WeaponsGUIListener implements Listener {
+public class BladesGUIListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
@@ -20,7 +21,7 @@ public class WeaponsGUIListener implements Listener {
             return;
         }
 
-        if (!(clickedInventory.getHolder(false) instanceof WeaponsGUI)) {
+        if (!(clickedInventory.getHolder(false) instanceof BladesGUI)) {
             return;
         }
 
@@ -32,7 +33,7 @@ public class WeaponsGUIListener implements Listener {
 
         ItemStack clickedItem = event.getCurrentItem();
 
-        if (clickedItem == null || clickedItem.getType().isAir()) {
+        if (clickedItem == null || clickedItem.getType().isAir() || clickedItem.getType() == Material.CYAN_STAINED_GLASS_PANE) {
             return;
         }
 

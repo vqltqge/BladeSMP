@@ -6,14 +6,14 @@ api-version: '1.21.8'
 load: POSTWORLD
 
 commands:
-  weapons:
+  blades:
     description: Opens a GUI with all the weapons in it, that you can take
     usage: /weapons
 
   cooldown:
     description: Resets the cooldown of the player specified, if none are specified it will reset your own cooldown
     usage: /cooldown <player>
-      
+
   config:
     description: Sends the current config of the plugin to the sender
     usage: /config

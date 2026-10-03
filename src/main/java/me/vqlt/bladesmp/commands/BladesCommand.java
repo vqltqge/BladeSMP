@@ -1,18 +1,18 @@
 package me.vqlt.bladesmp.commands;
 
 import me.vqlt.bladesmp.managers.BladeManager;
-import me.vqlt.bladesmp.other.WeaponsGUI;
+import me.vqlt.bladesmp.other.BladesGUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class WeaponsCommand implements CommandExecutor {
+public class BladesCommand implements CommandExecutor {
 
     private final BladeManager bladeManager;
 
-    public WeaponsCommand(BladeManager bladeManager) {
+    public BladesCommand(BladeManager bladeManager) {
         this.bladeManager = bladeManager;
     }
 
@@ -29,7 +29,7 @@ public class WeaponsCommand implements CommandExecutor {
             return true;
         }
 
-        WeaponsGUI gui = new WeaponsGUI(bladeManager);
+        BladesGUI gui = new BladesGUI(bladeManager);
         player.openInventory(gui.getInventory());
 
         return true;

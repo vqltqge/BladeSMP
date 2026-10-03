@@ -1,47 +1,10 @@
 # ==============================
 #          BLADE SMP
-#          config.yml
 # ==============================
 #
 # Time values are in seconds unless stated otherwise.
 # Damage values use Minecraft HP:
 # 1 heart = 2 HP.
-
-
-# ==============================
-#          STORM BLADE
-# ==============================
-
-storm:
-
-  passive:
-    # Number of hits required to trigger the lightning passive.
-    hits-to-strike: 10
-
-  ability-one:
-    # Thunderstorm
-    cooldown: 60
-    duration: 10
-
-    # 1 = lightning every hit
-    # 2 = every second hit
-    # 3 = every third hit, etc.
-    strike-hits: 1
-
-    # How long the player has to land the first hit
-    # after charging the ability.
-    charge-duration: 60
-
-  ability-two:
-    # Thunderfield
-    cooldown: 120
-    duration: 10
-    radius: 10.0
-    # Strike one player, then cycle to the next every N ticks.
-    strike-interval: 5
-    regen-amplifier: 1
-    slowness-amplifier: 0
-    weakness-amplifier: 0
 
 # ==============================
 #          BLOOM BLADE
@@ -191,31 +154,3 @@ fortune:
 
     # Time allowed to land the hit after charging.
     charge-duration: 60
-
-
-# ==============================
-#          TIDAL BLADE
-# ==============================
-
-tidal:
-
-  ability-one:
-    cooldown: 60
-    duration: 10
-
-    # Potion amplifier as displayed in-game.
-    # 1 = Resistance I
-    # 2 = Resistance II
-    # 3 = Resistance III
-    resistance-amplifier: 2
-
-    # Ability radius in blocks.
-    radius: 3.0
-  ability-two:
-    # Riptide - pulls nearby enemies inward, then launches them away.
-    cooldown: 60
-    radius: 8.0
-    pull-velocity: 0.6
-    knockback: 2.0
-    damage: 8.0
-
