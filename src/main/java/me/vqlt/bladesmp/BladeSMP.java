@@ -6,16 +6,25 @@ import me.vqlt.bladesmp.commands.*;
 import me.vqlt.bladesmp.listeners.*;
 import me.vqlt.bladesmp.managers.*;
 import me.vqlt.bladesmp.other.PassiveTask;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 public final class BladeSMP extends JavaPlugin {
 
     // release branch hihihhhihihihhihihihihihiihi
 
+    private FileConfiguration recipesConfig;
+
     @Override
     public void onEnable() {
         // Plugin startup logic
         saveDefaultConfig();
+
+        saveResource("recipes.yml", false);
+        recipesConfig = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "recipes.yml"));
 
         BladeManager bladeManager = new BladeManager(this);
         PassiveManager passiveManager = new PassiveManager(this);
@@ -56,6 +65,10 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne, frostAbilityTwo), this);
         getServer().getPluginManager().registerEvents(new PlayerConsumeListener(fortuneAbilityOne, this), this);
         getServer().getPluginManager().registerEvents(fortuneAbilityTwo, this);
+    }
+
+    public FileConfiguration getRecipesConfig() {
+        return recipesConfig;
     }
 
     @Override

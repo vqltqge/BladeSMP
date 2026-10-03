@@ -6,6 +6,8 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ShapedRecipe;
 
+import java.util.List;
+
 public class RecipeManager {
 
     private final BladeSMP plugin;
@@ -17,19 +19,34 @@ public class RecipeManager {
     }
 
     public void registerRecipes() {
+        ShapedRecipe flameRecipe = new ShapedRecipe(new NamespacedKey(plugin, "flame_blade_recipe"), bladeManager.createFlameBlade());
+        registerRecipe("flame", flameRecipe);
 
+        ShapedRecipe frostRecipe = new ShapedRecipe(new NamespacedKey(plugin, "frost_blade_recipe"), bladeManager.createFrostBlade());
+        registerRecipe("frost", frostRecipe);
+
+        ShapedRecipe bloomRecipe = new ShapedRecipe(new NamespacedKey(plugin, "bloom_blade_recipe"), bladeManager.createBloomBlade());
+        registerRecipe("bloom", bloomRecipe);
+
+        ShapedRecipe pulseRecipe = new ShapedRecipe(new NamespacedKey(plugin, "pulse_blade_recipe"), bladeManager.createPulseBlade());
+        registerRecipe("pulse", pulseRecipe);
+
+        ShapedRecipe fortuneRecipe = new ShapedRecipe(new NamespacedKey(plugin, "fortune_blade_recipe"), bladeManager.createFortuneBlade());
+        registerRecipe("fortune", fortuneRecipe);
     }
 
-    private void registerFlameBladeRecipe() {
-        NamespacedKey key = new NamespacedKey(plugin, "flame_blade_recipe");
+    private void registerRecipe(String blade, ShapedRecipe recipe) {
 
-        ShapedRecipe recipe = new ShapedRecipe(key, bladeManager.createFlameBlade());
+        List<String> shape = plugin.getRecipesConfig().getStringList(blade + ".shape");
 
-        recipe.shape("BBB", "BNB", " S ");
+        recipe.shape(shape.get(0), shape.get(1), shape.get(2));
 
-        recipe.setIngredient('B', Material.BLAZE_ROD);
-        recipe.setIngredient('N', Material.NETHER_STAR);
-        recipe.setIngredient('S', Material.NETHERITE_SWORD);
+        for (String ingredient : plugin.getRecipesConfig().getConfigurationSection(blade + ".ingredients").getKeys(false)) {
+
+            Material material = Material.matchMaterial(plugin.getRecipesConfig().getString(blade + ".ingredients." + ingredient));
+
+            recipe.setIngredient(ingredient.charAt(0), material);
+        }
 
         Bukkit.addRecipe(recipe);
     }
