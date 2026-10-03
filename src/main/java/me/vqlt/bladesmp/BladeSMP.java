@@ -10,6 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BladeSMP extends JavaPlugin {
 
+    // release branch hihihhhihihihhihihihihihiihi
+
     @Override
     public void onEnable() {
         // Plugin startup logic
