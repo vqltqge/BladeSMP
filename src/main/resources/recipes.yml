@@ -1,0 +1,57 @@
+flame:
+  shape:
+    - "ABA"
+    - "CDC"
+    - "ABA"
+  ingredients:
+    A: rib_armor_trim_smithing_template
+    B: respawn_anchor
+    C: netherite_ingot
+    D: netherite_sword
+
+frost:
+  shape:
+    - "ABA"
+    - "CDC"
+    - "AEA"
+  ingredients:
+    A: flow_armor_trim_smithing_template
+    B: conduit
+    C: verdant_froglight
+    D: netherite_sword
+    E: heart_of_the_sea
+
+bloom:
+  shape:
+    - "ABA"
+    - "CDC"
+    - "AEA"
+  ingredients:
+    A: totem_of_undying
+    B: dune_armor_trim_smithing_template
+    C: enchanted_golden_apple
+    D: netherite_sword
+    E: beacon
+
+pulse:
+  shape:
+    - "ABA"
+    - "CDC"
+    - "AEA"
+  ingredients:
+    A: breeze_rod
+    B: heavy_core
+    C: phantom_membrane
+    D: netherite_sword
+    E: recovery_compass
+
+fortune:
+  shape:
+    - "ABA"
+    - "CDC"
+    - "ABA"
+  ingredients:
+    A: diamond_block
+    B: gold_block
+    C: ominous_trial_key
+    D: netherite_sword

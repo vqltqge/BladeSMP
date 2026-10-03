@@ -22,6 +22,9 @@ public final class BladeSMP extends JavaPlugin {
         DurationManager durationManager = new DurationManager(this);
         CooldownManager cooldownManager = new CooldownManager();
 
+        RecipeManager recipeManager = new RecipeManager(this, bladeManager);
+        recipeManager.registerRecipes();
+
         PulseAbilityOne pulseAbilityOne = new PulseAbilityOne(this, cooldownManager, bladeManager);
         BloomAbilityOne bloomAbilityOne = new BloomAbilityOne(this, bladeManager, cooldownManager, durationManager);
         FlameAbilityOne flameAbilityOne = new FlameAbilityOne(bladeManager, cooldownManager, durationManager, this);
