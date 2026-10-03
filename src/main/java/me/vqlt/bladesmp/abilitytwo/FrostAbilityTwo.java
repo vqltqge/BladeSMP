@@ -46,7 +46,7 @@ public class FrostAbilityTwo {
         this.plugin = plugin;
 
         this.cooldown = plugin.getConfig().getLong("frost.ability-two.cooldown", 60) * 1000L;
-        this.duration = plugin.getConfig().getLong("frost.ability-two.duration", 5);
+        this.duration = plugin.getConfig().getLong("frost.ability-two.duration", 5) * 1000L;
         this.radius = plugin.getConfig().getDouble("frost.ability-two.radius", 3);
         this.damageMultiplier = plugin.getConfig().getDouble("frost.ability-two.damage-multiplier", 2);
     }
@@ -54,17 +54,24 @@ public class FrostAbilityTwo {
     public void activate(Player player) {
         UUID id = player.getUniqueId();
 
+        ItemStack hand = player.getInventory().getItemInMainHand();
+
+        if (!(bladeManager.isFrostBlade(hand))) {
+            return;
+        }
+
         if (cooldownManager.isOnCooldown(id, "frosttwo")) {
             int seconds = (int) Math.ceil(cooldownManager.getRemainingMillis(id, "frosttwo") / 1000.0);
             player.sendMessage(Component.text("✻ Frozen Domain is on cooldown for " + seconds + "s").color(FROST_COLOR));
             return;
         }
 
-        ItemStack hand = player.getInventory().getItemInMainHand();
-
-        if (!(bladeManager.isFrostBlade(hand))) {
+        if (durationManager.isActive(id, "frosttwo")) {
+            player.sendMessage(Component.text("✻ Frozen Domain is already active").color(FROST_COLOR));
             return;
         }
+
+        durationManager.startDuration(id, "frosttwo", duration);
 
         player.sendMessage(Component.text("✻ Frozen Domain activated").color(FROST_COLOR));
         player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_WIND_BURST, 1, 0.7f);
@@ -85,8 +92,14 @@ public class FrostAbilityTwo {
 
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 freezePlayers.remove(targetid);
-            }, duration * 20L);
+            }, duration / 1000 * 20L);
         }
+
+        durationManager.runAfter((duration / 1000), () -> {
+            player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
+            player.sendMessage(Component.text("✻ Frozen Domain on cooldown").color(FROST_COLOR));
+            cooldownManager.startCooldown(id, "frosttwo", cooldown);
+        });
 
     }
 }

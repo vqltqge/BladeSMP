@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
@@ -62,10 +63,18 @@ public class PlayerConsumeListener implements Listener {
             }
 
             Bukkit.getScheduler().runTask(plugin, () -> {
-                player.getInventory().addItem(item);
+                if (event.getHand() == EquipmentSlot.OFF_HAND) {
+                    ItemStack offhand = player.getInventory().getItemInOffHand();
+
+                    if (offhand.isSimilar(item)) {
+                        offhand.setAmount(offhand.getAmount() + 1);
+                    } else {
+                        player.getInventory().setItemInOffHand(item);
+                    }
+                } else {
+                    player.getInventory().addItem(item);
+                }
             });
         }
-
-
     }
 }
