@@ -77,6 +77,7 @@ frost:
   passive:
     # Number of hits required to freeze the enemy.
     hits-to-freeze: 10
+    freeze-duration: 0.5 # in seconds
 
   ability-one:
     # Frozen Dash
