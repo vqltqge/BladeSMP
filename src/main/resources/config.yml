@@ -58,7 +58,7 @@ flame:
     # Inferno
     cooldown: 90
 
-    damage: 10.0
+    damage: 40.0
     radius: 3.0
 
     # Horizontal knockback strength.
@@ -116,7 +116,7 @@ pulse:
     cooldown: 60
     upward-velocity: 1.5
     downward-velocity: 1.5
-    damage: 6.0
+    damage: 24.0
     radius: 3.0
     knockback: 1.2
     upward-knockback: 0.7
