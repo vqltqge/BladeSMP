@@ -67,13 +67,13 @@ public class FortuneAbilityOne {
         durationManager.startDuration(id, "fortuneone", duration);
 
         player.sendMessage(Component.text("♣ Conservation activated").color(FORTUNE_COLOR));
-        player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_CHIME, 0.6f, 1.5f);
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5f, 1.25f);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_CHIME, 0.6f, 1.5f);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5f, 1.25f);
 
         durationManager.runAfter((duration / 1000), () -> {
             conservationPlayers.remove(id);
             player.sendMessage(Component.text("♣ Conservation on cooldown").color(FORTUNE_COLOR));
-            player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
+            player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
             cooldownManager.startCooldown(id, "fortuneone", cooldown);
         });
     }

@@ -71,7 +71,8 @@ public class BloomAbilityOne {
         durationManager.startDuration(id, "bloomone", duration);
 
         player.sendMessage(Component.text("♥ Vital Surge activated").color(BLOOM_COLOR));
-        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1, 1);
+
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1, 1);
         maxHealth.setBaseValue(maxHearts);
         if (healHearts) {
             player.setHealth(maxHearts);
@@ -87,7 +88,7 @@ public class BloomAbilityOne {
             player.setHealth(originalMaxHealth);
         }
 
-        player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
         player.sendMessage(Component.text("♥ Vital Surge on cooldown").color(BLOOM_COLOR));
         cooldownManager.startCooldown(id, "bloomone", cooldown);
 

@@ -14,7 +14,7 @@ import java.io.File;
 
 public final class BladeSMP extends JavaPlugin {
 
-    // to do list: play sound affects all players , frozen domain damage way too much, frost passive doesnt seem to work, if u die with the heart thing u still temp on 4 hearts
+    // to do list: play sound affects all players (should work) , frozen domain damage way too much (should work), frost passive doesnt seem to work (should work if it is updated)s
 
     private FileConfiguration recipesConfig;
 
@@ -63,7 +63,7 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FrostHitListener(bladeManager, passiveManager, frostAbilityTwo), this);
         getServer().getPluginManager().registerEvents(new BloomHitListener(this, bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(new FortuneExperienceListener(this, bladeManager, passiveManager), this);
-        getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne, frostAbilityTwo), this);
+        getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne, frostAbilityTwo, passiveManager), this);
         getServer().getPluginManager().registerEvents(new PlayerConsumeListener(fortuneAbilityOne, this), this);
         getServer().getPluginManager().registerEvents(fortuneAbilityTwo, this);
         getServer().getPluginManager().registerEvents(new ChooserGUIListener(bladeManager), this);

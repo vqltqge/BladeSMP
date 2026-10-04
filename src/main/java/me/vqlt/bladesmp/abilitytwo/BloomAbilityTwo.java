@@ -64,7 +64,7 @@ public class BloomAbilityTwo {
         durationManager.startDuration(id, "bloomtwo", duration);
 
         player.sendMessage(Component.text("♥ Lifebind activated").color(BLOOM_COLOR));
-        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1, 1);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1, 1);
 
         for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
             if (!(entity instanceof LivingEntity target)) {
@@ -95,16 +95,9 @@ public class BloomAbilityTwo {
         }
 
         durationManager.runAfter((duration / 1000), () -> {
-            player.playSound(
-                    player.getLocation(),
-                    Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE,
-                    1,
-                    1
-            );
+            player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
 
-            player.sendMessage(
-                    Component.text("♥ Lifebind on cooldown").color(BLOOM_COLOR)
-            );
+            player.sendMessage(Component.text("♥ Lifebind on cooldown").color(BLOOM_COLOR));
 
             cooldownManager.startCooldown(id, "bloomtwo", cooldown);
         });

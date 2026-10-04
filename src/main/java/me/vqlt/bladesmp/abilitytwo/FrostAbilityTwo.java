@@ -48,7 +48,7 @@ public class FrostAbilityTwo {
         this.cooldown = plugin.getConfig().getLong("frost.ability-two.cooldown", 60) * 1000L;
         this.duration = plugin.getConfig().getLong("frost.ability-two.duration", 5) * 1000L;
         this.radius = plugin.getConfig().getDouble("frost.ability-two.radius", 3);
-        this.damageMultiplier = plugin.getConfig().getDouble("frost.ability-two.damage-multiplier", 2);
+        this.damageMultiplier = plugin.getConfig().getDouble("frost.ability-two.damage-multiplier", 1.1);
     }
 
     public void activate(Player player) {
@@ -74,8 +74,8 @@ public class FrostAbilityTwo {
         durationManager.startDuration(id, "frosttwo", duration);
 
         player.sendMessage(Component.text("✻ Frozen Domain activated").color(FROST_COLOR));
-        player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_WIND_BURST, 1, 0.7f);
-        player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 0.65f, 0.7f);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.ENTITY_BREEZE_WIND_BURST, 1, 0.7f);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 0.65f, 0.7f);
 
         for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
             if (!(entity instanceof Player target)) {
@@ -96,7 +96,7 @@ public class FrostAbilityTwo {
         }
 
         durationManager.runAfter((duration / 1000), () -> {
-            player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
+            player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
             player.sendMessage(Component.text("✻ Frozen Domain on cooldown").color(FROST_COLOR));
             cooldownManager.startCooldown(id, "frosttwo", cooldown);
         });

@@ -99,7 +99,7 @@ frost:
 
     # Damage dealt to affected/frozen targets.
     # 2.0 = 2x damage.
-    damage-multiplier: 2.0
+    damage-multiplier: 1.1
 
 
 # ==============================
@@ -147,7 +147,7 @@ fortune:
 
     # Maximum random damage multiplier.
     # 1.5 = maximum of 1.5x damage.
-    max-damage: 1.5
+    max-damage: 1.3
 
     # Time allowed to land the hit after charging.
     charge-duration: 60

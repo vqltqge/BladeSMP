@@ -46,8 +46,8 @@ public class PulseAbilityOne {
         }
 
         player.sendMessage(Component.text("➤ Velocity activated").color(PULSE_COLOR));
-        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 0.45f, 1.6f);
-        player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_JUMP, 0.7f, 1.4f);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 0.45f, 1.6f);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.ENTITY_BREEZE_JUMP, 0.7f, 1.4f);
         player.setVelocity(player.getLocation().getDirection().multiply(dashVelocity));
 
         // No need to say it is on cooldown as the ability is instant

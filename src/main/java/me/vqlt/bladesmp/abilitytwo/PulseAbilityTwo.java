@@ -71,8 +71,8 @@ public class PulseAbilityTwo {
             return;
         }
 
-        player.playSound(player.getLocation(), Sound.ENTITY_WARDEN_SONIC_BOOM, 1, 0.8f);
-        player.playSound(player.getLocation(), Sound.ENTITY_BLAZE_SHOOT, 0.45f, 0.65f);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.ENTITY_WARDEN_SONIC_BOOM, 1, 0.8f);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.ENTITY_BLAZE_SHOOT, 0.45f, 0.65f);
         player.sendMessage(Component.text("➤ Shockwave activated").color(PULSE_COLOR));
         durationManager.startDuration(id, "pulsetwo", 3000);
 

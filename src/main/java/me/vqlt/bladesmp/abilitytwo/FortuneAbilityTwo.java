@@ -42,7 +42,7 @@ public class FortuneAbilityTwo implements Listener {
 
         this.cooldown = plugin.getConfig().getLong("fortune.ability-two.cooldown", 60) * 1000L;
         this.duration = plugin.getConfig().getLong("fortune.ability-two.duration", 15) * 1000L;
-        this.maxDamageMultiplier = plugin.getConfig().getDouble("fortune.ability-two.max-damage", 1.5);
+        this.maxDamageMultiplier = plugin.getConfig().getDouble("fortune.ability-two.max-damage", 1.3);
         this.chargeDuration = plugin.getConfig().getLong("fortune.ability-two.charge-duration", 60) * 1000L;
     }
 
@@ -72,14 +72,14 @@ public class FortuneAbilityTwo implements Listener {
         }
 
         player.sendMessage(Component.text("♣ Lucky Strike charged").color(FORTUNE_COLOR));
-        player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_CHARGE, 0.5F, 1.5F);
-        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 0.25F, 2);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_CHARGE, 0.5F, 1.5F);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 0.25F, 2);
         armedPlayers.add(id);
 
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             if (armedPlayers.remove(id)) {
                 player.sendMessage(Component.text("♣ Lucky Strike charge expired").color(FORTUNE_COLOR));
-                player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 0.5F, 0.8F);
+                player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 0.5F, 0.8F);
             }
         }, chargeDuration / 50);
     }
@@ -124,7 +124,7 @@ public class FortuneAbilityTwo implements Listener {
 
     public void startCooldown(UUID id, Player player) {
         cooldownManager.startCooldown(id, "fortunetwo", cooldown);
-        player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
         player.sendMessage(Component.text("♣ Lucky Strike on cooldown").color(FORTUNE_COLOR));
     }
 }
