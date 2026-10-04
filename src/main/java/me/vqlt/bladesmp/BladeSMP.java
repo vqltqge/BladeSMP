@@ -14,6 +14,8 @@ import java.io.File;
 
 public final class BladeSMP extends JavaPlugin {
 
+    // to do list: play sound affects all players , frozen domain damage way too much, frost passive doesnt seem to work, if u die with the heart thing u still temp on 4 hearts
+
     private FileConfiguration recipesConfig;
 
     @Override

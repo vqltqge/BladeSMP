@@ -7,7 +7,7 @@ load: POSTWORLD
 
 commands:
   blades:
-    description: Opens a GUI with all the weapons in it, that you can take
+    description: Opens a GUI with all the weapons in it, that you can take. It also contains the selector and randomiser items.
     usage: /blades
 
   cooldown:
