@@ -43,8 +43,8 @@ public class PulseAbilityTwo {
         this.plugin = plugin;
 
         this.cooldown = plugin.getConfig().getLong("pulse.ability-two.cooldown", 60) * 1000L;
-        this.upwardVelocity = plugin.getConfig().getDouble("pulse.ability-two.upwardVelocity", 1.5);
-        this.downwardVelocity = plugin.getConfig().getDouble("pulse.ability-two.downwardVelocity", 1.5);
+        this.upwardVelocity = plugin.getConfig().getDouble("pulse.ability-two.upward-velocity", 1.5);
+        this.downwardVelocity = plugin.getConfig().getDouble("pulse.ability-two.downward-velocity", 1.5);
         this.damage = plugin.getConfig().getDouble("pulse.ability-two.damage", 6);
         this.radius = plugin.getConfig().getDouble("pulse.ability-two.radius", 3);
         this.knockback = plugin.getConfig().getDouble("pulse.ability-two.knockback", 1.2);

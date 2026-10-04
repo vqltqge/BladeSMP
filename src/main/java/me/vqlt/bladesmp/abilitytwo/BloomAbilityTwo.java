@@ -36,7 +36,7 @@ public class BloomAbilityTwo {
         this.plugin = plugin;
 
         this.radius = plugin.getConfig().getDouble("bloom.ability-two.radius", 3.0);
-        this.cooldown = plugin.getConfig().getLong("bloom.ability-two.cooldown", 60) * 1000L;
+        this.cooldown = plugin.getConfig().getLong("bloom.ability-two.cooldown", 100) * 1000L;
         this.duration = plugin.getConfig().getLong("bloom.ability-two.duration", 10) * 1000L;
         this.minHP = plugin.getConfig().getInt("bloom.ability-two.min-hp", 8);
     }

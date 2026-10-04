@@ -161,7 +161,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 90s")
+                Component.text("⌛ Cooldown: 60s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false)
         ));
@@ -194,7 +194,7 @@ public class BladeManager {
         );
 
         meta.lore(List.of(
-                Component.text("❤ PASSIVE • Lifebind")
+                Component.text("❤ PASSIVE • Lifesteal")
                         .color(TextColor.fromHexString("#FF65C8"))
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
@@ -220,7 +220,7 @@ public class BladeManager {
 
                 Component.empty(),
 
-                Component.text("◆ ABILITY II • Life Seal")
+                Component.text("◆ ABILITY II • Lifebind")
                         .color(TextColor.fromHexString("#F50CAB"))
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
@@ -286,13 +286,13 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 15s")
+                Component.text("⌛ Cooldown: 30s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
                 Component.empty(),
 
-                Component.text("◆ ABILITY II • Groundbreaker")
+                Component.text("◆ ABILITY II • Shockwave")
                         .color(TextColor.fromHexString("#D8B4FE"))
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
@@ -301,7 +301,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Deals 5 hearts within a 3 block radius.")
+                Component.text("Deals damage to players within a 3 block radius.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 

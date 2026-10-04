@@ -33,7 +33,7 @@ public class BloomAbilityOne {
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
 
-        this.cooldown = plugin.getConfig().getLong("bloom.ability-one.cooldown", 45) * 1000L;
+        this.cooldown = plugin.getConfig().getLong("bloom.ability-one.cooldown", 60) * 1000L;
         this.duration = plugin.getConfig().getLong("bloom.ability-one.duration", 15) * 1000L;
         this.maxHearts = plugin.getConfig().getInt("bloom.ability-one.max-hearts", 30);
         this.healHearts = plugin.getConfig().getBoolean("bloom.ability-one.heal-hearts", true);

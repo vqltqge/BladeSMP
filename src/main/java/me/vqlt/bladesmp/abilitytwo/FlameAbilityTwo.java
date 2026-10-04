@@ -40,7 +40,7 @@ public class FlameAbilityTwo {
         this.damage = plugin.getConfig().getDouble("flame.ability-two.damage", 10.0);
         this.knockback = plugin.getConfig().getDouble("flame.ability-two.knockback", 2.0);
         this.upwardKnockback = plugin.getConfig().getDouble("flame.ability-two.upward-knockback", 0.7);
-        this.cooldown = plugin.getConfig().getLong("flame.ability-two.cooldown", 60) * 1000L;
+        this.cooldown = plugin.getConfig().getLong("flame.ability-two.cooldown", 90) * 1000L;
     }
 
     public void activate(Player player) {

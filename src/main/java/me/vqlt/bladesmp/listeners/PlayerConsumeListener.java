@@ -42,7 +42,7 @@ public class PlayerConsumeListener implements Listener {
             Material material = Material.matchMaterial(name);
 
             if (material == null) {
-                plugin.getLogger().warning("Invalid Abundance Item: " + name);
+                plugin.getLogger().warning("Invalid Conservation Item: " + name);
                 continue;
             }
 

@@ -59,7 +59,7 @@ flame:
     cooldown: 90
 
     damage: 10.0
-    radius: 5.0
+    radius: 3.0
 
     # Horizontal knockback strength.
     knockback: 2.0
@@ -114,8 +114,8 @@ pulse:
   ability-two:
     # Shockwave
     cooldown: 60
-    upwardVelocity: 1.5
-    downwardVelocity: 1.5
+    upward-velocity: 1.5
+    downward-velocity: 1.5
     damage: 6.0
     radius: 3.0
     knockback: 1.2

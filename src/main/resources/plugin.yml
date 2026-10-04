@@ -12,7 +12,7 @@ commands:
 
   cooldown:
     description: Resets the cooldown of the player specified, if none are specified it will reset your own cooldown
-    usage: /cooldown <player>
+    usage: /cooldown [player]
 
   config:
     description: Sends the current config of the plugin to the sender
@@ -28,4 +28,4 @@ commands:
 
   random:
     description: Rolls a random blade for the player specified, if none are specified it will roll a random blade for everyone
-    usage: /random <player>
+    usage: /random [player]
