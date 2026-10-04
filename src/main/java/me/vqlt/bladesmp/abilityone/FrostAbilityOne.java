@@ -93,7 +93,7 @@ public class FrostAbilityOne {
                         hitPlayers.add(other.getUniqueId());
                         freezePlayers.add(other.getUniqueId());
 
-                        other.damage(damage);
+                        other.damage(damage, player);
 
                         new BukkitRunnable() {
                             @Override

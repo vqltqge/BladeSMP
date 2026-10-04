@@ -23,16 +23,20 @@ public class RandomBladeManager {
     }
 
     public void rollBlade(Player player) {
-        ItemStack winner = blades.get(random.nextInt(blades.size())).clone();
+        if (rollingPlayers.contains(player.getUniqueId())) {
+            return;
+        }
 
         rollingPlayers.add(player.getUniqueId());
+
+        ItemStack winner = blades.get(random.nextInt(blades.size())).clone();
+
         int slot = player.getInventory().firstEmpty();
 
         if (slot == -1) {
             slot = player.getInventory().getHeldItemSlot();
 
-            ItemStack droppedItem =
-                    player.getInventory().getItem(slot);
+            ItemStack droppedItem = player.getInventory().getItem(slot);
 
             if (droppedItem != null) {
                 player.getWorld().dropItemNaturally(player.getLocation(), droppedItem);
@@ -54,7 +58,7 @@ public class RandomBladeManager {
             return;
         }
 
-        ItemStack displayBlade = blades.get(random.nextInt(blades.size()));
+        ItemStack displayBlade = blades.get(random.nextInt(blades.size())).clone();
 
         player.getInventory().setItem(slot, displayBlade);
 

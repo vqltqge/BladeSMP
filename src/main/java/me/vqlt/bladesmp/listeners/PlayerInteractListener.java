@@ -45,7 +45,13 @@ public class PlayerInteractListener implements Listener {
             player.openInventory(gui.getInventory());
         } else if (bladeManager.isRandomiser(item)) {
             event.setCancelled(true);
+
+            if (randomBladeManager.isRolling(player)) {
+                return;
+            }
+
             item.subtract(1);
+
             randomBladeManager.rollBlade(player);
         }
     }

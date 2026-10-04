@@ -14,10 +14,6 @@ commands:
     description: Resets the cooldown of the player specified, if none are specified it will reset your own cooldown
     usage: /cooldown [player]
 
-  config:
-    description: Sends the current config of the plugin to the sender
-    usage: /config
-
   ability1:
     description: Activates your first ability
     usage: /ability1
