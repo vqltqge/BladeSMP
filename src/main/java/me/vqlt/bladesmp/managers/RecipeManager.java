@@ -93,7 +93,7 @@ public class RecipeManager {
 
             if (material == null) {
                 plugin.getLogger().warning("Invalid material '" + materialName + "' in " + blade + " recipe.");
-                continue;
+                return;
             }
 
             recipe.setIngredient(

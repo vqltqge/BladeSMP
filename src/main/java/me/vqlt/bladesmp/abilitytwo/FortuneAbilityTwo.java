@@ -55,6 +55,11 @@ public class FortuneAbilityTwo implements Listener {
             return;
         }
 
+        if (armedPlayers.contains(id)) {
+            player.sendMessage(Component.text("♣ Lucky Strike is already charged").color(FORTUNE_COLOR));
+            return;
+        }
+
         if (cooldownManager.isOnCooldown(id, "fortunetwo")) {
             int seconds = (int) Math.ceil(cooldownManager.getRemainingMillis(id, "fortunetwo") / 1000.0);
             player.sendMessage(Component.text("♣ Lucky Strike is on cooldown for " + seconds + "s").color(FORTUNE_COLOR));
@@ -109,7 +114,7 @@ public class FortuneAbilityTwo implements Listener {
 
         Random random = new Random();
 
-        int numberOfLevels = (int) Math.round((maxDamageMultiplier - 1.1) * 10) + 1;
+        int numberOfLevels = Math.max(1, (int) Math.round((maxDamageMultiplier - 1.1) * 10) + 1);
 
         if (durationManager.isActive(id, "fortunetwo")) {
             double multiplier = 1.1 + random.nextInt(numberOfLevels) * 0.1;

@@ -14,8 +14,6 @@ import java.io.File;
 
 public final class BladeSMP extends JavaPlugin {
 
-    // release branch hihihhhihihihhihihihihihiihi
-
     private FileConfiguration recipesConfig;
 
     @Override

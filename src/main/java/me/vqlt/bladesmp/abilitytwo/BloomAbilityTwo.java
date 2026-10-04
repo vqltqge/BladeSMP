@@ -85,11 +85,10 @@ public class BloomAbilityTwo {
 
             double currentHealth = target.getHealth();
 
-            if (currentHealth < minHP) {
-                currentHealth = minHP;
-            }
+            double newMaxHealth = Math.max(currentHealth, minHP);
+            newMaxHealth = Math.min(newMaxHealth, originalMaxHealth);
 
-            maxHealth.setBaseValue(currentHealth);
+            maxHealth.setBaseValue(newMaxHealth);
 
             durationManager.runAfter((duration / 1000), () ->
                     revertHealth(target, maxHealth, originalMaxHealth));
