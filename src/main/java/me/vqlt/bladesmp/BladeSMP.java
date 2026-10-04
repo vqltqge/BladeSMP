@@ -14,8 +14,6 @@ import java.io.File;
 
 public final class BladeSMP extends JavaPlugin {
 
-    // to do list: play sound affects all players (should work) , frozen domain damage way too much (should work), frost passive doesnt seem to work (should work if it is updated)s
-
     private FileConfiguration recipesConfig;
 
     @Override
