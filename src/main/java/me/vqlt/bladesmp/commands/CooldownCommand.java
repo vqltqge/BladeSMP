@@ -24,12 +24,16 @@ public class CooldownCommand implements CommandExecutor {
 
         Player target;
 
+        if (args.length > 1) {
+            sender.sendMessage("§cUsage: /cooldown [player]");
 
-        if (args.length >= 1) {
+            return true;
+        } else if (args.length == 1) {
             target = Bukkit.getPlayer(args[0]);
 
             if (target == null) {
                 sender.sendMessage("§cThat player is not online.");
+
                 return true;
             }
         } else {

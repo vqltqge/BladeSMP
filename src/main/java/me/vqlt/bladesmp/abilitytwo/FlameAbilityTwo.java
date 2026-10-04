@@ -37,7 +37,7 @@ public class FlameAbilityTwo {
         this.plugin = plugin;
 
         this.radius = plugin.getConfig().getDouble("flame.ability-two.radius", 3.0);
-        this.damage = plugin.getConfig().getDouble("flame.ability-two.damage", 10.0);
+        this.damage = plugin.getConfig().getDouble("flame.ability-two.damage", 40.0);
         this.knockback = plugin.getConfig().getDouble("flame.ability-two.knockback", 2.0);
         this.upwardKnockback = plugin.getConfig().getDouble("flame.ability-two.upward-knockback", 0.7);
         this.cooldown = plugin.getConfig().getLong("flame.ability-two.cooldown", 90) * 1000L;
@@ -74,11 +74,7 @@ public class FlameAbilityTwo {
                 continue;
             }
 
-            target.setHealth(Math.max(0, target.getHealth() - damage));
-
-            if (!target.isDead()) {
-                target.playHurtAnimation(0);
-            }
+            target.damage(damage, player);
 
             Vector direction = target.getLocation().toVector().subtract(center.toVector()).normalize().multiply(knockback);
 

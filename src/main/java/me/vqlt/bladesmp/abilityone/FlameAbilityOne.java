@@ -65,15 +65,9 @@ public class FlameAbilityOne {
         // Cooldown check
         if (cooldownManager.isOnCooldown(id, "flameone")) {
 
-            int seconds = (int) Math.ceil(
-                    cooldownManager.getRemainingMillis(id, "flameone") / 1000.0
-            );
+            int seconds = (int) Math.ceil(cooldownManager.getRemainingMillis(id, "flameone") / 1000.0);
 
-            player.sendMessage(
-                    Component.text(
-                            "🔥 Flame Sweep is on cooldown for " + seconds + "s"
-                    ).color(FLAME_COLOR)
-            );
+            player.sendMessage(Component.text("🔥 Flame Sweep is on cooldown for " + seconds + "s").color(FLAME_COLOR));
 
             return;
         }

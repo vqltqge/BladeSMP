@@ -24,10 +24,6 @@ public class PassiveTask {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 ItemStack hand = player.getInventory().getItemInMainHand();
 
-                if (!(bladeManager.isFlameBlade(hand))) {
-                    continue;
-                }
-
                 if (bladeManager.isFlameBlade(hand)) {
                     passiveManager.flamePassive(player);
                 }

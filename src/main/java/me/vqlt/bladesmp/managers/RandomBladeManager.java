@@ -49,6 +49,11 @@ public class RandomBladeManager {
     }
 
     private void roll(Player player, int slot, ItemStack winner, int rolls) {
+        if (!player.isOnline()) {
+            rollingPlayers.remove(player.getUniqueId());
+            return;
+        }
+
         if (rolls >= 10) {
             player.getInventory().setItem(slot, winner);
             rollingPlayers.remove(player.getUniqueId());

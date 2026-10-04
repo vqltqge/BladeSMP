@@ -45,7 +45,7 @@ public class PulseAbilityTwo {
         this.cooldown = plugin.getConfig().getLong("pulse.ability-two.cooldown", 60) * 1000L;
         this.upwardVelocity = plugin.getConfig().getDouble("pulse.ability-two.upward-velocity", 1.5);
         this.downwardVelocity = plugin.getConfig().getDouble("pulse.ability-two.downward-velocity", 1.5);
-        this.damage = plugin.getConfig().getDouble("pulse.ability-two.damage", 6);
+        this.damage = plugin.getConfig().getDouble("pulse.ability-two.damage", 24.0);
         this.radius = plugin.getConfig().getDouble("pulse.ability-two.radius", 3);
         this.knockback = plugin.getConfig().getDouble("pulse.ability-two.knockback", 1.2);
         this.upwardKnockback = plugin.getConfig().getDouble("pulse.ability-two.upward-knockback", 0.7);
@@ -137,7 +137,7 @@ public class PulseAbilityTwo {
                             continue;
                         }
 
-                        target.setHealth(Math.max(0, target.getHealth() - damage));
+                        target.damage(damage, player);
 
                         if (!target.isDead()) {
                             target.playHurtAnimation(0);
