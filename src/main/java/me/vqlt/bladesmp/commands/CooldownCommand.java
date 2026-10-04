@@ -29,16 +29,12 @@ public class CooldownCommand implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
 
             if (target == null) {
-                sender.sendMessage(
-                        "§cThat player is not online."
-                );
+                sender.sendMessage("§cThat player is not online.");
                 return true;
             }
         } else {
             if (!(sender instanceof Player player)) {
-                sender.sendMessage(
-                        "§cConsole usage: /cooldown <player>"
-                );
+                sender.sendMessage("§cConsole usage: /cooldown <player>");
                 return true;
             }
 
@@ -47,16 +43,10 @@ public class CooldownCommand implements CommandExecutor {
 
         cooldownManager.clearCooldowns(target);
 
-        sender.sendMessage(
-                "§aCleared all cooldowns for §f"
-                        + target.getName()
-                        + "§a."
-        );
+        sender.sendMessage("§aCleared all cooldowns for §f" + target.getName() + "§a.");
 
         if (!sender.equals(target)) {
-            target.sendMessage(
-                    "§aYour ability cooldowns were cleared."
-            );
+            target.sendMessage("§aYour ability cooldowns were cleared.");
         }
 
         return true;
