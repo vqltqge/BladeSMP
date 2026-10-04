@@ -38,6 +38,10 @@ public class FrostHitListener implements Listener {
             return;
         }
 
+        if (frostAbilityTwo.getFreezePlayers().contains(victim.getUniqueId())) {
+            event.setDamage(event.getDamage() * frostAbilityTwo.getDamageMultiplier());
+        }
+
         passiveManager.freezePassive(victim, attacker);
     }
 }
