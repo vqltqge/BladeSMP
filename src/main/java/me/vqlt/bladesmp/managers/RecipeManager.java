@@ -1,9 +1,10 @@
 package me.vqlt.bladesmp.managers;
 
 import me.vqlt.bladesmp.BladeSMP;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
 import java.util.List;
@@ -19,35 +20,88 @@ public class RecipeManager {
     }
 
     public void registerRecipes() {
-        ShapedRecipe flameRecipe = new ShapedRecipe(new NamespacedKey(plugin, "flame_blade_recipe"), bladeManager.createFlameBlade());
-        registerRecipe("flame", flameRecipe);
-
-        ShapedRecipe frostRecipe = new ShapedRecipe(new NamespacedKey(plugin, "frost_blade_recipe"), bladeManager.createFrostBlade());
-        registerRecipe("frost", frostRecipe);
-
-        ShapedRecipe bloomRecipe = new ShapedRecipe(new NamespacedKey(plugin, "bloom_blade_recipe"), bladeManager.createBloomBlade());
-        registerRecipe("bloom", bloomRecipe);
-
-        ShapedRecipe pulseRecipe = new ShapedRecipe(new NamespacedKey(plugin, "pulse_blade_recipe"), bladeManager.createPulseBlade());
-        registerRecipe("pulse", pulseRecipe);
-
-        ShapedRecipe fortuneRecipe = new ShapedRecipe(new NamespacedKey(plugin, "fortune_blade_recipe"), bladeManager.createFortuneBlade());
-        registerRecipe("fortune", fortuneRecipe);
+        registerRecipe("flame", bladeManager.createFlameBlade());
+        registerRecipe("frost", bladeManager.createFrostBlade());
+        registerRecipe("bloom", bladeManager.createBloomBlade());
+        registerRecipe("pulse", bladeManager.createPulseBlade());
+        registerRecipe("fortune", bladeManager.createFortuneBlade());
     }
 
-    private void registerRecipe(String blade, ShapedRecipe recipe) {
+    private void registerRecipe(String blade, ItemStack result) {
 
+        // Get recipe shape
         List<String> shape = plugin.getRecipesConfig().getStringList(blade + ".shape");
+
+        // Make sure there are exactly 3 rows
+        if (shape.size() != 3) {
+            plugin.getLogger().warning("Invalid recipe shape for " + blade + ". Expected exactly 3 rows.");
+            return;
+        }
+
+        // Make sure each row is exactly 3 characters
+        for (String row : shape) {
+            if (row.length() != 3) {
+                plugin.getLogger().warning("Invalid recipe shape for " + blade + ". Each row must contain exactly 3 characters.");
+                return;
+            }
+        }
+
+        // Get ingredients section
+        ConfigurationSection ingredients = plugin.getRecipesConfig().getConfigurationSection(blade + ".ingredients");
+
+        if (ingredients == null) {
+            plugin.getLogger().warning("Missing ingredients section for " + blade + ".");
+            return;
+        }
+
+        for (String row : shape) {
+            for (char character : row.toCharArray()) {
+                if (character == ' ') {
+                    continue;
+                }
+
+                if (!ingredients.contains(String.valueOf(character))) {
+                    plugin.getLogger().warning("Missing ingredient '" + character + "' in " + blade + " recipe.");
+                    return;
+                }
+            }
+        }
+
+        NamespacedKey recipeKey = new NamespacedKey(plugin, blade + "_blade");
+
+        ShapedRecipe recipe = new ShapedRecipe(recipeKey, result);
 
         recipe.shape(shape.get(0), shape.get(1), shape.get(2));
 
-        for (String ingredient : plugin.getRecipesConfig().getConfigurationSection(blade + ".ingredients").getKeys(false)) {
+        // Add every ingredient from recipes.yml
+        for (String key : ingredients.getKeys(false)) {
 
-            Material material = Material.matchMaterial(plugin.getRecipesConfig().getString(blade + ".ingredients." + ingredient));
+            // Recipe keys should be one character, e.g. A, B, C
+            if (key.length() != 1) {
+                plugin.getLogger().warning("Invalid ingredient key '" + key + "' in " + blade + " recipe.");
+                continue;
+            }
 
-            recipe.setIngredient(ingredient.charAt(0), material);
+            String materialName = ingredients.getString(key);
+
+            if (materialName == null) {
+                plugin.getLogger().warning("Missing material for ingredient '" + key + "' in " + blade + " recipe.");
+                continue;
+            }
+
+            Material material = Material.matchMaterial(materialName);
+
+            if (material == null) {
+                plugin.getLogger().warning("Invalid material '" + materialName + "' in " + blade + " recipe.");
+                continue;
+            }
+
+            recipe.setIngredient(
+                    key.charAt(0),
+                    material
+            );
         }
 
-        Bukkit.addRecipe(recipe);
+        plugin.getServer().addRecipe(recipe);
     }
 }

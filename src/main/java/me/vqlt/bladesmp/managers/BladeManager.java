@@ -31,6 +31,8 @@ public class BladeManager {
         ItemStack blade = new ItemStack(Material.NETHERITE_SWORD);
         ItemMeta meta = blade.getItemMeta();
 
+        meta.setItemModel(new NamespacedKey("bladesmp", "flame_blade"));
+
         meta.getPersistentDataContainer().set(
                 bladeKey,
                 PersistentDataType.STRING,
@@ -104,6 +106,8 @@ public class BladeManager {
         ItemStack blade = new ItemStack(Material.NETHERITE_SWORD);
         ItemMeta meta = blade.getItemMeta();
 
+        meta.setItemModel(new NamespacedKey("bladesmp", "frost_blade"));
+
         meta.getPersistentDataContainer().set(
                 bladeKey,
                 PersistentDataType.STRING,
@@ -144,7 +148,7 @@ public class BladeManager {
 
                 Component.empty(),
 
-                Component.text("◆ ABILITY II • Absolute Zero")
+                Component.text("◆ ABILITY II • Frozen Domain")
                         .color(TextColor.fromHexString("#C7F5FF"))
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
@@ -174,6 +178,8 @@ public class BladeManager {
         ItemStack blade = new ItemStack(Material.NETHERITE_SWORD);
         ItemMeta meta = blade.getItemMeta();
 
+        meta.setItemModel(new NamespacedKey("bladesmp", "bloom_blade"));
+
         meta.getPersistentDataContainer().set(
                 bladeKey,
                 PersistentDataType.STRING,
@@ -188,7 +194,7 @@ public class BladeManager {
         );
 
         meta.lore(List.of(
-                Component.text("❤ PASSIVE • Lifesteal")
+                Component.text("❤ PASSIVE • Lifebind")
                         .color(TextColor.fromHexString("#FF65C8"))
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
@@ -208,7 +214,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 45s")
+                Component.text("⌛ Cooldown: 60s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -243,6 +249,8 @@ public class BladeManager {
     public ItemStack createPulseBlade() {
         ItemStack blade = new ItemStack(Material.NETHERITE_SWORD);
         ItemMeta meta = blade.getItemMeta();
+
+        meta.setItemModel(new NamespacedKey("bladesmp", "pulse_blade"));
 
         meta.getPersistentDataContainer().set(
                 bladeKey,
@@ -314,6 +322,8 @@ public class BladeManager {
         ItemStack blade = new ItemStack(Material.NETHERITE_SWORD);
         ItemMeta meta = blade.getItemMeta();
 
+        meta.setItemModel(new NamespacedKey("bladesmp", "fortune_blade"));
+
         meta.getPersistentDataContainer().set(
                 bladeKey,
                 PersistentDataType.STRING,
@@ -377,8 +387,48 @@ public class BladeManager {
     }
 
     // =========================
+    // BLADE CHOOSER
+    // =========================
+
+    public ItemStack createBladeChooser() {
+        ItemStack chooser = new ItemStack(Material.ENDER_EYE);
+        ItemMeta meta = chooser.getItemMeta();
+        meta.setMaxStackSize(1);
+        meta.setEnchantmentGlintOverride(true);
+
+        meta.getPersistentDataContainer().set(bladeKey, PersistentDataType.STRING, "bladeChooser");
+
+        meta.displayName(Component.text("✦ BLADE CHOOSER ✦").color(NamedTextColor.DARK_RED).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, false));
+
+        chooser.setItemMeta(meta);
+        return chooser;
+    }
+
+    // =========================
+    // RANDOM BLADE
+    // =========================
+
+    public ItemStack createBladeRandomiser() {
+        ItemStack randomiser = new ItemStack(Material.NETHER_STAR);
+        ItemMeta meta = randomiser.getItemMeta();
+        meta.setMaxStackSize(1);
+        meta.setEnchantmentGlintOverride(true);
+
+        meta.getPersistentDataContainer().set(bladeKey, PersistentDataType.STRING, "bladeRandomiser");
+
+        meta.displayName(Component.text("✦ BLADE RANDOMISER ✦").color(NamedTextColor.DARK_RED).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, false));
+
+        randomiser.setItemMeta(meta);
+        return randomiser;
+    }
+
+    // =========================
     // BLADE CHECKS
     // =========================
+
+    public boolean isBladeChooser(ItemStack item) {
+        return isBlade(item, "bladeChooser");
+    }
 
     public boolean isPulseBlade(ItemStack item) {
         return isBlade(item, "pulseBlade");
@@ -398,6 +448,10 @@ public class BladeManager {
 
     public boolean isFortuneBlade(ItemStack item) {
         return isBlade(item, "fortuneBlade");
+    }
+
+    public boolean isRandomiser(ItemStack item) {
+        return isBlade(item, "bladeRandomiser");
     }
 
     private boolean isBlade(ItemStack item, String type) {

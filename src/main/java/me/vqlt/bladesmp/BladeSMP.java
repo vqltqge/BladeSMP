@@ -30,6 +30,7 @@ public final class BladeSMP extends JavaPlugin {
         PassiveManager passiveManager = new PassiveManager(this);
         DurationManager durationManager = new DurationManager(this);
         CooldownManager cooldownManager = new CooldownManager();
+        RandomBladeManager randomBladeManager = new RandomBladeManager(this, bladeManager);
 
         RecipeManager recipeManager = new RecipeManager(this, bladeManager);
         recipeManager.registerRecipes();
@@ -54,6 +55,7 @@ public final class BladeSMP extends JavaPlugin {
         getCommand("blades").setExecutor(new BladesCommand(bladeManager));
         getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne));
         getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, flameAbilityTwo, frostAbilityTwo, bloomAbilityTwo, fortuneAbilityTwo, pulseAbilityTwo));
+        getCommand("random").setExecutor(new RandomCommand(randomBladeManager, this));
         getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
         getCommand("config").setExecutor(new ConfigCommand(this));
 
@@ -65,6 +67,8 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne, frostAbilityTwo), this);
         getServer().getPluginManager().registerEvents(new PlayerConsumeListener(fortuneAbilityOne, this), this);
         getServer().getPluginManager().registerEvents(fortuneAbilityTwo, this);
+        getServer().getPluginManager().registerEvents(new ChooserGUIListener(bladeManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerInteractListener(bladeManager, randomBladeManager), this);
     }
 
     public FileConfiguration getRecipesConfig() {

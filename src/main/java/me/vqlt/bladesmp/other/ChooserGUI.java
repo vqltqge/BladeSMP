@@ -11,11 +11,11 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class BladesGUI implements InventoryHolder {
+public class ChooserGUI implements InventoryHolder {
     private final Inventory inventory;
     private final BladeManager bladeManager;
 
-    public BladesGUI(BladeManager bladeManager) {
+    public ChooserGUI(BladeManager bladeManager) {
         this.bladeManager = bladeManager;
 
         inventory = Bukkit.createInventory(this, 27, Component.text("Blades").color(NamedTextColor.DARK_RED).decoration(TextDecoration.BOLD, true));
@@ -32,13 +32,11 @@ public class BladesGUI implements InventoryHolder {
             inventory.setItem(i, new ItemStack(Material.CYAN_STAINED_GLASS_PANE));
         }
 
-        inventory.setItem(4, bladeManager.createBladeRandomiser());
         inventory.setItem(11, bladeManager.createFlameBlade());
         inventory.setItem(12, bladeManager.createFrostBlade());
         inventory.setItem(13, bladeManager.createBloomBlade());
         inventory.setItem(14, bladeManager.createPulseBlade());
         inventory.setItem(15, bladeManager.createFortuneBlade());
-        inventory.setItem(22, bladeManager.createBladeChooser());
 
     }
 

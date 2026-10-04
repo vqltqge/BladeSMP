@@ -8,7 +8,7 @@ load: POSTWORLD
 commands:
   blades:
     description: Opens a GUI with all the weapons in it, that you can take
-    usage: /weapons
+    usage: /blades
 
   cooldown:
     description: Resets the cooldown of the player specified, if none are specified it will reset your own cooldown
@@ -25,3 +25,7 @@ commands:
   ability2:
     description: Activates your second ability
     usage: /ability2
+
+  random:
+    description: Rolls a random blade for the player specified, if none are specified it will roll a random blade for everyone
+    usage: /random <player>
