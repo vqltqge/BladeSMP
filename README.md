@@ -6,7 +6,7 @@ This plugin adds eight custom swords to the game. Each sword gives you a passive
 ## Abilities
 
 ###  Flame Blade
-#### Passive
+**Passive**
 Gain permenant Fire Resistance while holding the blade.
 
 ## Commands
