@@ -3,6 +3,12 @@
 # Blade SMP
 This plugin adds eight custom swords to the game. Each sword gives you a passive and two abilities. All the swords have custom recipes. You can view the abilities and recipes by scrolling down to the images.
 
+## Abilities
+
+###  Flame Blade
+#### Passive
+Gain permenant Fire Resistance while holding the blade.
+
 ## Commands
 
 ### /blades
