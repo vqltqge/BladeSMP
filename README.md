@@ -5,9 +5,40 @@ This plugin adds eight custom swords to the game. Each sword gives you a passive
 
 ## Abilities
 
-###  Flame Blade
-**Passive**
-Gain permenant Fire Resistance while holding the blade.
+### Flame Blade
+**Passive**: Gain permenant Fire Resistance while holding the blade.
+
+**Ability One**: Do a 120 degrees sweep attack that knocks all players in the range away and deals extra damage. **Cooldown: 60 seconds.**
+
+**Ability Two**: Create a flame explosion around you that deals high damage and knockback. **Cooldown: 90 seconds.**
+
+### Bloom Blade
+**Passive**: Every 10th hit, heal the damage that you deal to the other player.
+
+**Ability One**: Temporarily gain 5 extra hearts (15 hearts), and heal yourself. **Duration: 15 seconds. Cooldown: 60 seconds.**
+
+**Ability Two**: Cap the hearts of all players in the three block radius around you to the health they are currently at. If it is below four hearts, it will instead be capped to four hearts. **Duration: 10 seconds. Cooldown: 100 seconds.**
+
+### Pulse Blade
+**Passive**: You are immune to fall damage.
+
+**Ability One**: Dash in the direction you are looking. **Cooldown: 30 seconds.**
+
+**Ability Two**: Boost upwards 5 blocks, then smash into the ground, dealing damage to and knocking away enemies in the range. **Cooldown: 60 seconds.**
+
+### Frost Blade
+**Passive**: Every tenth hit, freeze the player for half a second. While frozen, they cannot move or change the direction they are looking.
+
+**Ability One**: Dash in the direction you are looking and any enemies you collide with whilst dashing are frozen for a few seconds. While frozen, they cannot move or change the direction they are looking. **Freeze duration: 3 seconds. Cooldown: 45 seconds.**
+
+**Ability Two**: Freeze all the players in a 3 block radius around you, and they take 1.1x damage whilst frozen. While frozen, they cannot move or change the direction they are looking. **Duration: 5 seconds. Cooldown: 60 seconds.**
+
+### Fortune Blade
+**Passive**: You gain 2x XP.
+
+**Ability One**: Any food you eat will not be consumed while the ability is active, excluding enchanted golden apples. **Duration: 15 seconds. Cooldown: 60 seconds.**
+
+**Ability Two**: All your attacks will get random damage multipliers ranging from 1.1x to 1.3x. **Duration: 15 seconds. Cooldown: 60 seconds.**
 
 ## Commands
 
