@@ -10,6 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class AbilityTwoCommand implements CommandExecutor {
+
+    // Variables for the classes with the methods needed
     private final BladeManager bladeManager;
     private final FlameAbilityTwo flameAbilityTwo;
     private final FrostAbilityTwo frostAbilityTwo;
@@ -28,11 +30,13 @@ public class AbilityTwoCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+        // If this was not sent by a player, return
         if (!(sender instanceof Player player)) {
             sender.sendMessage("Players only");
             return true;
         }
 
+        // Get the item in the players hand, and loop through all the blades and activate their abilities
         ItemStack hand = player.getInventory().getItemInMainHand();
 
         if (bladeManager.isPulseBlade(hand)) {
@@ -55,7 +59,7 @@ public class AbilityTwoCommand implements CommandExecutor {
             fortuneAbilityTwo.activate(player);
         }
 
-
+        // If they are not holding a blade, tell them
         if (!bladeManager.isBloomBlade(hand) && !bladeManager.isFlameBlade(hand) && !bladeManager.isFortuneBlade(hand) && !bladeManager.isPulseBlade(hand) && !bladeManager.isFrostBlade(hand)) {
             player.sendMessage("§aYou must be holding a blade to use an ability.");
         }
