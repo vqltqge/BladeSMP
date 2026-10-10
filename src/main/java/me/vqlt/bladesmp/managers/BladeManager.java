@@ -157,7 +157,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Frozen players take 2x damage.")
+                Component.text("Frozen players take 1.1x damage.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -373,7 +373,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Damage ranges from 1.1x to 1.5x.")
+                Component.text("Damage ranges from 1.1x to 1.3x.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
