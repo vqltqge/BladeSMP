@@ -29,12 +29,7 @@ public class ActionBarManager {
     private static final TextColor ACTIVE_COLOR = TextColor.fromHexString("#ff0000");
     private static final TextColor COOLDOWN_COLOR = TextColor.color(NamedTextColor.GRAY);
 
-    public ActionBarManager(
-            CooldownManager cooldownManager,
-            DurationManager durationManager,
-            BladeManager bladeManager,
-            BladeSMP plugin
-    ) {
+    public ActionBarManager(CooldownManager cooldownManager, DurationManager durationManager, BladeManager bladeManager, BladeSMP plugin) {
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
         this.bladeManager = bladeManager;
@@ -42,108 +37,67 @@ public class ActionBarManager {
     }
 
     public void start() {
+        // Every two ticks
         new BukkitRunnable() {
             @Override
             public void run() {
+                // For every player online
                 for (Player player : Bukkit.getOnlinePlayers()) {
 
+                    // Get what sword they are holding in their main hand, and send the relevant action bar
                     ItemStack hand = player.getInventory().getItemInMainHand();
 
                     if (bladeManager.isFlameBlade(hand)) {
-                        sendAbilityBar(
-                                player,
-                                "🔥 Flame Sweep", "flameone",
-                                "🔥 Inferno", "flametwo",
-                                FLAME_COLOR
-                        );
+                        sendAbilityBar(player, "🔥 Flame Sweep", "flameone", "🔥 Inferno", "flametwo", FLAME_COLOR);
 
                     } else if (bladeManager.isFrostBlade(hand)) {
-                        sendAbilityBar(
-                                player,
-                                "❄ Frozen Dash", "frostone",
-                                "❄ Frozen Domain", "frosttwo",
-                                FROST_COLOR
-                        );
+                        sendAbilityBar(player, "❄ Frozen Dash", "frostone", "❄ Frozen Domain", "frosttwo", FROST_COLOR);
 
                     } else if (bladeManager.isBloomBlade(hand)) {
-                        sendAbilityBar(
-                                player,
-                                "❤ Vital Surge", "bloomone",
-                                "❤ Lifebind", "bloomtwo",
-                                BLOOM_COLOR
-                        );
+                        sendAbilityBar(player, "❤ Vital Surge", "bloomone", "❤ Lifebind", "bloomtwo", BLOOM_COLOR);
 
                     } else if (bladeManager.isPulseBlade(hand)) {
-                        sendAbilityBar(
-                                player,
-                                "➜ Velocity", "pulseone",
-                                "✦ Shockwave", "pulsetwo",
-                                PULSE_COLOR
-                        );
+                        sendAbilityBar(player, "➜ Velocity", "pulseone", "✦ Shockwave", "pulsetwo", PULSE_COLOR);
 
                     } else if (bladeManager.isFortuneBlade(hand)) {
-                        sendAbilityBar(
-                                player,
-                                "★ Conservation", "fortuneone",
-                                "★ Lucky Strike", "fortunetwo",
-                                FORTUNE_COLOR
-                        );
+                        sendAbilityBar(player, "★ Conservation", "fortuneone", "★ Lucky Strike", "fortunetwo", FORTUNE_COLOR);
                     }
                 }
             }
         }.runTaskTimer(plugin, 0L, 2L);
     }
 
-    private void sendAbilityBar(
-            Player player,
-            String abilityOneName,
-            String abilityOneKey,
-            String abilityTwoName,
-            String abilityTwoKey,
-            TextColor bladeColor
-    ) {
-
+    private void sendAbilityBar(Player player, String abilityOneName, String abilityOneKey, String abilityTwoName, String abilityTwoKey, TextColor bladeColor) {
+        // Get the players UUID
         UUID id = player.getUniqueId();
 
-        Component abilityOne = Component.text(abilityOneName + " ")
-                .color(bladeColor)
-                .append(getAbilityState(id, abilityOneKey));
+        // Display the blade's ability one name with the correct colour, then add the state of the ability after it (Active, cooldown or ready)
+        Component abilityOne = Component.text(abilityOneName + " ").color(bladeColor).append(getAbilityState(id, abilityOneKey));
 
-        Component separator = Component.text("  |  ")
-                .color(NamedTextColor.DARK_GRAY);
+        // Display a separator between the two abilities
+        Component separator = Component.text("  |  ").color(NamedTextColor.DARK_GRAY);
 
-        Component abilityTwo = Component.text(abilityTwoName + " ")
-                .color(bladeColor)
-                .append(getAbilityState(id, abilityTwoKey));
+        // Display the blade's ability two name with the correct colour, then add the state of the ability after it (Active, cooldown or ready)
+        Component abilityTwo = Component.text(abilityTwoName + " ").color(bladeColor).append(getAbilityState(id, abilityTwoKey));
 
-        player.sendActionBar(
-                abilityOne
-                        .append(separator)
-                        .append(abilityTwo)
-        );
+        // Combine the three components into one action bar message and send it to the player
+        player.sendActionBar(abilityOne.append(separator).append(abilityTwo));
     }
 
     private Component getAbilityState(UUID id, String abilityKey) {
 
+        // If the ability is already active, return the component "Active" in a red color and in bold
         if (durationManager.isActive(id, abilityKey)) {
-            return Component.text("Active")
-                    .color(ACTIVE_COLOR)
-                    .decorate(TextDecoration.BOLD);
+            return Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD);
         }
 
+        // If the ability is on cooldown, return the number of seconds remaining to 1dp in a gray color and in bold
         if (cooldownManager.isOnCooldown(id, abilityKey)) {
-            return Component.text(
-                            String.format(
-                                    "%.1fs",
-                                    cooldownManager.getRemainingMillis(id, abilityKey) / 1000.0
-                            )
-                    )
-                    .color(COOLDOWN_COLOR)
-                    .decorate(TextDecoration.BOLD);
+            return Component.text(String.format("%.1fs", cooldownManager.getRemainingMillis(id, abilityKey) / 1000.0)).color(COOLDOWN_COLOR).decorate(TextDecoration.BOLD);
         }
 
-        return Component.text("Ready")
-                .color(READY_COLOR)
-                .decorate(TextDecoration.BOLD);
+        // If the ability is not on cooldown or active, then it is ready
+        // Returns the component "ready" in a green colour in bold
+        return Component.text("Ready").color(READY_COLOR).decorate(TextDecoration.BOLD);
     }
 }
