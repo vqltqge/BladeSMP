@@ -67,7 +67,7 @@ public class AbilityOneCommand implements CommandExecutor {
         }
 
         // If they are not holding a blade, tell them
-        if (!bladeManager.isBloomBlade(hand) && !bladeManager.isFlameBlade(hand) && !bladeManager.isFortuneBlade(hand) && !bladeManager.isPulseBlade(hand) && !bladeManager.isFrostBlade(hand)) {
+        if (!bladeManager.isBloomBlade(hand) && !bladeManager.isFlameBlade(hand) && !bladeManager.isFortuneBlade(hand) && !bladeManager.isPulseBlade(hand) && !bladeManager.isFrostBlade(hand) && !bladeManager.isStormBlade(hand)) {
             player.sendMessage("§aYou must be holding a blade to use an ability.");
         }
 
