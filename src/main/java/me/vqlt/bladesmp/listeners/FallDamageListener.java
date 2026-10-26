@@ -18,20 +18,24 @@ public class FallDamageListener implements Listener {
 
     @EventHandler
     public void onFallDamage(EntityDamageEvent event) {
+        // If the entity that was damaged is not a player, return
         if (!(event.getEntity() instanceof Player player)) {
             return;
         }
 
+        // If the cause of the damage was not fall damage, return
         if (event.getCause() != EntityDamageEvent.DamageCause.FALL) {
             return;
         }
 
+        // If the player is not holding the pulse blade, return
         ItemStack hand = player.getInventory().getItemInMainHand();
 
         if (!(bladeManager.isPulseBlade(hand))) {
             return;
         }
 
+        // Cancel the fall damage
         event.setCancelled(true);
     }
 }

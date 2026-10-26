@@ -16,10 +16,12 @@ public class RandomInventoryListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
+        // If the GUI was not clicked by a player, return
         if (!(event.getWhoClicked() instanceof Player player)) {
             return;
         }
 
+        // If the player is already rolling a blade, cancel the inventory click event
         if (randomBladeManager.isRolling(player)) {
             event.setCancelled(true);
         }
@@ -27,10 +29,12 @@ public class RandomInventoryListener implements Listener {
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
+        // If the GUI was not clicked by a player, return
         if (!(event.getWhoClicked() instanceof Player player)) {
             return;
         }
 
+        // If the player is already rolling a blade, cancel the inventory click event
         if (randomBladeManager.isRolling(player)) {
             event.setCancelled(true);
         }

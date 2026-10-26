@@ -21,8 +21,10 @@ public class FrostMoveListener implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
+        // Get the player that tried to move
         Player player = event.getPlayer();
 
+        // If the player that tried to move is affected by any of frosts abilities, do not let them move
         if (passiveManager.getPassiveFreezePlayers().contains(player.getUniqueId())) {
             event.setCancelled(true);
         }

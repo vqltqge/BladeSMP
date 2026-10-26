@@ -26,16 +26,20 @@ public class FortuneExperienceListener implements Listener {
 
     @EventHandler
     public void onExperienceGain(PlayerExpChangeEvent event) {
+        // Get the player that gained the experience
         Player player = event.getPlayer();
 
+        // If the player is not holding the fortune blade, return
         ItemStack hand = player.getInventory().getItemInMainHand();
 
         if (!(bladeManager.isFortuneBlade(hand))) {
             return;
         }
 
+        // Get the amount of xp that the player gained
         int num = event.getAmount();
 
+        // Multiply the amount of xp they will gain by the xp multiplier, and round it to the nearest integer
         event.setAmount((int) Math.round(num * xpMultiplier));
     }
 }

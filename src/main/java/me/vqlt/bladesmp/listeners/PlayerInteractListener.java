@@ -23,16 +23,19 @@ public class PlayerInteractListener implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
+        // If the player interacted with their offhand, return
         Player player = event.getPlayer();
 
         if (event.getHand() != EquipmentSlot.HAND) {
             return;
         }
 
+        // If the player did not right-click the air or a block, return
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) {
             return;
         }
 
+        // If the item they right-clicked with doesn't exist return
         ItemStack item = event.getItem();
 
         if (item == null) {
@@ -40,10 +43,12 @@ public class PlayerInteractListener implements Listener {
         }
 
         if (bladeManager.isBladeChooser(item)) {
+            // If they right-clicked the blade chooser item open the blade chooser GUI. Also cancel the action
             event.setCancelled(true);
             ChooserGUI gui = new ChooserGUI(bladeManager);
             player.openInventory(gui.getInventory());
         } else if (bladeManager.isRandomiser(item)) {
+            // If they right-clicked the randomiser item open the randomiser GUI. Also cancel the action
             event.setCancelled(true);
 
             if (randomBladeManager.isRolling(player)) {
