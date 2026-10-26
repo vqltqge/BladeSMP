@@ -18,15 +18,17 @@ public class AbilityOneCommand implements CommandExecutor {
     private final FlameAbilityOne flameAbilityOne;
     private final FrostAbilityOne frostAbilityOne;
     private final FortuneAbilityOne fortuneAbilityOne;
+    private final StormAbilityOne stormAbilityOne;
 
 
-    public AbilityOneCommand(BladeManager bladeManager, PulseAbilityOne pulseAbilityOne, BloomAbilityOne bloomAbilityOne, FlameAbilityOne flameAbilityOne, FrostAbilityOne frostAbilityOne, FortuneAbilityOne fortuneAbilityOne) {
+    public AbilityOneCommand(BladeManager bladeManager, PulseAbilityOne pulseAbilityOne, BloomAbilityOne bloomAbilityOne, FlameAbilityOne flameAbilityOne, FrostAbilityOne frostAbilityOne, FortuneAbilityOne fortuneAbilityOne, StormAbilityOne stormAbilityOne) {
         this.bladeManager = bladeManager;
         this.pulseAbilityOne = pulseAbilityOne;
         this.bloomAbilityOne = bloomAbilityOne;
         this.flameAbilityOne = flameAbilityOne;
         this.frostAbilityOne = frostAbilityOne;
         this.fortuneAbilityOne = fortuneAbilityOne;
+        this.stormAbilityOne = stormAbilityOne;
     }
 
     @Override
@@ -58,6 +60,10 @@ public class AbilityOneCommand implements CommandExecutor {
 
         if (bladeManager.isFortuneBlade(hand)) {
             fortuneAbilityOne.activate(player);
+        }
+
+        if (bladeManager.isStormBlade(hand)) {
+            stormAbilityOne.activate(player);
         }
 
         // If they are not holding a blade, tell them

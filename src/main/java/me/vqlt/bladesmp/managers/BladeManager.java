@@ -450,6 +450,10 @@ public class BladeManager {
         return isBlade(item, "fortuneBlade");
     }
 
+    public boolean isStormBlade(ItemStack item) {
+        return isBlade(item, "stormBlade");
+    }
+
     public boolean isRandomiser(ItemStack item) {
         return isBlade(item, "bladeRandomiser");
     }
