@@ -25,6 +25,7 @@ public class RecipeManager {
         registerRecipe("bloom", bladeManager.createBloomBlade());
         registerRecipe("pulse", bladeManager.createPulseBlade());
         registerRecipe("fortune", bladeManager.createFortuneBlade());
+        registerRecipe("storm", bladeManager.createStormBlade());
     }
 
     private void registerRecipe(String blade, ItemStack result) {

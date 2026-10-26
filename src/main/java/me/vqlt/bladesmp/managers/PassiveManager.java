@@ -55,4 +55,6 @@ public class PassiveManager {
     public void flamePassive(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 40, 0));
     }
+
+
 }

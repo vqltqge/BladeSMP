@@ -19,7 +19,7 @@ public class RandomBladeManager {
         this.plugin = plugin;
         this.bladeManager = bladeManager;
 
-        this.blades = List.of(bladeManager.createBloomBlade(), bladeManager.createFlameBlade(), bladeManager.createFortuneBlade(), bladeManager.createFrostBlade(), bladeManager.createPulseBlade());
+        this.blades = List.of(bladeManager.createBloomBlade(), bladeManager.createFlameBlade(), bladeManager.createFortuneBlade(), bladeManager.createFrostBlade(), bladeManager.createPulseBlade(), bladeManager.createStormBlade());
     }
 
     public void rollBlade(Player player) {

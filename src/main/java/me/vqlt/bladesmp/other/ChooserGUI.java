@@ -32,6 +32,7 @@ public class ChooserGUI implements InventoryHolder {
             inventory.setItem(i, new ItemStack(Material.CYAN_STAINED_GLASS_PANE));
         }
 
+        inventory.setItem(10, bladeManager.createStormBlade());
         inventory.setItem(11, bladeManager.createFlameBlade());
         inventory.setItem(12, bladeManager.createFrostBlade());
         inventory.setItem(13, bladeManager.createBloomBlade());

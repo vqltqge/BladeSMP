@@ -33,6 +33,7 @@ public class BladesGUI implements InventoryHolder {
         }
 
         inventory.setItem(4, bladeManager.createBladeRandomiser());
+        inventory.setItem(10, bladeManager.createStormBlade());
         inventory.setItem(11, bladeManager.createFlameBlade());
         inventory.setItem(12, bladeManager.createFrostBlade());
         inventory.setItem(13, bladeManager.createBloomBlade());

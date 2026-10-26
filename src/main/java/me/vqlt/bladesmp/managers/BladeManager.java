@@ -387,6 +387,91 @@ public class BladeManager {
     }
 
     // =========================
+    // STORM BLADE
+    // =========================
+
+    public ItemStack createStormBlade() {
+        ItemStack blade = new ItemStack(Material.NETHERITE_SWORD);
+        ItemMeta meta = blade.getItemMeta();
+
+        meta.setItemModel(new NamespacedKey("bladesmp", "storm_blade"));
+
+        meta.getPersistentDataContainer().set(
+                bladeKey,
+                PersistentDataType.STRING,
+                "stormBlade"
+        );
+
+        meta.displayName(
+                Component.text("✦ STORM BLADE ✦")
+                        .color(TextColor.fromHexString("#00BFFF"))
+                        .decorate(TextDecoration.BOLD)
+                        .decoration(TextDecoration.ITALIC, false)
+        );
+
+        meta.lore(List.of(
+                Component.text("✧ PASSIVE • Static")
+                        .color(TextColor.fromHexString("#80E5FF"))
+                        .decorate(TextDecoration.BOLD)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("Every " + plugin.getConfig().getInt("storm.passive.hits-to-strike", 5) + "th hit strikes lightning.")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.empty(),
+
+                Component.text("✦ ABILITY I • Thunderstorm")
+                        .color(TextColor.fromHexString("#00BFFF"))
+                        .decorate(TextDecoration.BOLD)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("Every " + plugin.getConfig().getInt("storm.ability-one.strike-hits", 1) + (plugin.getConfig().getInt("storm.ability-one.strike-hits", 1) == 1 ? "st" : "th") + " hit strikes lightning while active.")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("Duration: " + plugin.getConfig().getInt("storm.ability-one.duration", 10) + "s")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("storm.ability-one.cooldown", 60) + "s")
+                        .color(NamedTextColor.DARK_GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.empty(),
+
+                Component.text("◆ ABILITY II • Thunderfield")
+                        .color(TextColor.fromHexString("#A0C4FF"))
+                        .decorate(TextDecoration.BOLD)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("Create a thunderstorm around you.")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("Gain Regeneration II while opponents")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("within " + plugin.getConfig().getDouble("storm.ability-two.radius", 10.0) + " blocks gain Weakness and Slowness.")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("Duration: " + plugin.getConfig().getInt("storm.ability-two.duration", 10) + "s")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("storm.ability-two.cooldown", 120) + "s")
+                        .color(NamedTextColor.DARK_GRAY)
+                        .decoration(TextDecoration.ITALIC, false)
+        ));
+
+        blade.setItemMeta(meta);
+        return blade;
+    }
+
+
+    // =========================
     // BLADE CHOOSER
     // =========================
 
