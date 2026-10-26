@@ -421,7 +421,7 @@ public class BladeManager {
 
                 Component.empty(),
 
-                Component.text("✦ ABILITY I • Thunderstorm")
+                Component.text("✦ ABILITY I • Overcharge")
                         .color(TextColor.fromHexString("#00BFFF"))
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
