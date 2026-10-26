@@ -70,7 +70,7 @@ public class BladeManager {
                 Component.text("Deals damage and knocks enemies back.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
-                Component.text("⌛ Cooldown: 60s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("flame.ability-two.cooldown", 90) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -89,7 +89,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 90s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("flame.ability-one.cooldown", 60) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false)
         ));
@@ -127,7 +127,7 @@ public class BladeManager {
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Every 10th hit freezes the enemy.")
+                Component.text("Every " + plugin.getConfig().getInt("frost.passive.hits-to-freeze", 10) + "th hit freezes the enemy.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -142,7 +142,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 45s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("frost.ability-one.cooldown", 60) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -153,15 +153,15 @@ public class BladeManager {
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Freeze all players within a 3 block radius.")
+                Component.text("Freeze all players within a " + plugin.getConfig().getDouble("frost.ability-two.radius", 3.0) + " block radius.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Frozen players take 1.1x damage.")
+                Component.text("Frozen players take " + plugin.getConfig().getDouble("frost.ability-two.damage-multiplier", 1.1) + "x damage.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 60s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("frost.ability-two.cooldown", 60) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false)
         ));
@@ -199,7 +199,7 @@ public class BladeManager {
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Every 10th hit heals you for the damage dealt.")
+                Component.text("Every " + plugin.getConfig().getInt("bloom.passive.hits-to-activate", 10) + "th hit heals you for the damage dealt.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -210,11 +210,11 @@ public class BladeManager {
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Raise yourself to 15 hearts for 15 seconds.")
+                Component.text("Raise yourself to " + plugin.getConfig().getDouble("bloom.ability-one.max-hearts", 30) / 2 + " hearts for 15 seconds.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 60s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("bloom.ability-one.cooldown", 60) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -229,11 +229,11 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Minimum: 4 hearts")
+                Component.text("Minimum: " + plugin.getConfig().getDouble("bloom.ability-two.min-hp", 60) / 2 + " hearts")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 100s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("bloom.ability-two.cooldown", 100) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false)
         ));
@@ -286,7 +286,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 30s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("pulse.ability-one.cooldown", 30) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -305,7 +305,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 60s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("pulse.ability-two.cooldown", 60) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false)
         ));
@@ -343,7 +343,7 @@ public class BladeManager {
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Gain 2x XP while holding the blade.")
+                Component.text("Gain " + plugin.getConfig().getDouble("fortune.passive.xp-multiplier", 2.0) + "x XP while holding the blade.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -358,7 +358,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 60s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("fortune.ability-one.cooldown", 60) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -373,11 +373,11 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Damage ranges from 1.1x to 1.3x.")
+                Component.text("Damage ranges from 1.1x to " + plugin.getConfig().getDouble("fortune.ability-two.max-damage", 1.3) + "x.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: 60s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("fortune.ability-two.cooldown", 60) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false)
         ));

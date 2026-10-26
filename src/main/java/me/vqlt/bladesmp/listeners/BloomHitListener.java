@@ -69,7 +69,7 @@ public class BloomHitListener implements Listener {
         bloomHits.put(id, hits);
 
         if (hits >= activateHits) {
-            damager.setHealth(Math.min(damager.getHealth() + event.getFinalDamage(), damager.getMaxHealth()));
+            damager.setHealth(Math.min(damager.getHealth() + event.getFinalDamage(), maxHealth));
 
             bloomHits.put(id, 0);
         }
