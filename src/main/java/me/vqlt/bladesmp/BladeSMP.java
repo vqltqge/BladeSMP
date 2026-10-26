@@ -51,6 +51,7 @@ public final class BladeSMP extends JavaPlugin {
         BloomAbilityTwo bloomAbilityTwo = new BloomAbilityTwo(bladeManager, cooldownManager, durationManager, this);
         FortuneAbilityTwo fortuneAbilityTwo = new FortuneAbilityTwo(bladeManager, cooldownManager, durationManager, this);
         PulseAbilityTwo pulseAbilityTwo = new PulseAbilityTwo(bladeManager, cooldownManager, durationManager, this);
+        StormAbilityTwo stormAbilityTwo = new StormAbilityTwo(bladeManager, cooldownManager, durationManager, this);
 
         // Initialise the actionbar manager and passive task, and start them
         ActionBarManager actionBarManager = new ActionBarManager(cooldownManager, durationManager, bladeManager, this);
@@ -61,7 +62,7 @@ public final class BladeSMP extends JavaPlugin {
         // Initialise the commands
         getCommand("blades").setExecutor(new BladesCommand(bladeManager));
         getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, stormAbilityOne));
-        getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, flameAbilityTwo, frostAbilityTwo, bloomAbilityTwo, fortuneAbilityTwo, pulseAbilityTwo));
+        getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, flameAbilityTwo, frostAbilityTwo, bloomAbilityTwo, fortuneAbilityTwo, pulseAbilityTwo, stormAbilityTwo));
         getCommand("random").setExecutor(new RandomCommand(randomBladeManager, this));
         getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
 
@@ -77,6 +78,7 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ChooserGUIListener(bladeManager), this);
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(bladeManager, randomBladeManager), this);
         getServer().getPluginManager().registerEvents(new RandomInventoryListener(randomBladeManager), this);
+        getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager), this);
     }
 
     // Create a getter for the recipe config

@@ -18,14 +18,16 @@ public class AbilityTwoCommand implements CommandExecutor {
     private final BloomAbilityTwo bloomAbilityTwo;
     private final FortuneAbilityTwo fortuneAbilityTwo;
     private final PulseAbilityTwo pulseAbilityTwo;
+    private final StormAbilityTwo stormAbilityTwo;
 
-    public AbilityTwoCommand(BladeManager bladeManager, FlameAbilityTwo flameAbilityTwo, FrostAbilityTwo frostAbilityTwo, BloomAbilityTwo bloomAbilityTwo, FortuneAbilityTwo fortuneAbilityTwo, PulseAbilityTwo pulseAbilityTwo) {
+    public AbilityTwoCommand(BladeManager bladeManager, FlameAbilityTwo flameAbilityTwo, FrostAbilityTwo frostAbilityTwo, BloomAbilityTwo bloomAbilityTwo, FortuneAbilityTwo fortuneAbilityTwo, PulseAbilityTwo pulseAbilityTwo, StormAbilityTwo stormAbilityTwo) {
         this.bladeManager = bladeManager;
         this.flameAbilityTwo = flameAbilityTwo;
         this.frostAbilityTwo = frostAbilityTwo;
         this.bloomAbilityTwo = bloomAbilityTwo;
         this.fortuneAbilityTwo = fortuneAbilityTwo;
         this.pulseAbilityTwo = pulseAbilityTwo;
+        this.stormAbilityTwo = stormAbilityTwo;
     }
 
     @Override
@@ -59,8 +61,12 @@ public class AbilityTwoCommand implements CommandExecutor {
             fortuneAbilityTwo.activate(player);
         }
 
+        if (bladeManager.isStormBlade(hand)) {
+            stormAbilityTwo.activate(player);
+        }
+
         // If they are not holding a blade, tell them
-        if (!bladeManager.isBloomBlade(hand) && !bladeManager.isFlameBlade(hand) && !bladeManager.isFortuneBlade(hand) && !bladeManager.isPulseBlade(hand) && !bladeManager.isFrostBlade(hand)) {
+        if (!bladeManager.isBloomBlade(hand) && !bladeManager.isFlameBlade(hand) && !bladeManager.isFortuneBlade(hand) && !bladeManager.isPulseBlade(hand) && !bladeManager.isFrostBlade(hand) && !bladeManager.isStormBlade(hand)) {
             player.sendMessage("§aYou must be holding a blade to use an ability.");
         }
 
