@@ -29,7 +29,7 @@ public class StaticHitListener implements Listener {
     public void onMeleeHit(EntityDamageByEntityEvent event) {
 
 
-        if (!(event.getDamager() instanceof Player attacker)) {
+        if (!(event.getDamager() instanceof Player damager)) {
             return;
         }
 
@@ -39,7 +39,6 @@ public class StaticHitListener implements Listener {
         }
 
 
-        Player damager = (Player) event.getDamager();
         Location location = event.getEntity().getLocation();
         World world = event.getEntity().getWorld();
 

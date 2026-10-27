@@ -73,7 +73,6 @@ public class StormAbilityTwo {
 
         player.sendMessage(Component.text("⚡ Thunderfield activated").color(STORM_COLOR));
         player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1, 1);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, (int) duration / 1000, regenAmplifier));
 
         // Cooldown begins when Thunderfield ends, so the action bar shows Active first.
         durationManager.runAfter(duration / 1000, () -> {
@@ -94,9 +93,6 @@ public class StormAbilityTwo {
             if (entity.getLocation().distanceSquared(player.getLocation()) > radius * radius) {
                 continue;
             }
-
-            target.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, (int) duration / 1000, weaknessAmplifier));
-            target.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, (int) duration / 1000, slownessAmplifier));
 
             targets.add(target);
         }
@@ -138,6 +134,13 @@ public class StormAbilityTwo {
                 Player target = targets.get(index);
 
                 target.getWorld().strikeLightning(target.getLocation());
+
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 2, regenAmplifier));
+
+                for (Player x : targets) {
+                    x.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 40, weaknessAmplifier));
+                    x.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 40, slownessAmplifier));
+                }
 
                 index++;
 

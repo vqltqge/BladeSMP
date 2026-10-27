@@ -75,6 +75,7 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne, frostAbilityTwo, passiveManager), this);
         getServer().getPluginManager().registerEvents(new PlayerConsumeListener(fortuneAbilityOne, this), this);
         getServer().getPluginManager().registerEvents(fortuneAbilityTwo, this);
+        getServer().getPluginManager().registerEvents(stormAbilityOne, this);
         getServer().getPluginManager().registerEvents(new ChooserGUIListener(bladeManager), this);
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(bladeManager, randomBladeManager), this);
         getServer().getPluginManager().registerEvents(new RandomInventoryListener(randomBladeManager), this);

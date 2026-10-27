@@ -114,18 +114,14 @@ public class StormAbilityOne implements Listener {
             durationManager.runAfter(duration / 1000, () -> startCooldown(id, attacker));
             armedPlayers.remove(id);
 
-
             hitCount.put(id, 0);
         }
 
-
-//        if (!durationManager.isActive(id, "stormone")) {
-//            return;
-//        }
-
+        if (!durationManager.isActive(id, "stormone")) {
+            return;
+        }
 
         int hits = hitCount.getOrDefault(id, 0) + 1;
-
 
         if (hits >= strikeHits) {
             world.strikeLightning(location);
@@ -133,12 +129,10 @@ public class StormAbilityOne implements Listener {
         } else {
             hitCount.put(id, hits);
         }
-
-
     }
 
-
     public void startCooldown(UUID id, Player player) {
+        hitCount.put(id, 0);
         cooldownManager.startCooldown(id, "stormone", cooldown);
         player.playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
         player.sendMessage(Component.text("⚡ Thunderstorm on cooldown").color(STORM_COLOR));
