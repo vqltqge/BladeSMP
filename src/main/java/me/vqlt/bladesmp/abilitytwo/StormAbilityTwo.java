@@ -135,7 +135,7 @@ public class StormAbilityTwo {
 
                 target.getWorld().strikeLightning(target.getLocation());
 
-                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 2, regenAmplifier));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 40, regenAmplifier));
 
                 for (Player x : targets) {
                     x.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 40, weaknessAmplifier));
