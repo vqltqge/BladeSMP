@@ -15,11 +15,8 @@ import java.io.File;
 public final class BladeSMP extends JavaPlugin {
 
     private FileConfiguration recipesConfig;
-    private final TrustManager trustManager;
 
-    public BladeSMP(TrustManager trustManager) {
-        this.trustManager = trustManager;
-    }
+    private TrustManager trustManager;
 
     // develop
     @Override
@@ -38,7 +35,7 @@ public final class BladeSMP extends JavaPlugin {
         DurationManager durationManager = new DurationManager(this);
         CooldownManager cooldownManager = new CooldownManager();
         RandomBladeManager randomBladeManager = new RandomBladeManager(this, bladeManager);
-        TrustManager trustManager = new TrustManager(this);
+        trustManager = new TrustManager(this);
 
         // Initialise the recipe manager and register the custom recipes
         RecipeManager recipeManager = new RecipeManager(this, bladeManager);
@@ -94,10 +91,15 @@ public final class BladeSMP extends JavaPlugin {
         return recipesConfig;
     }
 
+    public TrustManager getTrustManager() {
+        return trustManager;
+    }
+
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
-        trustManager.saveTrusts();
+        if (trustManager != null) {
+            trustManager.saveTrusts();
+        }
     }
 }
 
