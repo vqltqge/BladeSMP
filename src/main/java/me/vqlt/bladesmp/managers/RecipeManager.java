@@ -20,12 +20,24 @@ public class RecipeManager {
     }
 
     public void registerRecipes() {
-        registerRecipe("flame", bladeManager.createFlameBlade());
-        registerRecipe("frost", bladeManager.createFrostBlade());
-        registerRecipe("bloom", bladeManager.createBloomBlade());
-        registerRecipe("pulse", bladeManager.createPulseBlade());
-        registerRecipe("fortune", bladeManager.createFortuneBlade());
-        registerRecipe("storm", bladeManager.createStormBlade());
+        if (isEnabled("flame")) {
+            registerRecipe("flame", bladeManager.createFlameBlade());
+        }
+        if (isEnabled("bloom")) {
+            registerRecipe("bloom", bladeManager.createBloomBlade());
+        }
+        if (isEnabled("fortune")) {
+            registerRecipe("fortune", bladeManager.createFortuneBlade());
+        }
+        if (isEnabled("frost")) {
+            registerRecipe("frost", bladeManager.createFrostBlade());
+        }
+        if (isEnabled("pulse")) {
+            registerRecipe("pulse", bladeManager.createPulseBlade());
+        }
+        if (isEnabled("storm")) {
+            registerRecipe("storm", bladeManager.createStormBlade());
+        }
     }
 
     private void registerRecipe(String blade, ItemStack result) {
@@ -104,5 +116,9 @@ public class RecipeManager {
         }
 
         plugin.getServer().addRecipe(recipe);
+    }
+
+    private boolean isEnabled(String type) {
+        return plugin.getRecipesConfig().getBoolean("type.enabled");
     }
 }
