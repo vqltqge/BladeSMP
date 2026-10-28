@@ -1,4 +1,7 @@
 flame:
+  enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
@@ -10,6 +13,9 @@ flame:
     D: netherite_sword
 
 frost:
+  enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
@@ -22,6 +28,9 @@ frost:
     E: heart_of_the_sea
 
 bloom:
+  enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
@@ -34,6 +43,9 @@ bloom:
     E: beacon
 
 pulse:
+  enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
@@ -46,6 +58,9 @@ pulse:
     E: recovery_compass
 
 fortune:
+  enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
@@ -57,6 +72,9 @@ fortune:
     D: netherite_sword
 
 storm:
+  enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
