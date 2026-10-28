@@ -102,6 +102,6 @@ public class AbilityTwoCommand implements CommandExecutor {
     }
 
     private boolean isEnabled(String ability) {
-        return plugin.getConfig().getBoolean(ability + ".ability-Two.enabled", true);
+        return plugin.getConfig().getBoolean(ability + ".ability-two.enabled", true);
     }
 }
