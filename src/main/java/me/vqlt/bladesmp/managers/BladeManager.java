@@ -554,4 +554,9 @@ public class BladeManager {
 
         return type.equals(bladeType);
     }
+
+    public boolean isAnyBlade(ItemStack item) {
+        return item != null && item.hasItemMeta() && item.getItemMeta().getPersistentDataContainer().has(bladeKey, PersistentDataType.STRING);
+    }
 }
+

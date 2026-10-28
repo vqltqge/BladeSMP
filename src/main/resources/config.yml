@@ -8,6 +8,13 @@
 # 1 heart = 2 HP.
 
 # ==============================
+#          SETTINGS
+# ==============================
+keep-blade-on-death: false
+keep-randomiser-on-death: false
+keep-chooser-on-death: false
+
+# ==============================
 #          BLOOM BLADE
 # ==============================
 
