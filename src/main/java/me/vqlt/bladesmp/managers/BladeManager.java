@@ -70,7 +70,7 @@ public class BladeManager {
                 Component.text("Deals damage and knocks enemies back.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
-                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("flame.ability-two.cooldown", 90) + "s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("flame.ability-one.cooldown", 60) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -89,7 +89,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("flame.ability-one.cooldown", 60) + "s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("flame.ability-two.cooldown", 90) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false)
         ));
@@ -415,7 +415,7 @@ public class BladeManager {
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Every " + plugin.getConfig().getInt("storm.passive.hits-to-strike", 5) + "th hit strikes lightning.")
+                Component.text("Every " + plugin.getConfig().getInt("storm.passive.hits-to-strike", 10) + "th hit strikes lightning.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -426,7 +426,7 @@ public class BladeManager {
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Every " + plugin.getConfig().getInt("storm.ability-one.strike-hits", 1) + (plugin.getConfig().getInt("storm.ability-one.strike-hits", 1) == 1 ? "st" : "th") + " hit strikes lightning while active.")
+                Component.text("Strike lightning every " + plugin.getConfig().getInt("storm.ability-one.strike-hits", 1) + " hits while active.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -434,7 +434,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("storm.ability-one.cooldown", 60) + "s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("storm.ability-one.cooldown", 45) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -449,7 +449,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Gain Regeneration II while opponents")
+                Component.text("Gain Regeneration " + (plugin.getConfig().getInt("storm.ability-two.regen-amplifier", 1) + 1) + " while opponents")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
@@ -461,7 +461,7 @@ public class BladeManager {
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("storm.ability-two.cooldown", 120) + "s")
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("storm.ability-two.cooldown", 60) + "s")
                         .color(NamedTextColor.DARK_GRAY)
                         .decoration(TextDecoration.ITALIC, false)
         ));
