@@ -119,6 +119,6 @@ public class RecipeManager {
     }
 
     private boolean isEnabled(String type) {
-        return plugin.getRecipesConfig().getBoolean("type.enabled");
+        return plugin.getRecipesConfig().getBoolean(type + ".enabled", true);
     }
 }
