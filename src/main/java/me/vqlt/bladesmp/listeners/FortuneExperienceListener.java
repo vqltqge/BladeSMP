@@ -26,6 +26,10 @@ public class FortuneExperienceListener implements Listener {
 
     @EventHandler
     public void onExperienceGain(PlayerExpChangeEvent event) {
+        if (!plugin.getConfig().getBoolean("storm.passive.enabled", true)) {
+            return;
+        }
+
         // Get the player that gained the experience
         Player player = event.getPlayer();
 

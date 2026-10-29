@@ -25,6 +25,10 @@ public class PassiveTask {
                 ItemStack hand = player.getInventory().getItemInMainHand();
 
                 if (bladeManager.isFlameBlade(hand)) {
+                    if (!plugin.getConfig().getBoolean("flame.passive.enabled", true)) {
+                        return;
+                    }
+
                     passiveManager.flamePassive(player);
                 }
             }

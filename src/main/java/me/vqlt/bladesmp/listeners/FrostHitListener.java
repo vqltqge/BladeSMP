@@ -1,5 +1,6 @@
 package me.vqlt.bladesmp.listeners;
 
+import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.abilitytwo.FrostAbilityTwo;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.PassiveManager;
@@ -14,11 +15,13 @@ public class FrostHitListener implements Listener {
     private final BladeManager bladeManager;
     private final PassiveManager passiveManager;
     private final FrostAbilityTwo frostAbilityTwo;
+    private final BladeSMP plugin;
 
-    public FrostHitListener(BladeManager bladeManager, PassiveManager passiveManager, FrostAbilityTwo frostAbilityTwo) {
+    public FrostHitListener(BladeManager bladeManager, PassiveManager passiveManager, FrostAbilityTwo frostAbilityTwo, BladeSMP plugin) {
         this.bladeManager = bladeManager;
         this.passiveManager = passiveManager;
         this.frostAbilityTwo = frostAbilityTwo;
+        this.plugin = plugin;
     }
 
     @EventHandler
@@ -44,6 +47,10 @@ public class FrostHitListener implements Listener {
         // If the victim is in the set of frozen players for frost ability 2, multiply the damage they took by the damage multiplier
         if (frostAbilityTwo.getFreezePlayers().contains(victim.getUniqueId())) {
             event.setDamage(event.getDamage() * frostAbilityTwo.getDamageMultiplier());
+        }
+
+        if (!plugin.getConfig().getBoolean("frost.passive.enabled", true)) {
+            return;
         }
 
         // Call the method from passive manager to freeze the player

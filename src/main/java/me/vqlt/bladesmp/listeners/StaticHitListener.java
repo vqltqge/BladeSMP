@@ -1,6 +1,7 @@
 package me.vqlt.bladesmp.listeners;
 
 
+import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.PassiveManager;
 import org.bukkit.Location;
@@ -17,17 +18,21 @@ public class StaticHitListener implements Listener {
 
     private final BladeManager bladeManager;
     private final PassiveManager passiveManager;
+    private final BladeSMP plugin;
 
 
-    public StaticHitListener(BladeManager bladeManager, PassiveManager passiveManager) {
+    public StaticHitListener(BladeManager bladeManager, PassiveManager passiveManager, BladeSMP plugin) {
         this.bladeManager = bladeManager;
         this.passiveManager = passiveManager;
+        this.plugin = plugin;
     }
-
 
     @EventHandler
     public void onMeleeHit(EntityDamageByEntityEvent event) {
 
+        if (!plugin.getConfig().getBoolean("storm.passive.enabled", true)) {
+            return;
+        }
 
         if (!(event.getDamager() instanceof Player damager)) {
             return;
