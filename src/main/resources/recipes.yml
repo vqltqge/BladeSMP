@@ -55,3 +55,14 @@ fortune:
     B: gold_block
     C: ominous_trial_key
     D: netherite_sword
+
+storm:
+  shape:
+    - "ABA"
+    - "CDC"
+    - "ABA"
+  ingredients:
+    A: bolt_armor_trim_smithing_template
+    B: heart_of_the_sea
+    C: trident
+    D: netherite_sword
