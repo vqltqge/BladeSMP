@@ -21,7 +21,7 @@ public class BladeCraftListener implements Listener {
         this.bladeCraftManager = bladeCraftManager;
     }
 
-    private String getBladeID(Recipe recipe) {
+    public String getBladeID(Recipe recipe) {
 
         if (!(recipe instanceof Keyed keyed)) {
             return null;
@@ -62,7 +62,7 @@ public class BladeCraftListener implements Listener {
             return;
         }
 
-        boolean enabled = plugin.getConfig().getBoolean(blade + ".enabled", true);
+        boolean enabled = plugin.getRecipesConfig().getBoolean(blade + ".enabled", true);
 
         if (!enabled || bladeCraftManager.hasReachedLimit(blade)) {
             event.getInventory().setResult(null);
@@ -77,7 +77,7 @@ public class BladeCraftListener implements Listener {
             return;
         }
 
-        boolean enabled = plugin.getConfig().getBoolean(blade + ".enabled", true);
+        boolean enabled = plugin.getRecipesConfig().getBoolean(blade + ".enabled", true);
 
         if (!enabled) {
             event.setCancelled(true);
