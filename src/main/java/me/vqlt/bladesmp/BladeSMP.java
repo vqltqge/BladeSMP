@@ -16,7 +16,6 @@ public final class BladeSMP extends JavaPlugin {
 
     private FileConfiguration recipesConfig;
 
-    // develop
     @Override
     public void onEnable() {
         // Plugin startup logic
