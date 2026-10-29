@@ -16,7 +16,6 @@ public final class BladeSMP extends JavaPlugin {
 
     private FileConfiguration recipesConfig;
 
-    // develop
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -62,8 +61,8 @@ public final class BladeSMP extends JavaPlugin {
 
         // Initialise the commands
         getCommand("blades").setExecutor(new BladesCommand(bladeManager));
-        getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, stormAbilityOne));
-        getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, flameAbilityTwo, frostAbilityTwo, bloomAbilityTwo, fortuneAbilityTwo, pulseAbilityTwo, stormAbilityTwo));
+        getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, stormAbilityOne, this));
+        getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, pulseAbilityTwo, bloomAbilityTwo, flameAbilityTwo, frostAbilityTwo, fortuneAbilityTwo, stormAbilityTwo, this));
         getCommand("random").setExecutor(new RandomCommand(randomBladeManager, this));
         getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
 
@@ -82,6 +81,7 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RandomInventoryListener(randomBladeManager), this);
         getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(this, bladeManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(bladeManager, this), this);
     }
 
     // Create a getter for the recipe config
