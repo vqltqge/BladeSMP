@@ -10,7 +10,10 @@ public class BladeCraftManager {
     }
 
     public boolean hasReachedLimit(String blade) {
-        return (plugin.getRecipesConfig().getInt(blade + ".crafted") >= plugin.getRecipesConfig().getInt(blade + ".limit"));
+        int limit = plugin.getRecipesConfig().getInt(blade + ".limit", 1);
+        int crafted = plugin.getRecipesConfig().getInt(blade + ".crafted", 0);
+
+        return crafted >= limit;
     }
 
     public void incrementCrafted(String blade) {
@@ -18,5 +21,6 @@ public class BladeCraftManager {
         crafted++;
 
         plugin.getRecipesConfig().set(blade + ".crafted", crafted);
+        plugin.saveRecipesConfig();
     }
 }

@@ -11,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
 
 public final class BladeSMP extends JavaPlugin {
 
@@ -89,6 +90,15 @@ public final class BladeSMP extends JavaPlugin {
     // Create a getter for the recipe config
     public FileConfiguration getRecipesConfig() {
         return recipesConfig;
+    }
+
+    public void saveRecipesConfig() {
+        try {
+            recipesConfig.save(new File(getDataFolder(), "recipes.yml"));
+        } catch (IOException e) {
+            getLogger().severe("Could not save recipes.yml!");
+            e.printStackTrace();
+        }
     }
 
     @Override

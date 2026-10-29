@@ -35,7 +35,13 @@ public class BladeCraftListener implements Listener {
 
         String blade = key.getKey();
 
-        if (!plugin.getConfig().contains(blade + ".limit")) {
+        if (!blade.endsWith("_blade")) {
+            return null;
+        }
+
+        blade = blade.substring(0, blade.length() - "_blade".length());
+
+        if (!plugin.getRecipesConfig().contains(blade + ".limit")) {
             return null;
         }
 
