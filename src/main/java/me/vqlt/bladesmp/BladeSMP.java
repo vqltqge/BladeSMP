@@ -32,6 +32,7 @@ public final class BladeSMP extends JavaPlugin {
         DurationManager durationManager = new DurationManager(this);
         CooldownManager cooldownManager = new CooldownManager();
         RandomBladeManager randomBladeManager = new RandomBladeManager(this, bladeManager);
+        BladeCraftManager bladeCraftManager = new BladeCraftManager(this);
 
         // Initialise the recipe manager and register the custom recipes
         RecipeManager recipeManager = new RecipeManager(this, bladeManager);
@@ -82,6 +83,7 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager, this), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(this, bladeManager), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(bladeManager, this), this);
+        getServer().getPluginManager().registerEvents(new BladeCraftListener(this, bladeCraftManager), this);
     }
 
     // Create a getter for the recipe config

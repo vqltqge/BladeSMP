@@ -1,5 +1,7 @@
 flame:
   enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
@@ -12,6 +14,8 @@ flame:
 
 frost:
   enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
@@ -25,6 +29,8 @@ frost:
 
 bloom:
   enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
@@ -38,6 +44,8 @@ bloom:
 
 pulse:
   enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
@@ -51,6 +59,8 @@ pulse:
 
 fortune:
   enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
@@ -63,6 +73,8 @@ fortune:
 
 storm:
   enabled: true
+  limit: 1
+  crafted: 0
   shape:
     - "ABA"
     - "CDC"
