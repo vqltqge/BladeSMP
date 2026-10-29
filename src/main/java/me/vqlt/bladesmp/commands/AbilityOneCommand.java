@@ -1,5 +1,6 @@
 package me.vqlt.bladesmp.commands;
 
+import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.abilityone.*;
 import me.vqlt.bladesmp.managers.BladeManager;
 import org.bukkit.command.Command;
@@ -19,9 +20,10 @@ public class AbilityOneCommand implements CommandExecutor {
     private final FrostAbilityOne frostAbilityOne;
     private final FortuneAbilityOne fortuneAbilityOne;
     private final StormAbilityOne stormAbilityOne;
+    private final BladeSMP plugin;
 
 
-    public AbilityOneCommand(BladeManager bladeManager, PulseAbilityOne pulseAbilityOne, BloomAbilityOne bloomAbilityOne, FlameAbilityOne flameAbilityOne, FrostAbilityOne frostAbilityOne, FortuneAbilityOne fortuneAbilityOne, StormAbilityOne stormAbilityOne) {
+    public AbilityOneCommand(BladeManager bladeManager, PulseAbilityOne pulseAbilityOne, BloomAbilityOne bloomAbilityOne, FlameAbilityOne flameAbilityOne, FrostAbilityOne frostAbilityOne, FortuneAbilityOne fortuneAbilityOne, StormAbilityOne stormAbilityOne, BladeSMP plugin) {
         this.bladeManager = bladeManager;
         this.pulseAbilityOne = pulseAbilityOne;
         this.bloomAbilityOne = bloomAbilityOne;
@@ -29,6 +31,7 @@ public class AbilityOneCommand implements CommandExecutor {
         this.frostAbilityOne = frostAbilityOne;
         this.fortuneAbilityOne = fortuneAbilityOne;
         this.stormAbilityOne = stormAbilityOne;
+        this.plugin = plugin;
     }
 
     @Override
@@ -43,34 +46,62 @@ public class AbilityOneCommand implements CommandExecutor {
         ItemStack hand = player.getInventory().getItemInMainHand();
 
         if (bladeManager.isPulseBlade(hand)) {
-            pulseAbilityOne.activate(player);
+            if (isEnabled("pulse")) {
+                pulseAbilityOne.activate(player);
+            } else {
+                player.sendMessage("§cThat ability is disabled.");
+            }
         }
 
         if (bladeManager.isBloomBlade(hand)) {
-            bloomAbilityOne.activate(player);
+            if (isEnabled("bloom")) {
+                bloomAbilityOne.activate(player);
+            } else {
+                player.sendMessage("§cThat ability is disabled.");
+            }
         }
 
         if (bladeManager.isFlameBlade(hand)) {
-            flameAbilityOne.activate(player);
+            if (isEnabled("flame")) {
+                flameAbilityOne.activate(player);
+            } else {
+                player.sendMessage("§cThat ability is disabled.");
+            }
         }
 
         if (bladeManager.isFrostBlade(hand)) {
-            frostAbilityOne.activate(player);
+            if (isEnabled("frost")) {
+                frostAbilityOne.activate(player);
+            } else {
+                player.sendMessage("§cThat ability is disabled.");
+            }
         }
 
         if (bladeManager.isFortuneBlade(hand)) {
-            fortuneAbilityOne.activate(player);
+            if (isEnabled("fortune")) {
+                fortuneAbilityOne.activate(player);
+            } else {
+                player.sendMessage("§cThat ability is disabled.");
+            }
         }
 
         if (bladeManager.isStormBlade(hand)) {
-            stormAbilityOne.activate(player);
+            if (isEnabled("storm")) {
+                stormAbilityOne.activate(player);
+            } else {
+                player.sendMessage("§cThat ability is disabled.");
+            }
         }
 
         // If they are not holding a blade, tell them
         if (!bladeManager.isBloomBlade(hand) && !bladeManager.isFlameBlade(hand) && !bladeManager.isFortuneBlade(hand) && !bladeManager.isPulseBlade(hand) && !bladeManager.isFrostBlade(hand) && !bladeManager.isStormBlade(hand)) {
-            player.sendMessage("§aYou must be holding a blade to use an ability.");
+            player.sendMessage("§cYou must be holding a blade to use an ability.");
         }
 
         return true;
+    }
+
+    private boolean isEnabled(String ability) {
+        return plugin.getConfig().getBoolean(ability + ".ability-one.enabled", true);
     }
 }
