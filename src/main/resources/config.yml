@@ -10,6 +10,9 @@
 # ==============================
 #          SETTINGS
 # ==============================
+keep-blade-on-death: false
+keep-randomiser-on-death: false
+keep-chooser-on-death: false
 
 # If all players should receive a random blade when they join for the first time
 random-first-join-blade: false
