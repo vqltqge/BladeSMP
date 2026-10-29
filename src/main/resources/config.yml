@@ -8,6 +8,16 @@
 # 1 heart = 2 HP.
 
 # ==============================
+#          SETTINGS
+# ==============================
+
+# If all players should receive a random blade when they join for the first time
+random-first-join-blade: false
+
+# If all players should receive a blade selector when they join for the first time
+first-join-blade-selector: false
+
+# ==============================
 #          BLOOM BLADE
 # ==============================
 
