@@ -84,8 +84,17 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager, this), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(this, bladeManager), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(bladeManager, this), this);
-        getServer().getPluginManager().registerEvents(new BladeCraftListener(this, bladeCraftManager), this);
+
+        // Initialise the crafting listeners
+        BladeCraftListener bladeCraftListener = new BladeCraftListener(this, bladeCraftManager);
+
+        getServer().getPluginManager().registerEvents(bladeCraftListener, this);
+        getServer().getPluginManager().registerEvents(
+                new CrafterCraftListener(this, bladeCraftManager, bladeCraftListener),
+                this
+        );
     }
+
 
     // Create a getter for the recipe config
     public FileConfiguration getRecipesConfig() {
