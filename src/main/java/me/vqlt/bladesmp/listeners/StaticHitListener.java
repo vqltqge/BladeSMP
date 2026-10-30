@@ -3,6 +3,7 @@ package me.vqlt.bladesmp.listeners;
 
 import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
+import me.vqlt.bladesmp.managers.DurationManager;
 import me.vqlt.bladesmp.managers.PassiveManager;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -19,12 +20,13 @@ public class StaticHitListener implements Listener {
     private final BladeManager bladeManager;
     private final PassiveManager passiveManager;
     private final BladeSMP plugin;
+    private final DurationManager durationManager;
 
-
-    public StaticHitListener(BladeManager bladeManager, PassiveManager passiveManager, BladeSMP plugin) {
+    public StaticHitListener(BladeManager bladeManager, PassiveManager passiveManager, BladeSMP plugin, DurationManager durationManager) {
         this.bladeManager = bladeManager;
         this.passiveManager = passiveManager;
         this.plugin = plugin;
+        this.durationManager = durationManager;
     }
 
     @EventHandler
@@ -55,6 +57,9 @@ public class StaticHitListener implements Listener {
             return;
         }
 
+        if (durationManager.isActive(damager.getUniqueId(), "stormone") || durationManager.isActive(damager.getUniqueId(), "stormtwo")) {
+            return;
+        }
 
         passiveManager.staticPassive(damager, location, world);
     }
