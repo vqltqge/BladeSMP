@@ -93,7 +93,7 @@ public class BladeCraftListener implements Listener {
             event.setCancelled(true);
 
             if (event.getWhoClicked() instanceof Player player) {
-                player.sendMessage("§cCaft blades individually");
+                player.sendMessage("§cCraft blades individually");
             }
 
             return;

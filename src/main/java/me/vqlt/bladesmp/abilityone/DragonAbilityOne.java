@@ -93,7 +93,7 @@ public class DragonAbilityOne {
         }
 
         // Start the cooldown
-        cooldownManager.startCooldown(id, "dragontwo", cooldown);
+        cooldownManager.startCooldown(id, "dragonone", cooldown);
 
 
     }

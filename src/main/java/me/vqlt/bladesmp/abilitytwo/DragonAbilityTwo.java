@@ -97,5 +97,6 @@ public class DragonAbilityTwo {
         durationManager.startDuration(id, "dragontwo", duration);
         durationManager.runAfter(duration / 1000, () -> startCooldown(id, attacker));
         armedPlayers.remove(id);
+        activePlayers.add(id);
     }
 }
