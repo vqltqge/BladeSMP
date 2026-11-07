@@ -38,6 +38,9 @@ public class RecipeManager {
         if (isEnabled("storm")) {
             registerRecipe("storm", bladeManager.createStormBlade());
         }
+        if (isEnabled("dragon")) {
+            registerRecipe("dragon", bladeManager.createDragonBlade());
+        }
     }
 
     private void registerRecipe(String blade, ItemStack result) {

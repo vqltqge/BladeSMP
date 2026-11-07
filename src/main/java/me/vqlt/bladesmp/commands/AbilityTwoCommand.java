@@ -20,10 +20,11 @@ public class AbilityTwoCommand implements CommandExecutor {
     private final FrostAbilityTwo frostAbilityTwo;
     private final FortuneAbilityTwo fortuneAbilityTwo;
     private final StormAbilityTwo stormAbilityTwo;
+    private final DragonAbilityTwo dragonAbilityTwo;
     private final BladeSMP plugin;
 
 
-    public AbilityTwoCommand(BladeManager bladeManager, PulseAbilityTwo pulseAbilityTwo, BloomAbilityTwo bloomAbilityTwo, FlameAbilityTwo flameAbilityTwo, FrostAbilityTwo frostAbilityTwo, FortuneAbilityTwo fortuneAbilityTwo, StormAbilityTwo stormAbilityTwo, BladeSMP plugin) {
+    public AbilityTwoCommand(BladeManager bladeManager, PulseAbilityTwo pulseAbilityTwo, BloomAbilityTwo bloomAbilityTwo, FlameAbilityTwo flameAbilityTwo, FrostAbilityTwo frostAbilityTwo, FortuneAbilityTwo fortuneAbilityTwo, StormAbilityTwo stormAbilityTwo, DragonAbilityTwo dragonAbilityTwo, BladeSMP plugin) {
         this.bladeManager = bladeManager;
         this.pulseAbilityTwo = pulseAbilityTwo;
         this.bloomAbilityTwo = bloomAbilityTwo;
@@ -31,6 +32,7 @@ public class AbilityTwoCommand implements CommandExecutor {
         this.frostAbilityTwo = frostAbilityTwo;
         this.fortuneAbilityTwo = fortuneAbilityTwo;
         this.stormAbilityTwo = stormAbilityTwo;
+        this.dragonAbilityTwo = dragonAbilityTwo;
         this.plugin = plugin;
     }
 
@@ -93,8 +95,16 @@ public class AbilityTwoCommand implements CommandExecutor {
             }
         }
 
+        if (bladeManager.isDragonBlade(hand)) {
+            if (isEnabled("dragon")) {
+                dragonAbilityTwo.activate(player);
+            } else {
+                player.sendMessage("§cThat ability is disabled.");
+            }
+        }
+
         // If they are not holding a blade, tell them
-        if (!bladeManager.isBloomBlade(hand) && !bladeManager.isFlameBlade(hand) && !bladeManager.isFortuneBlade(hand) && !bladeManager.isPulseBlade(hand) && !bladeManager.isFrostBlade(hand) && !bladeManager.isStormBlade(hand)) {
+        if (!bladeManager.isBloomBlade(hand) && !bladeManager.isFlameBlade(hand) && !bladeManager.isFortuneBlade(hand) && !bladeManager.isPulseBlade(hand) && !bladeManager.isFrostBlade(hand) && !bladeManager.isStormBlade(hand) && !bladeManager.isDragonBlade(hand)) {
             player.sendMessage("§cYou must be holding a blade to use an ability.");
         }
 

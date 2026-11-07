@@ -225,3 +225,27 @@ storm:
     regen-amplifier: 1
     slowness-amplifier: 0
     weakness-amplifier: 0
+
+# ==============================
+#         STORM BLADE
+# ==============================
+
+dragon:
+
+  passive:
+    enabled: true
+
+    # The amplifiers for the potion effects
+    # NOTE: the values are one less than their usual values
+    # So, speed 2 is 1 in this config
+    speed-amplifier: 1
+
+  ability-one:
+    enabled: true
+    cooldown: 60
+
+  ability-two:
+    enabled: true
+    cooldown: 120
+    duration: 10
+
