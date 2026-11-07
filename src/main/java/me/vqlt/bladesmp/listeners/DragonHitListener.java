@@ -1,6 +1,7 @@
 package me.vqlt.bladesmp.listeners;
 
 import me.vqlt.bladesmp.abilitytwo.DragonAbilityTwo;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -8,8 +9,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import java.util.UUID;
+
 public class DragonHitListener implements Listener {
     private final DragonAbilityTwo dragonAbilityTwo;
+    private static final TextColor DRAGON_COLOR = TextColor.fromHexString("#5A189A");
 
     public DragonHitListener(DragonAbilityTwo dragonAbilityTwo) {
         this.dragonAbilityTwo = dragonAbilityTwo;
@@ -18,6 +22,8 @@ public class DragonHitListener implements Listener {
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 
+        UUID id = event.getDamager().getUniqueId();
+
         // Returns if the entity who dealt the damage is not a player or the entity that was damaged is not a player
         if (!(event.getDamager() instanceof Player attacker)) {
             return;
@@ -25,6 +31,10 @@ public class DragonHitListener implements Listener {
 
         if (!(event.getEntity() instanceof Player victim)) {
             return;
+        }
+
+        if (dragonAbilityTwo.armedPlayers.contains(id)) {
+            dragonAbilityTwo.removeCharge(attacker, id);
         }
 
         if (!dragonAbilityTwo.activePlayers.contains(attacker.getUniqueId())) {

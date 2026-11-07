@@ -227,7 +227,7 @@ storm:
     weakness-amplifier: 0
 
 # ==============================
-#         STORM BLADE
+#         DRAGON BLADE
 # ==============================
 
 dragon:
@@ -243,9 +243,18 @@ dragon:
   ability-one:
     enabled: true
     cooldown: 60
+    damage: 50.0
+    radius: 4.0
+
+    # Horizontal knockback strength.
+    knockback: 2.0
+
+    # Vertical launch strength.
+    upward-knockback: 0.7
 
   ability-two:
     enabled: true
     cooldown: 120
     duration: 10
+    charge-duration: 10
 

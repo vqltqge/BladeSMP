@@ -510,7 +510,7 @@ public class BladeManager {
                         .decorate(TextDecoration.BOLD)
                         .decoration(TextDecoration.ITALIC, false),
 
-                Component.text("Fire a sonic beam attack like a warden.")
+                Component.text("Release a burst of dragon energy that knocks enemies back.")
                         .color(NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false),
 
