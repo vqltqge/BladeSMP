@@ -1,7 +1,6 @@
 package me.vqlt.bladesmp.listeners;
 
 import me.vqlt.bladesmp.abilitytwo.DragonAbilityTwo;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -13,7 +12,6 @@ import java.util.UUID;
 
 public class DragonHitListener implements Listener {
     private final DragonAbilityTwo dragonAbilityTwo;
-    private static final TextColor DRAGON_COLOR = TextColor.fromHexString("#5A189A");
 
     public DragonHitListener(DragonAbilityTwo dragonAbilityTwo) {
         this.dragonAbilityTwo = dragonAbilityTwo;

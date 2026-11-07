@@ -87,6 +87,7 @@ public class DragonAbilityTwo {
 
     public void startCooldown(UUID id, Player player) {
         // Start the ability cooldown, play a sound and send the player a message
+        activePlayers.remove(id);
         cooldownManager.startCooldown(id, "dragontwo", cooldown);
         player.getLocation().getWorld().playSound(player.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 1, 1);
         player.sendMessage(Component.text("☄ Dragon's Fury on cooldown").color(DRAGON_COLOR));

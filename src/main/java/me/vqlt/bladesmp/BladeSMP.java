@@ -65,7 +65,7 @@ public final class BladeSMP extends JavaPlugin {
 
         // Initialise the commands
         getCommand("blades").setExecutor(new BladesCommand(bladeManager));
-        getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, stormAbilityOne, this));
+        getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, stormAbilityOne, dragonAbilityOne, this));
         getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, pulseAbilityTwo, bloomAbilityTwo, flameAbilityTwo, frostAbilityTwo, fortuneAbilityTwo, stormAbilityTwo, dragonAbilityTwo, this));
         getCommand("random").setExecutor(new RandomCommand(randomBladeManager, this));
         getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
