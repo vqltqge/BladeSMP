@@ -19,7 +19,7 @@ public class RandomBladeManager {
         this.plugin = plugin;
         this.bladeManager = bladeManager;
 
-        this.blades = List.of(bladeManager.createBloomBlade(), bladeManager.createFlameBlade(), bladeManager.createFortuneBlade(), bladeManager.createFrostBlade(), bladeManager.createPulseBlade(), bladeManager.createStormBlade());
+        this.blades = new ArrayList<>(List.of(bladeManager.createBloomBlade(), bladeManager.createFlameBlade(), bladeManager.createFortuneBlade(), bladeManager.createFrostBlade(), bladeManager.createPulseBlade(), bladeManager.createStormBlade()));
 
         if (plugin.getConfig().getBoolean("dragon-blade-randomiser")) {
             blades.add(bladeManager.createDragonBlade());

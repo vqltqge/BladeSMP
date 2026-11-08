@@ -1,5 +1,6 @@
 package me.vqlt.bladesmp.listeners;
 
+import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.RandomBladeManager;
 import me.vqlt.bladesmp.other.ChooserGUI;
@@ -15,10 +16,12 @@ public class PlayerInteractListener implements Listener {
 
     private final BladeManager bladeManager;
     private final RandomBladeManager randomBladeManager;
+    private final BladeSMP plugin;
 
-    public PlayerInteractListener(BladeManager bladeManager, RandomBladeManager randomBladeManager) {
+    public PlayerInteractListener(BladeManager bladeManager, RandomBladeManager randomBladeManager, BladeSMP plugin) {
         this.bladeManager = bladeManager;
         this.randomBladeManager = randomBladeManager;
+        this.plugin = plugin;
     }
 
     @EventHandler
@@ -45,7 +48,7 @@ public class PlayerInteractListener implements Listener {
         if (bladeManager.isBladeChooser(item)) {
             // If they right-clicked the blade chooser item open the blade chooser GUI. Also cancel the action
             event.setCancelled(true);
-            ChooserGUI gui = new ChooserGUI(bladeManager);
+            ChooserGUI gui = new ChooserGUI(bladeManager, plugin);
             player.openInventory(gui.getInventory());
         } else if (bladeManager.isRandomiser(item)) {
             // If they right-clicked the randomiser item open the randomiser GUI. Also cancel the action

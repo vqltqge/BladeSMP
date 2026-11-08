@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -26,7 +27,7 @@ public class ChooserGUIListener implements Listener {
             return;
         }
 
-        if (!(clickedInventory.getHolder(false) instanceof ChooserGUI)) {
+        if (!(event.getView().getTopInventory().getHolder(false) instanceof ChooserGUI)) {
             return;
         }
 
@@ -61,5 +62,12 @@ public class ChooserGUIListener implements Listener {
 
         // Close the GUI
         player.closeInventory();
+    }
+
+    @EventHandler
+    public void onInventoryDrag(InventoryDragEvent event) {
+        if (event.getView().getTopInventory().getHolder(false) instanceof ChooserGUI) {
+            event.setCancelled(true);
+        }
     }
 }
