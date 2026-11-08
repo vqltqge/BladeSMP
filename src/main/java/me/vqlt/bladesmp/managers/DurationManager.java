@@ -14,6 +14,9 @@ public class DurationManager {
 
     private final Map<UUID, Map<String, Long>> durations = new HashMap<>();
     private final JavaPlugin plugin;
+    private StormAbilityOne stormAbilityOne;
+    private DragonAbilityTwo dragonAbilityTwo;
+    private FortuneAbilityTwo fortuneAbilityTwo;
 
     public DurationManager(JavaPlugin plugin) {
         this.plugin = plugin;
