@@ -45,18 +45,18 @@ public final class BladeSMP extends JavaPlugin {
         PulseAbilityOne pulseAbilityOne = new PulseAbilityOne(this, cooldownManager, bladeManager);
         BloomAbilityOne bloomAbilityOne = new BloomAbilityOne(this, bladeManager, cooldownManager, durationManager);
         FlameAbilityOne flameAbilityOne = new FlameAbilityOne(bladeManager, cooldownManager, durationManager, this);
-        FrostAbilityOne frostAbilityOne = new FrostAbilityOne(this, durationManager, cooldownManager, bladeManager);
+        FrostAbilityOne frostAbilityOne = new FrostAbilityOne(this, trustManager, cooldownManager, bladeManager);
         FortuneAbilityOne fortuneAbilityOne = new FortuneAbilityOne(bladeManager, cooldownManager, durationManager, this);
-        StormAbilityOne stormAbilityOne = new StormAbilityOne(this, bladeManager, cooldownManager, durationManager);
+        StormAbilityOne stormAbilityOne = new StormAbilityOne(this, bladeManager, cooldownManager, durationManager, trustManager);
         DragonAbilityOne dragonAbilityOne = new DragonAbilityOne(bladeManager, cooldownManager, this);
 
         // Initialise every ability two
-        FlameAbilityTwo flameAbilityTwo = new FlameAbilityTwo(bladeManager, cooldownManager, durationManager, this);
-        FrostAbilityTwo frostAbilityTwo = new FrostAbilityTwo(bladeManager, cooldownManager, durationManager, this);
-        BloomAbilityTwo bloomAbilityTwo = new BloomAbilityTwo(bladeManager, cooldownManager, durationManager, this);
-        FortuneAbilityTwo fortuneAbilityTwo = new FortuneAbilityTwo(bladeManager, cooldownManager, durationManager, this);
-        PulseAbilityTwo pulseAbilityTwo = new PulseAbilityTwo(bladeManager, cooldownManager, durationManager, this);
-        StormAbilityTwo stormAbilityTwo = new StormAbilityTwo(bladeManager, cooldownManager, durationManager, this);
+        FlameAbilityTwo flameAbilityTwo = new FlameAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
+        FrostAbilityTwo frostAbilityTwo = new FrostAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
+        BloomAbilityTwo bloomAbilityTwo = new BloomAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
+        FortuneAbilityTwo fortuneAbilityTwo = new FortuneAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
+        PulseAbilityTwo pulseAbilityTwo = new PulseAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
+        StormAbilityTwo stormAbilityTwo = new StormAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
         DragonAbilityTwo dragonAbilityTwo = new DragonAbilityTwo(bladeManager, cooldownManager, durationManager, this);
 
         // Initialise the actionbar manager and passive task, and start them
@@ -90,7 +90,7 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager, this, durationManager), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(this, bladeManager), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(bladeManager, this), this);
-        getServer().getPluginManager().registerEvents(new DragonHitListener(dragonAbilityTwo), this);
+        getServer().getPluginManager().registerEvents(new DragonHitListener(dragonAbilityTwo, trustManager), this);
 
         // Initialise the crafting listeners
         BladeCraftListener bladeCraftListener = new BladeCraftListener(this, bladeCraftManager);

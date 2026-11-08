@@ -5,6 +5,7 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.DurationManager;
 import me.vqlt.bladesmp.managers.PassiveManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -21,12 +22,14 @@ public class StaticHitListener implements Listener {
     private final PassiveManager passiveManager;
     private final BladeSMP plugin;
     private final DurationManager durationManager;
+    private final TrustManager trustManager;
 
-    public StaticHitListener(BladeManager bladeManager, PassiveManager passiveManager, BladeSMP plugin, DurationManager durationManager) {
+    public StaticHitListener(BladeManager bladeManager, PassiveManager passiveManager, BladeSMP plugin, DurationManager durationManager, TrustManager trustManager) {
         this.bladeManager = bladeManager;
         this.passiveManager = passiveManager;
         this.plugin = plugin;
         this.durationManager = durationManager;
+        this.trustManager = trustManager;
     }
 
     @EventHandler
@@ -58,6 +61,10 @@ public class StaticHitListener implements Listener {
         }
 
         if (durationManager.isActive(damager.getUniqueId(), "stormone") || durationManager.isActive(damager.getUniqueId(), "stormtwo")) {
+            return;
+        }
+
+        if (trustManager.isTrusted(damager.getUniqueId(), victim.getUniqueId())) {
             return;
         }
 

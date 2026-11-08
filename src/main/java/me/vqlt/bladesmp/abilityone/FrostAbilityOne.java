@@ -3,7 +3,7 @@ package me.vqlt.bladesmp.abilityone;
 import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
-import me.vqlt.bladesmp.managers.DurationManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Sound;
@@ -19,7 +19,7 @@ public class FrostAbilityOne {
     // Variables for the classes with the methods needed for the blades abilities
     private final BladeManager bladeManager;
     private final CooldownManager cooldownManager;
-    private final DurationManager durationManager;
+    private final TrustManager trustManager;
     private final BladeSMP plugin;
 
     // A set that stores which players are frozen
@@ -39,9 +39,9 @@ public class FrostAbilityOne {
     // Variable for the colour for the messages
     private static final TextColor FROST_COLOR = TextColor.fromHexString("#6EE7FF");
 
-    public FrostAbilityOne(BladeSMP plugin, DurationManager durationManager, CooldownManager cooldownManager, BladeManager bladeManager) {
+    public FrostAbilityOne(BladeSMP plugin, TrustManager trustManager, CooldownManager cooldownManager, BladeManager bladeManager) {
         this.plugin = plugin;
-        this.durationManager = durationManager;
+        this.trustManager = trustManager;
         this.cooldownManager = cooldownManager;
         this.bladeManager = bladeManager;
 
@@ -97,6 +97,10 @@ public class FrostAbilityOne {
                 for (Player other : player.getWorld().getPlayers()) {
                     // Skip the player that activated the ability
                     if (other.equals(player)) {
+                        continue;
+                    }
+
+                    if (trustManager.isTrusted(player.getUniqueId(), other.getUniqueId())) {
                         continue;
                     }
 

@@ -3,6 +3,7 @@ package me.vqlt.bladesmp.abilityone;
 import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Location;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class DragonAbilityOne {
     private final BladeManager bladeManager;
     private final CooldownManager cooldownManager;
+    private final TrustManager trustManager;
     private final BladeSMP plugin;
 
     private final long cooldown;
@@ -27,9 +29,10 @@ public class DragonAbilityOne {
 
     private static final TextColor DRAGON_COLOR = TextColor.fromHexString("#5A189A");
 
-    public DragonAbilityOne(BladeManager bladeManager, CooldownManager cooldownManager, BladeSMP plugin) {
+    public DragonAbilityOne(BladeManager bladeManager, CooldownManager cooldownManager, TrustManager trustManager, BladeSMP plugin) {
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
+        this.trustManager = trustManager;
         this.plugin = plugin;
 
         this.cooldown = plugin.getConfig().getLong("dragon.ability-one.cooldown", 60) * 1000L;
@@ -76,6 +79,10 @@ public class DragonAbilityOne {
 
             // If the entity is not in a configured radius circle of the player, ignore it
             if (entity.getLocation().distanceSquared(player.getLocation()) > radius * radius) {
+                continue;
+            }
+
+            if (entity instanceof Player victim && trustManager.isTrusted(player.getUniqueId(), victim.getUniqueId())) {
                 continue;
             }
 

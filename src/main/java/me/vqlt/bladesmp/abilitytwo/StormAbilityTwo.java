@@ -4,6 +4,7 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Sound;
@@ -22,6 +23,7 @@ public class StormAbilityTwo {
     private final BladeManager bladeManager;
     private final CooldownManager cooldownManager;
     private final DurationManager durationManager;
+    private final TrustManager trustManager;
     private final BladeSMP plugin;
 
     private final long cooldown;
@@ -34,10 +36,11 @@ public class StormAbilityTwo {
 
     private static final TextColor STORM_COLOR = TextColor.fromHexString("#FFE44D");
 
-    public StormAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin) {
+    public StormAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin, TrustManager trustManager) {
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
+        this.trustManager = trustManager;
         this.plugin = plugin;
 
         this.cooldown = plugin.getConfig().getLong("storm.ability-two.cooldown", 60) * 1000L;
@@ -116,7 +119,8 @@ public class StormAbilityTwo {
                     if (entity instanceof Player target
                             && target.isOnline()
                             && !target.isDead()
-                            && target.getLocation().distanceSquared(player.getLocation()) <= radius * radius) {
+                            && target.getLocation().distanceSquared(player.getLocation()) <= radius * radius
+                            && trustManager.isTrusted(player.getUniqueId(), target.getUniqueId())) {
                         targets.add(target);
                     }
                 }

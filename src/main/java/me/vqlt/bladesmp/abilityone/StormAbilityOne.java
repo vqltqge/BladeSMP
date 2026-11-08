@@ -5,6 +5,7 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
@@ -24,6 +25,7 @@ public class StormAbilityOne implements Listener {
     private final BladeManager bladeManager;
     private final CooldownManager cooldownManager;
     private final DurationManager durationManager;
+    private final TrustManager trustManager;
     private final BladeSMP plugin;
 
 
@@ -38,11 +40,12 @@ public class StormAbilityOne implements Listener {
     private final Map<UUID, Integer> hitCount = new HashMap<>();
 
 
-    public StormAbilityOne(BladeSMP plugin, BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager) {
+    public StormAbilityOne(BladeSMP plugin, BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, TrustManager trustManager) {
         this.plugin = plugin;
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
+        this.trustManager = trustManager;
 
 
         this.cooldown = plugin.getConfig().getLong("storm.ability-one.cooldown", 45) * 1000L;
@@ -105,6 +108,10 @@ public class StormAbilityOne implements Listener {
 
 
         if (!(bladeManager.isStormBlade(hand))) {
+            return;
+        }
+
+        if (trustManager.isTrusted(attacker.getUniqueId(), victim.getUniqueId())) {
             return;
         }
 
