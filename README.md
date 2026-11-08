@@ -1,7 +1,7 @@
 ![Blade SMP Title](https://cdn.modrinth.com/data/cached_images/149e4286e8d091e741ac32f41c72aff8e58ea0db.png)
 
 # Blade SMP
-This plugin adds eight custom swords to the game. Each sword gives you a passive and two abilities. All the swords have custom recipes. You can view the abilities and recipes by scrolling down to the images.
+This plugin adds seven custom swords to the game. Each sword gives you a passive and two abilities. All the swords have custom recipes. You can view the abilities and recipes by scrolling down to the images.
 
 ## Abilities
 
@@ -39,6 +39,20 @@ This plugin adds eight custom swords to the game. Each sword gives you a passive
 **Ability One**: Any food you eat will not be consumed while the ability is active, excluding enchanted golden apples. **Duration: 15 seconds. Cooldown: 60 seconds.**
 
 **Ability Two**: All your attacks will get random damage multipliers ranging from 1.1x to 1.3x. **Duration: 15 seconds. Cooldown: 60 seconds.**
+
+### Storm Blade
+**Passive**: Every tenth hit strikes lightning
+
+**Ability One**: Strike lightning every hit while it is active **Duration: 10 seconds. Cooldown: 45 seconds.**
+
+**Ability Two**: Create a thunderstorm around you. You gain Regeneration II and any opponents who enter will gain Weakness I and Slowness I. It will strike lightning on an opponent every second. **Duration: 10 seconds. Cooldown: 60 seconds.**
+
+### Dragon Blade
+**Passive**: Gain Speed II when walking on end stone.
+
+**Ability One**: Create an explosion around you that deals huge damage to opponents and knocks them away **Cooldown: 60 seconds.**
+
+**Ability Two**: All of your hits will become critical hits whilst active. **Duration: 10 seconds. Cooldown: 120 seconds.**
 
 ## Commands
 
