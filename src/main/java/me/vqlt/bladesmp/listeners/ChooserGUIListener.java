@@ -34,6 +34,11 @@ public class ChooserGUIListener implements Listener {
         // Cancel the click action
         event.setCancelled(true);
 
+        // Only process clicks inside the actual Chooser GUI
+        if (event.getClickedInventory() != event.getView().getTopInventory()) {
+            return;
+        }
+
         // If a player did not click the GUI, return
         if (!(event.getWhoClicked() instanceof Player player)) {
             return;
