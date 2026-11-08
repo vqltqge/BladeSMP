@@ -34,17 +34,8 @@ public class CrafterCraftListener implements Listener {
 
         String blade = bladeCraftListener.getBladeID(recipe);
 
-        if (blade == null) {
-            return;
-        }
-
-        boolean enabled = plugin.getRecipesConfig().getBoolean(blade + ".enabled", true);
-
-        if (!enabled || bladeCraftManager.hasReachedLimit(blade)) {
+        if (blade != null) {
             event.setCancelled(true);
-            return;
         }
-
-        bladeCraftManager.incrementCrafted(blade);
     }
 }

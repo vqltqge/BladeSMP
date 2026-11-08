@@ -2,6 +2,7 @@ package me.vqlt.bladesmp.listeners;
 
 import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeCraftManager;
+import me.vqlt.bladesmp.managers.RitualManager;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -15,10 +16,12 @@ import org.bukkit.inventory.Recipe;
 public class BladeCraftListener implements Listener {
     private final BladeSMP plugin;
     private final BladeCraftManager bladeCraftManager;
+    private final RitualManager ritualManager;
 
-    public BladeCraftListener(BladeSMP plugin, BladeCraftManager bladeCraftManager) {
+    public BladeCraftListener(BladeSMP plugin, BladeCraftManager bladeCraftManager, RitualManager ritualManager) {
         this.plugin = plugin;
         this.bladeCraftManager = bladeCraftManager;
+        this.ritualManager = ritualManager;
     }
 
     public String getBladeID(Recipe recipe) {
@@ -101,6 +104,11 @@ public class BladeCraftListener implements Listener {
 
         if (event.getAction() == InventoryAction.NOTHING) {
             return;
+        }
+
+        if (plugin.getConfig().getBoolean("rituals-enabled", true)) {
+            event.setCancelled(true);
+            ritualManager.startRitual();
         }
 
         bladeCraftManager.incrementCrafted(blade);
