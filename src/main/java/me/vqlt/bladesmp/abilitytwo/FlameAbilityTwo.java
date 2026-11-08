@@ -4,6 +4,7 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Location;
@@ -22,6 +23,7 @@ public class FlameAbilityTwo {
     private final CooldownManager cooldownManager;
     private final DurationManager durationManager;
     private final BladeSMP plugin;
+    private final TrustManager trustManager;
 
     // Variables for the config values
     private final double radius;
@@ -32,11 +34,12 @@ public class FlameAbilityTwo {
 
     private static final TextColor FLAME_COLOR = TextColor.fromHexString("#FF4A1C");
 
-    public FlameAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin) {
+    public FlameAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin, TrustManager trustManager) {
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
         this.plugin = plugin;
+        this.trustManager = trustManager;
 
         // Fetches the config values and stores them in variables
         this.radius = plugin.getConfig().getDouble("flame.ability-two.radius", 3.0);
@@ -80,6 +83,10 @@ public class FlameAbilityTwo {
 
             // If the entity is not in a configured radius circle of the player, ignore it
             if (entity.getLocation().distanceSquared(player.getLocation()) > radius * radius) {
+                continue;
+            }
+
+            if (entity instanceof Player victim && trustManager.isTrusted(player.getUniqueId(), victim.getUniqueId())) {
                 continue;
             }
 

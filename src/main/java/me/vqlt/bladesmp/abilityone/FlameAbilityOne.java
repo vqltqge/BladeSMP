@@ -4,6 +4,7 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Sound;
@@ -20,6 +21,7 @@ public class FlameAbilityOne {
     private final BladeManager bladeManager;
     private final CooldownManager cooldownManager;
     private final DurationManager durationManager;
+    private final TrustManager trustManager;
     private final BladeSMP plugin;
 
     // Variables for the config values
@@ -31,10 +33,11 @@ public class FlameAbilityOne {
     // Variable for the colour for the messages
     private static final TextColor FLAME_COLOR = TextColor.fromHexString("#FF4A1C");
 
-    public FlameAbilityOne(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin) {
+    public FlameAbilityOne(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, TrustManager trustManager, BladeSMP plugin) {
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
+        this.trustManager = trustManager;
         this.plugin = plugin;
 
         // Fetches the config values and stores them in variables
@@ -80,6 +83,10 @@ public class FlameAbilityOne {
 
             // Ignores any entities that aren't living (eg arrows)
             if (!(entity instanceof LivingEntity target)) {
+                continue;
+            }
+
+            if (entity instanceof Player victim && trustManager.isTrusted(player.getUniqueId(), victim.getUniqueId())) {
                 continue;
             }
 

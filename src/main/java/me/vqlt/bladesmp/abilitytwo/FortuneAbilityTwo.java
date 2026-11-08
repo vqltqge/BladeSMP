@@ -4,6 +4,7 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
@@ -25,6 +26,7 @@ public class FortuneAbilityTwo implements Listener {
     private final CooldownManager cooldownManager;
     private final DurationManager durationManager;
     private final BladeSMP plugin;
+    private final TrustManager trustManager;
 
     private final long cooldown;
     private final long duration;
@@ -37,11 +39,16 @@ public class FortuneAbilityTwo implements Listener {
     // Set to store armed players
     private final Set<UUID> armedPlayers = new HashSet<>();
 
-    public FortuneAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin) {
+    public Set<UUID> getArmedPlayers() {
+        return armedPlayers;
+    }
+
+    public FortuneAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin, TrustManager trustManager) {
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
         this.plugin = plugin;
+        this.trustManager = trustManager;
 
         // Fetches the config values and stores them in variables
         this.cooldown = plugin.getConfig().getLong("fortune.ability-two.cooldown", 60) * 1000L;
@@ -112,6 +119,10 @@ public class FortuneAbilityTwo implements Listener {
         ItemStack hand = attacker.getInventory().getItemInMainHand();
 
         if (!(bladeManager.isFortuneBlade(hand))) {
+            return;
+        }
+
+        if (trustManager.isTrusted(id, victim.getUniqueId())) {
             return;
         }
 

@@ -4,6 +4,7 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.abilitytwo.FrostAbilityTwo;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.PassiveManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,13 +16,15 @@ public class FrostHitListener implements Listener {
     private final BladeManager bladeManager;
     private final PassiveManager passiveManager;
     private final FrostAbilityTwo frostAbilityTwo;
+    private final TrustManager trustManager;
     private final BladeSMP plugin;
 
-    public FrostHitListener(BladeManager bladeManager, PassiveManager passiveManager, FrostAbilityTwo frostAbilityTwo, BladeSMP plugin) {
+    public FrostHitListener(BladeManager bladeManager, PassiveManager passiveManager, FrostAbilityTwo frostAbilityTwo, BladeSMP plugin, TrustManager trustManager) {
         this.bladeManager = bladeManager;
         this.passiveManager = passiveManager;
         this.frostAbilityTwo = frostAbilityTwo;
         this.plugin = plugin;
+        this.trustManager = trustManager;
     }
 
     @EventHandler
@@ -45,7 +48,7 @@ public class FrostHitListener implements Listener {
         }
 
         // If the victim is in the set of frozen players for frost ability 2, multiply the damage they took by the damage multiplier
-        if (frostAbilityTwo.getFreezePlayers().contains(victim.getUniqueId())) {
+        if (frostAbilityTwo.getFreezePlayers().contains(victim.getUniqueId()) && !trustManager.isTrusted(attacker.getUniqueId(), victim.getUniqueId())) {
             event.setDamage(event.getDamage() * frostAbilityTwo.getDamageMultiplier());
         }
 
@@ -54,6 +57,8 @@ public class FrostHitListener implements Listener {
         }
 
         // Call the method from passive manager to freeze the player
-        passiveManager.freezePassive(victim, attacker);
+        if (!trustManager.isTrusted(attacker.getUniqueId(), victim.getUniqueId())) {
+            passiveManager.freezePassive(victim, attacker);
+        }
     }
 }

@@ -4,6 +4,7 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Sound;
@@ -21,6 +22,7 @@ public class BloomAbilityTwo {
     private final BladeManager bladeManager;
     private final CooldownManager cooldownManager;
     private final DurationManager durationManager;
+    private final TrustManager trustManager;
     private final BladeSMP plugin;
 
     // Variables for the config values
@@ -32,10 +34,11 @@ public class BloomAbilityTwo {
     // Variable for the colour for the messages
     private static final TextColor BLOOM_COLOR = TextColor.fromHexString("#F50CAB");
 
-    public BloomAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin) {
+    public BloomAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin, TrustManager trustManager) {
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
+        this.trustManager = trustManager;
         this.plugin = plugin;
 
         // Fetches the config values and stores them in variables
@@ -83,6 +86,10 @@ public class BloomAbilityTwo {
             // If the entity is not in a configured radius circle of the player, ignore it
             if (entity.getLocation().distanceSquared(player.getLocation()) > radius * radius) {
                 continue;
+            }
+
+            if (target instanceof Player victim && trustManager.isTrusted(player.getUniqueId(), victim.getUniqueId())) {
+                return;
             }
 
             // Get the target's maximum health, and ignore the entity if it doesn't exist

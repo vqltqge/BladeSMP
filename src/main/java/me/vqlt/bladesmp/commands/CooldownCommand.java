@@ -5,10 +5,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CooldownCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class CooldownCommand implements CommandExecutor, TabCompleter {
     // Variables for the classes with the methods needed
     private final CooldownManager cooldownManager;
 
@@ -65,6 +70,23 @@ public class CooldownCommand implements CommandExecutor {
 
         return true;
 
+    }
+
+    @Override
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+
+        List<String> completions = new ArrayList<>();
+
+        if (args.length == 1) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                completions.add(player.getName());
+            }
+
+        }
+
+        String input = args[args.length - 1].toLowerCase();
+
+        return completions.stream().filter(s -> s.toLowerCase().startsWith(input)).collect(Collectors.toList());
     }
 
 }

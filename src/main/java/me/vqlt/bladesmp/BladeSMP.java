@@ -16,6 +16,7 @@ import java.io.IOException;
 public final class BladeSMP extends JavaPlugin {
 
     private FileConfiguration recipesConfig;
+    private TrustManager trustManager;
 
     @Override
     public void onEnable() {
@@ -30,10 +31,12 @@ public final class BladeSMP extends JavaPlugin {
         // Initialise managers
         BladeManager bladeManager = new BladeManager(this);
         PassiveManager passiveManager = new PassiveManager(this);
+        trustManager = new TrustManager(this);
         DurationManager durationManager = new DurationManager(this);
         CooldownManager cooldownManager = new CooldownManager();
         RandomBladeManager randomBladeManager = new RandomBladeManager(this, bladeManager);
         BladeCraftManager bladeCraftManager = new BladeCraftManager(this);
+
 
         // Initialise the recipe manager and register the custom recipes
         RecipeManager recipeManager = new RecipeManager(this, bladeManager);
@@ -42,24 +45,29 @@ public final class BladeSMP extends JavaPlugin {
         // Initialise every ability one
         PulseAbilityOne pulseAbilityOne = new PulseAbilityOne(this, cooldownManager, bladeManager);
         BloomAbilityOne bloomAbilityOne = new BloomAbilityOne(this, bladeManager, cooldownManager, durationManager);
-        FlameAbilityOne flameAbilityOne = new FlameAbilityOne(bladeManager, cooldownManager, durationManager, this);
-        FrostAbilityOne frostAbilityOne = new FrostAbilityOne(this, durationManager, cooldownManager, bladeManager);
+        FlameAbilityOne flameAbilityOne = new FlameAbilityOne(bladeManager, cooldownManager, durationManager, trustManager, this);
+        FrostAbilityOne frostAbilityOne = new FrostAbilityOne(this, trustManager, cooldownManager, bladeManager);
         FortuneAbilityOne fortuneAbilityOne = new FortuneAbilityOne(bladeManager, cooldownManager, durationManager, this);
-        StormAbilityOne stormAbilityOne = new StormAbilityOne(this, bladeManager, cooldownManager, durationManager);
-        DragonAbilityOne dragonAbilityOne = new DragonAbilityOne(bladeManager, cooldownManager, this);
+        StormAbilityOne stormAbilityOne = new StormAbilityOne(this, bladeManager, cooldownManager, durationManager, trustManager);
+        DragonAbilityOne dragonAbilityOne = new DragonAbilityOne(bladeManager, cooldownManager, trustManager, this);
 
         // Initialise every ability two
-        FlameAbilityTwo flameAbilityTwo = new FlameAbilityTwo(bladeManager, cooldownManager, durationManager, this);
-        FrostAbilityTwo frostAbilityTwo = new FrostAbilityTwo(bladeManager, cooldownManager, durationManager, this);
-        BloomAbilityTwo bloomAbilityTwo = new BloomAbilityTwo(bladeManager, cooldownManager, durationManager, this);
-        FortuneAbilityTwo fortuneAbilityTwo = new FortuneAbilityTwo(bladeManager, cooldownManager, durationManager, this);
-        PulseAbilityTwo pulseAbilityTwo = new PulseAbilityTwo(bladeManager, cooldownManager, durationManager, this);
-        StormAbilityTwo stormAbilityTwo = new StormAbilityTwo(bladeManager, cooldownManager, durationManager, this);
+        FlameAbilityTwo flameAbilityTwo = new FlameAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
+        FrostAbilityTwo frostAbilityTwo = new FrostAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
+        BloomAbilityTwo bloomAbilityTwo = new BloomAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
+        FortuneAbilityTwo fortuneAbilityTwo = new FortuneAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
+        PulseAbilityTwo pulseAbilityTwo = new PulseAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
+        StormAbilityTwo stormAbilityTwo = new StormAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
         DragonAbilityTwo dragonAbilityTwo = new DragonAbilityTwo(bladeManager, cooldownManager, durationManager, this);
+
+        durationManager.setStormAbilityOne(stormAbilityOne);
+        durationManager.setDragonAbilityTwo(dragonAbilityTwo);
+        durationManager.setFortuneAbilityTwo(fortuneAbilityTwo);
 
         // Initialise the actionbar manager and passive task, and start them
         ActionBarManager actionBarManager = new ActionBarManager(cooldownManager, durationManager, bladeManager, this);
         actionBarManager.start();
+        trustManager.loadTrustData();
         PassiveTask passiveTask = new PassiveTask(this, passiveManager, bladeManager);
         passiveTask.start();
 
@@ -67,13 +75,23 @@ public final class BladeSMP extends JavaPlugin {
         getCommand("blades").setExecutor(new BladesCommand(bladeManager));
         getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, stormAbilityOne, dragonAbilityOne, this));
         getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, pulseAbilityTwo, bloomAbilityTwo, flameAbilityTwo, frostAbilityTwo, fortuneAbilityTwo, stormAbilityTwo, dragonAbilityTwo, this));
-        getCommand("random").setExecutor(new RandomCommand(randomBladeManager, this));
-        getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
+
+        RandomCommand randomCommand = new RandomCommand(randomBladeManager, this);
+        getCommand("random").setExecutor(randomCommand);
+        getCommand("random").setTabCompleter(randomCommand);
+
+        CooldownCommand cooldownCommand = new CooldownCommand(cooldownManager);
+        getCommand("cooldown").setExecutor(cooldownCommand);
+        getCommand("cooldown").setTabCompleter(cooldownCommand);
+
+        TrustCommand trustCommand = new TrustCommand(trustManager);
+        getCommand("trust").setExecutor(trustCommand);
+        getCommand("trust").setTabCompleter(trustCommand);
 
         // Initialise the listeners
         getServer().getPluginManager().registerEvents(new BladesGUIListener(), this);
         getServer().getPluginManager().registerEvents(new FallDamageListener(bladeManager, this), this);
-        getServer().getPluginManager().registerEvents(new FrostHitListener(bladeManager, passiveManager, frostAbilityTwo, this), this);
+        getServer().getPluginManager().registerEvents(new FrostHitListener(bladeManager, passiveManager, frostAbilityTwo, this, trustManager), this);
         getServer().getPluginManager().registerEvents(new BloomHitListener(this, bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(new FortuneExperienceListener(this, bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne, frostAbilityTwo, passiveManager), this);
@@ -83,10 +101,10 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ChooserGUIListener(bladeManager), this);
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(bladeManager, randomBladeManager), this);
         getServer().getPluginManager().registerEvents(new RandomInventoryListener(randomBladeManager), this);
-        getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager, this, durationManager), this);
+        getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager, this, durationManager, trustManager), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(this, bladeManager), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(bladeManager, this), this);
-        getServer().getPluginManager().registerEvents(new DragonHitListener(dragonAbilityTwo), this);
+        getServer().getPluginManager().registerEvents(new DragonHitListener(dragonAbilityTwo, trustManager), this);
 
         // Initialise the crafting listeners
         BladeCraftListener bladeCraftListener = new BladeCraftListener(this, bladeCraftManager);
@@ -116,6 +134,7 @@ public final class BladeSMP extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        trustManager.saveTrustData();
     }
 }
 

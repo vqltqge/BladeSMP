@@ -1,6 +1,7 @@
 package me.vqlt.bladesmp.listeners;
 
 import me.vqlt.bladesmp.abilitytwo.DragonAbilityTwo;
+import me.vqlt.bladesmp.managers.TrustManager;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -12,9 +13,11 @@ import java.util.UUID;
 
 public class DragonHitListener implements Listener {
     private final DragonAbilityTwo dragonAbilityTwo;
+    private final TrustManager trustManager;
 
-    public DragonHitListener(DragonAbilityTwo dragonAbilityTwo) {
+    public DragonHitListener(DragonAbilityTwo dragonAbilityTwo, TrustManager trustManager) {
         this.dragonAbilityTwo = dragonAbilityTwo;
+        this.trustManager = trustManager;
     }
 
     @EventHandler
@@ -28,6 +31,10 @@ public class DragonHitListener implements Listener {
         }
 
         if (!(event.getEntity() instanceof Player victim)) {
+            return;
+        }
+
+        if (trustManager.isTrusted(attacker.getUniqueId(), victim.getUniqueId())) {
             return;
         }
 

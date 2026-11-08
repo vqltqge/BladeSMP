@@ -4,6 +4,7 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
@@ -21,6 +22,7 @@ public class FrostAbilityTwo {
     private final BladeManager bladeManager;
     private final CooldownManager cooldownManager;
     private final DurationManager durationManager;
+    private final TrustManager trustManager;
     private final BladeSMP plugin;
 
     // A set that stores frozen players
@@ -45,11 +47,12 @@ public class FrostAbilityTwo {
         return damageMultiplier;
     }
 
-    public FrostAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin) {
+    public FrostAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin, TrustManager trustManager) {
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
         this.plugin = plugin;
+        this.trustManager = trustManager;
 
         // Fetches the config values and stores them in variables
         this.cooldown = plugin.getConfig().getLong("frost.ability-two.cooldown", 60) * 1000L;
@@ -97,6 +100,10 @@ public class FrostAbilityTwo {
 
             // If the target is not in the circle of the same radius, ignore it
             if (target.getLocation().distanceSquared(player.getLocation()) > radius * radius) {
+                continue;
+            }
+
+            if (trustManager.isTrusted(player.getUniqueId(), target.getUniqueId())) {
                 continue;
             }
 

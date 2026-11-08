@@ -1,5 +1,8 @@
 package me.vqlt.bladesmp.managers;
 
+import me.vqlt.bladesmp.abilityone.StormAbilityOne;
+import me.vqlt.bladesmp.abilitytwo.DragonAbilityTwo;
+import me.vqlt.bladesmp.abilitytwo.FortuneAbilityTwo;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,12 +19,36 @@ public class DurationManager {
         this.plugin = plugin;
     }
 
+    public void setStormAbilityOne(StormAbilityOne ability) {
+        this.stormAbilityOne = ability;
+    }
+
+    public void setDragonAbilityTwo(DragonAbilityTwo ability) {
+        this.dragonAbilityTwo = ability;
+    }
+
+    public void setFortuneAbilityTwo(FortuneAbilityTwo ability) {
+        this.fortuneAbilityTwo = ability;
+    }
+
     public void startDuration(UUID id, String abilityId, long durationMillis) {
         durations.computeIfAbsent(id, ignored -> new HashMap<>()).put(abilityId, System.currentTimeMillis() + durationMillis);
     }
 
     public boolean isActive(UUID id, String abilityId) {
         return getRemainingMillis(id, abilityId) > 0;
+    }
+
+    public boolean isCharged(UUID id, String abilityID) {
+        if (abilityID.equals("stormone")) {
+            return stormAbilityOne.getArmedPlayers().contains(id);
+        } else if (abilityID.equals("dragontwo")) {
+            return dragonAbilityTwo.armedPlayers.contains(id);
+        } else if (abilityID.equals("fortunetwo")) {
+            return fortuneAbilityTwo.getArmedPlayers().contains(id);
+        }
+
+        return false;
     }
 
     public long getRemainingMillis(UUID id, String abilityId) {

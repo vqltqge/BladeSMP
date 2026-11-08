@@ -4,6 +4,7 @@ import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import me.vqlt.bladesmp.managers.CooldownManager;
 import me.vqlt.bladesmp.managers.DurationManager;
+import me.vqlt.bladesmp.managers.TrustManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
@@ -26,6 +27,7 @@ public class PulseAbilityTwo {
     private final CooldownManager cooldownManager;
     private final DurationManager durationManager;
     private final BladeSMP plugin;
+    private final TrustManager trustManager;
 
     // Variables for the config values
     private final long cooldown;
@@ -39,11 +41,12 @@ public class PulseAbilityTwo {
     // Variable for the colour for the messages
     private static final TextColor PULSE_COLOR = TextColor.fromHexString("#A855F7");
 
-    public PulseAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin) {
+    public PulseAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin, TrustManager trustManager) {
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
         this.durationManager = durationManager;
         this.plugin = plugin;
+        this.trustManager = trustManager;
 
         // Fetches the config values and stores them in variables
         this.cooldown = plugin.getConfig().getLong("pulse.ability-two.cooldown", 60) * 1000L;
@@ -143,6 +146,10 @@ public class PulseAbilityTwo {
 
                         // If the entity is not within the circle of configured radius, ignore it
                         if (entity.getLocation().distanceSquared(center) > radius * radius) {
+                            continue;
+                        }
+
+                        if (target instanceof Player victim && trustManager.isTrusted(player.getUniqueId(), victim.getUniqueId())) {
                             continue;
                         }
 
