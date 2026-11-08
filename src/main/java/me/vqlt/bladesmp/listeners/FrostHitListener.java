@@ -48,7 +48,7 @@ public class FrostHitListener implements Listener {
         }
 
         // If the victim is in the set of frozen players for frost ability 2, multiply the damage they took by the damage multiplier
-        if (frostAbilityTwo.getFreezePlayers().contains(victim.getUniqueId())) {
+        if (frostAbilityTwo.getFreezePlayers().contains(victim.getUniqueId()) && !trustManager.isTrusted(attacker.getUniqueId(), victim.getUniqueId())) {
             event.setDamage(event.getDamage() * frostAbilityTwo.getDamageMultiplier());
         }
 

@@ -104,7 +104,7 @@ public class FrostAbilityTwo {
             }
 
             if (trustManager.isTrusted(player.getUniqueId(), target.getUniqueId())) {
-                return;
+                continue;
             }
 
             // Get the targets UUID, and add them to the freeze players set

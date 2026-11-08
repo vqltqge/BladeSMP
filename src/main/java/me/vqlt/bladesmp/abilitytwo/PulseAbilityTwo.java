@@ -150,7 +150,7 @@ public class PulseAbilityTwo {
                         }
 
                         if (target instanceof Player victim && trustManager.isTrusted(player.getUniqueId(), victim.getUniqueId())) {
-                            return;
+                            continue;
                         }
 
                         // Damage the entity, with the damage source of the player

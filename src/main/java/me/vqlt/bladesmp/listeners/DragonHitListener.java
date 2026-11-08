@@ -34,15 +34,15 @@ public class DragonHitListener implements Listener {
             return;
         }
 
+        if (trustManager.isTrusted(attacker.getUniqueId(), victim.getUniqueId())) {
+            return;
+        }
+
         if (dragonAbilityTwo.armedPlayers.contains(id)) {
             dragonAbilityTwo.removeCharge(attacker, id);
         }
 
         if (!dragonAbilityTwo.activePlayers.contains(attacker.getUniqueId())) {
-            return;
-        }
-
-        if (trustManager.isTrusted(attacker.getUniqueId(), victim.getUniqueId())) {
             return;
         }
 

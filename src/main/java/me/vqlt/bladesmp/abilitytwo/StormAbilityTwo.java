@@ -120,7 +120,7 @@ public class StormAbilityTwo {
                             && target.isOnline()
                             && !target.isDead()
                             && target.getLocation().distanceSquared(player.getLocation()) <= radius * radius
-                            && trustManager.isTrusted(player.getUniqueId(), target.getUniqueId())) {
+                            && !trustManager.isTrusted(player.getUniqueId(), target.getUniqueId())) {
                         targets.add(target);
                     }
                 }
