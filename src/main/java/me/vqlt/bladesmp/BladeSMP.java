@@ -70,9 +70,18 @@ public final class BladeSMP extends JavaPlugin {
         getCommand("blades").setExecutor(new BladesCommand(bladeManager));
         getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, stormAbilityOne, dragonAbilityOne, this));
         getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, pulseAbilityTwo, bloomAbilityTwo, flameAbilityTwo, frostAbilityTwo, fortuneAbilityTwo, stormAbilityTwo, dragonAbilityTwo, this));
-        getCommand("random").setExecutor(new RandomCommand(randomBladeManager, this));
-        getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
-        getCommand("trust").setExecutor(new TrustCommand(trustManager));
+
+        RandomCommand randomCommand = new RandomCommand(randomBladeManager, this);
+        getCommand("random").setExecutor(randomCommand);
+        getCommand("random").setTabCompleter(randomCommand);
+
+        CooldownCommand cooldownCommand = new CooldownCommand(cooldownManager);
+        getCommand("cooldown").setExecutor(cooldownCommand);
+        getCommand("cooldown").setTabCompleter(cooldownCommand);
+
+        TrustCommand trustCommand = new TrustCommand(trustManager);
+        getCommand("trust").setExecutor(trustCommand);
+        getCommand("trust").setTabCompleter(trustCommand);
 
         // Initialise the listeners
         getServer().getPluginManager().registerEvents(new BladesGUIListener(), this);

@@ -6,13 +6,17 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
-public class TrustCommand implements CommandExecutor {
+public class TrustCommand implements CommandExecutor, TabCompleter {
 
     private final TrustManager trustManager;
 
@@ -41,6 +45,7 @@ public class TrustCommand implements CommandExecutor {
             sender.sendMessage("§cUsage: /trust <add/remove/list> <player>");
             return true;
         } else if (args.length == 1) {
+
             if (args[0].equals("list")) {
                 // List trusted players
                 Set<UUID> trustedPlayers = trustManager.getTrustedPlayers(player.getUniqueId());
@@ -110,5 +115,27 @@ public class TrustCommand implements CommandExecutor {
         }
 
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+
+        List<String> completions = new ArrayList<>();
+
+        if (args.length == 1) {
+            completions.add("add");
+            completions.add("remove");
+            completions.add("list");
+
+        } else if (args.length == 2 && (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove"))) {
+
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                completions.add(player.getName());
+            }
+        }
+
+        String input = args[args.length - 1].toLowerCase();
+
+        return completions.stream().filter(s -> s.toLowerCase().startsWith(input)).collect(Collectors.toList());
     }
 }
