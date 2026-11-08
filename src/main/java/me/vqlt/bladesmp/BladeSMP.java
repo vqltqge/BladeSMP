@@ -44,11 +44,11 @@ public final class BladeSMP extends JavaPlugin {
         // Initialise every ability one
         PulseAbilityOne pulseAbilityOne = new PulseAbilityOne(this, cooldownManager, bladeManager);
         BloomAbilityOne bloomAbilityOne = new BloomAbilityOne(this, bladeManager, cooldownManager, durationManager);
-        FlameAbilityOne flameAbilityOne = new FlameAbilityOne(bladeManager, cooldownManager, durationManager, this);
+        FlameAbilityOne flameAbilityOne = new FlameAbilityOne(bladeManager, cooldownManager, durationManager, trustManager, this);
         FrostAbilityOne frostAbilityOne = new FrostAbilityOne(this, trustManager, cooldownManager, bladeManager);
         FortuneAbilityOne fortuneAbilityOne = new FortuneAbilityOne(bladeManager, cooldownManager, durationManager, this);
         StormAbilityOne stormAbilityOne = new StormAbilityOne(this, bladeManager, cooldownManager, durationManager, trustManager);
-        DragonAbilityOne dragonAbilityOne = new DragonAbilityOne(bladeManager, cooldownManager, this);
+        DragonAbilityOne dragonAbilityOne = new DragonAbilityOne(bladeManager, cooldownManager, trustManager, this);
 
         // Initialise every ability two
         FlameAbilityTwo flameAbilityTwo = new FlameAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
@@ -77,7 +77,7 @@ public final class BladeSMP extends JavaPlugin {
         // Initialise the listeners
         getServer().getPluginManager().registerEvents(new BladesGUIListener(), this);
         getServer().getPluginManager().registerEvents(new FallDamageListener(bladeManager, this), this);
-        getServer().getPluginManager().registerEvents(new FrostHitListener(bladeManager, passiveManager, frostAbilityTwo, this), this);
+        getServer().getPluginManager().registerEvents(new FrostHitListener(bladeManager, passiveManager, frostAbilityTwo, this, trustManager), this);
         getServer().getPluginManager().registerEvents(new BloomHitListener(this, bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(new FortuneExperienceListener(this, bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne, frostAbilityTwo, passiveManager), this);
@@ -87,7 +87,7 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ChooserGUIListener(bladeManager), this);
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(bladeManager, randomBladeManager), this);
         getServer().getPluginManager().registerEvents(new RandomInventoryListener(randomBladeManager), this);
-        getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager, this, durationManager), this);
+        getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager, this, durationManager, trustManager), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(this, bladeManager), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(bladeManager, this), this);
         getServer().getPluginManager().registerEvents(new DragonHitListener(dragonAbilityTwo, trustManager), this);
