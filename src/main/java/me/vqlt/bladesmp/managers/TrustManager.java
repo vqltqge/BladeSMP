@@ -41,6 +41,10 @@ public class TrustManager {
         return trustedPlayers.get(owner).remove(target);
     }
 
+    public Set<UUID> getTrustedPlayers(UUID owner) {
+        return trustedPlayers.getOrDefault(owner, Collections.emptySet());
+    }
+
     public boolean isTrusted(UUID owner, UUID target) {
         return !owner.equals(target) && trustedPlayers.containsKey(owner) && trustedPlayers.get(owner).contains(target);
     }
@@ -91,4 +95,5 @@ public class TrustManager {
             trustedPlayers.put(owner, trusted);
         }
     }
+
 }

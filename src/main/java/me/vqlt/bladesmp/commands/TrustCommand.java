@@ -2,11 +2,15 @@ package me.vqlt.bladesmp.commands;
 
 import me.vqlt.bladesmp.managers.TrustManager;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
+import java.util.UUID;
 
 public class TrustCommand implements CommandExecutor {
 
@@ -39,6 +43,21 @@ public class TrustCommand implements CommandExecutor {
         } else if (args.length == 1) {
             if (args[0].equals("list")) {
                 // List trusted players
+                Set<UUID> trustedPlayers = trustManager.getTrustedPlayers(player.getUniqueId());
+
+                if (trustedPlayers.isEmpty()) {
+                    player.sendMessage("§cYou haven't trusted anyone.");
+                    return true;
+                }
+
+                player.sendMessage("§6§lTrusted Players:");
+
+                for (UUID uuid : trustedPlayers) {
+                    OfflinePlayer trustedPlayer = Bukkit.getOfflinePlayer(uuid);
+
+                    player.sendMessage("§7- §f" + trustedPlayer.getName());
+                }
+
             } else {
                 sender.sendMessage("§cUsage: /trust <add/remove/list> <player>");
                 return true;
@@ -54,7 +73,12 @@ public class TrustCommand implements CommandExecutor {
 
                 // Add that player to trust list
                 if (!trustManager.trustPlayer(player.getUniqueId(), target.getUniqueId())) {
-                    player.sendMessage("§cYou cannot trust yourself.");
+                    if (player.getUniqueId().equals(target.getUniqueId())) {
+                        player.sendMessage("§cYou cannot trust yourself.");
+                    } else {
+                        player.sendMessage("§cThat player is already trusted..");
+                    }
+
                 } else {
                     player.sendMessage("§aTrusted " + target.getName());
                 }
@@ -68,6 +92,17 @@ public class TrustCommand implements CommandExecutor {
                 }
 
                 // Remove that player from trust list
+                if (!trustManager.untrustPlayer(player.getUniqueId(), target.getUniqueId())) {
+                    if (player.getUniqueId().equals(target.getUniqueId())) {
+                        player.sendMessage("§cYou cannot untrust yourself.");
+                    } else {
+                        player.sendMessage("§cThat player is not trusted.");
+                    }
+
+                } else {
+                    player.sendMessage("§aUntrusted " + target.getName());
+                }
+
             } else {
                 sender.sendMessage("§cUsage: /trust <add/remove/list> <player>");
                 return true;
