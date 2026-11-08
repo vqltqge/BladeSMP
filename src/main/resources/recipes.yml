@@ -94,8 +94,8 @@ dragon:
     - "CDC"
     - "AEA"
   ingredients:
-    A: dragon_head
+    A: spire_armor_trim_smithing_template
     B: dragon_egg
-    C: spire_armor_trim_smithing_template
+    C: dragon_head
     D: netherite_sword
     E: elytra
