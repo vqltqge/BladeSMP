@@ -470,6 +470,78 @@ public class BladeManager {
         return blade;
     }
 
+    // =========================
+    // DRAGON BLADE
+    // =========================
+
+    public ItemStack createDragonBlade() {
+        ItemStack blade = new ItemStack(Material.NETHERITE_SWORD);
+        ItemMeta meta = blade.getItemMeta();
+
+        meta.setItemModel(new NamespacedKey("bladesmp", "dragon_blade"));
+
+        meta.getPersistentDataContainer().set(
+                bladeKey,
+                PersistentDataType.STRING,
+                "dragonBlade"
+        );
+
+        meta.displayName(
+                Component.text("✦ DRAGON BLADE ✦")
+                        .color(TextColor.fromHexString("#3C096C"))
+                        .decorate(TextDecoration.BOLD)
+                        .decoration(TextDecoration.ITALIC, false)
+        );
+
+        meta.lore(List.of(
+                Component.text("✧ PASSIVE • Voidstride")
+                        .color(TextColor.fromHexString("#5A189A"))
+                        .decorate(TextDecoration.BOLD)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("Gain Speed " + (plugin.getConfig().getLong("dragon.passive.speed-amplifier", 1) + 1) + " when walking on endstone.")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.empty(),
+
+                Component.text("✦ ABILITY I • Dragon's Wrath")
+                        .color(TextColor.fromHexString("#5A189A"))
+                        .decorate(TextDecoration.BOLD)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("Release a burst of dragon energy that knocks enemies back.")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("dragon.ability-one.cooldown", 60) + "s")
+                        .color(NamedTextColor.DARK_GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.empty(),
+
+                Component.text("◆ ABILITY II • Dragon's Fury")
+                        .color(TextColor.fromHexString("#5A189A"))
+                        .decorate(TextDecoration.BOLD)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("All of your hits become critical hits")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("Duration: " + plugin.getConfig().getInt("dragon.ability-two.duration", 10) + "s")
+                        .color(NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false),
+
+                Component.text("⌛ Cooldown: " + plugin.getConfig().getLong("dragon.ability-two.cooldown", 120) + "s")
+                        .color(NamedTextColor.DARK_GRAY)
+                        .decoration(TextDecoration.ITALIC, false)
+        ));
+
+        blade.setItemMeta(meta);
+        return blade;
+    }
+
 
     // =========================
     // BLADE CHOOSER
@@ -539,6 +611,10 @@ public class BladeManager {
         return isBlade(item, "stormBlade");
     }
 
+    public boolean isDragonBlade(ItemStack item) {
+        return isBlade(item, "dragonBlade");
+    }
+
     public boolean isRandomiser(ItemStack item) {
         return isBlade(item, "bladeRandomiser");
     }
@@ -554,4 +630,9 @@ public class BladeManager {
 
         return type.equals(bladeType);
     }
+
+    public boolean isAnyBlade(ItemStack item) {
+        return item != null && item.hasItemMeta() && item.getItemMeta().getPersistentDataContainer().has(bladeKey, PersistentDataType.STRING);
+    }
 }
+

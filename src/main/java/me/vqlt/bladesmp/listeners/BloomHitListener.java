@@ -38,6 +38,10 @@ public class BloomHitListener implements Listener {
     @EventHandler
     public void onMeleeHit(EntityDamageByEntityEvent event) {
 
+        if (!plugin.getConfig().getBoolean("bloom.passive.enabled", true)) {
+            return;
+        }
+
         // Returns if the entity who dealt the damage is not a player or the entity that was damaged is not a player
         if (!(event.getDamager() instanceof Player attacker)) {
             return;

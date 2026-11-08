@@ -21,6 +21,7 @@ public class PassiveManager {
     private final int frostHitsToFreeze;
     private final int staticHitsToStrike;
     private final double passiveFreezeDuration;
+    private final int dragonPassiveAmplifier;
 
     public Set<UUID> getPassiveFreezePlayers() {
         return passiveFreezePlayers;
@@ -31,6 +32,7 @@ public class PassiveManager {
         this.staticHitsToStrike = plugin.getConfig().getInt("storm.passive.hits-to-strike", 10);
         this.frostHitsToFreeze = plugin.getConfig().getInt("frost.passive.hits-to-freeze", 10);
         this.passiveFreezeDuration = plugin.getConfig().getDouble("frost.passive.freeze-duration", 0.5) * 20L;
+        this.dragonPassiveAmplifier = plugin.getConfig().getInt("dragon.passive.speed-amplifier", 1);
     }
 
     public void freezePassive(Player target, Player damager) {
@@ -77,5 +79,7 @@ public class PassiveManager {
         player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 40, 0));
     }
 
-
+    public void dragonPassive(Player player) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, dragonPassiveAmplifier));
+    }
 }

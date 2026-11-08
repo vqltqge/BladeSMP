@@ -28,7 +28,7 @@ public class BladesGUI implements InventoryHolder {
             inventory.setItem(i, new ItemStack(Material.CYAN_STAINED_GLASS_PANE));
         }
 
-        for (int i = 16; i <= 26; i++) {
+        for (int i = 17; i <= 26; i++) {
             inventory.setItem(i, new ItemStack(Material.CYAN_STAINED_GLASS_PANE));
         }
 
@@ -39,6 +39,7 @@ public class BladesGUI implements InventoryHolder {
         inventory.setItem(13, bladeManager.createBloomBlade());
         inventory.setItem(14, bladeManager.createPulseBlade());
         inventory.setItem(15, bladeManager.createFortuneBlade());
+        inventory.setItem(16, bladeManager.createDragonBlade());
         inventory.setItem(22, bladeManager.createBladeChooser());
 
     }

@@ -11,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
 
 public final class BladeSMP extends JavaPlugin {
 
@@ -33,6 +34,7 @@ public final class BladeSMP extends JavaPlugin {
         DurationManager durationManager = new DurationManager(this);
         CooldownManager cooldownManager = new CooldownManager();
         RandomBladeManager randomBladeManager = new RandomBladeManager(this, bladeManager);
+        BladeCraftManager bladeCraftManager = new BladeCraftManager(this);
 
         // Initialise the recipe manager and register the custom recipes
         RecipeManager recipeManager = new RecipeManager(this, bladeManager);
@@ -45,6 +47,7 @@ public final class BladeSMP extends JavaPlugin {
         FrostAbilityOne frostAbilityOne = new FrostAbilityOne(this, durationManager, cooldownManager, bladeManager);
         FortuneAbilityOne fortuneAbilityOne = new FortuneAbilityOne(bladeManager, cooldownManager, durationManager, this);
         StormAbilityOne stormAbilityOne = new StormAbilityOne(this, bladeManager, cooldownManager, durationManager);
+        DragonAbilityOne dragonAbilityOne = new DragonAbilityOne(bladeManager, cooldownManager, this);
 
         // Initialise every ability two
         FlameAbilityTwo flameAbilityTwo = new FlameAbilityTwo(bladeManager, cooldownManager, durationManager, this);
@@ -53,6 +56,7 @@ public final class BladeSMP extends JavaPlugin {
         FortuneAbilityTwo fortuneAbilityTwo = new FortuneAbilityTwo(bladeManager, cooldownManager, durationManager, this);
         PulseAbilityTwo pulseAbilityTwo = new PulseAbilityTwo(bladeManager, cooldownManager, durationManager, this);
         StormAbilityTwo stormAbilityTwo = new StormAbilityTwo(bladeManager, cooldownManager, durationManager, this);
+        DragonAbilityTwo dragonAbilityTwo = new DragonAbilityTwo(bladeManager, cooldownManager, durationManager, this);
 
         // Initialise the actionbar manager and passive task, and start them
         ActionBarManager actionBarManager = new ActionBarManager(cooldownManager, durationManager, bladeManager, this);
@@ -62,15 +66,15 @@ public final class BladeSMP extends JavaPlugin {
 
         // Initialise the commands
         getCommand("blades").setExecutor(new BladesCommand(bladeManager));
-        getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, stormAbilityOne));
-        getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, flameAbilityTwo, frostAbilityTwo, bloomAbilityTwo, fortuneAbilityTwo, pulseAbilityTwo, stormAbilityTwo));
+        getCommand("ability1").setExecutor(new AbilityOneCommand(bladeManager, pulseAbilityOne, bloomAbilityOne, flameAbilityOne, frostAbilityOne, fortuneAbilityOne, stormAbilityOne, dragonAbilityOne, this));
+        getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, pulseAbilityTwo, bloomAbilityTwo, flameAbilityTwo, frostAbilityTwo, fortuneAbilityTwo, stormAbilityTwo, dragonAbilityTwo, this));
         getCommand("random").setExecutor(new RandomCommand(randomBladeManager, this));
         getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
 
         // Initialise the listeners
         getServer().getPluginManager().registerEvents(new BladesGUIListener(), this);
-        getServer().getPluginManager().registerEvents(new FallDamageListener(bladeManager), this);
-        getServer().getPluginManager().registerEvents(new FrostHitListener(bladeManager, passiveManager, frostAbilityTwo), this);
+        getServer().getPluginManager().registerEvents(new FallDamageListener(bladeManager, this), this);
+        getServer().getPluginManager().registerEvents(new FrostHitListener(bladeManager, passiveManager, frostAbilityTwo, this), this);
         getServer().getPluginManager().registerEvents(new BloomHitListener(this, bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(new FortuneExperienceListener(this, bladeManager, passiveManager), this);
         getServer().getPluginManager().registerEvents(new FrostMoveListener(frostAbilityOne, frostAbilityTwo, passiveManager), this);
@@ -80,12 +84,34 @@ public final class BladeSMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ChooserGUIListener(bladeManager), this);
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(bladeManager, randomBladeManager), this);
         getServer().getPluginManager().registerEvents(new RandomInventoryListener(randomBladeManager), this);
-        getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager), this);
+        getServer().getPluginManager().registerEvents(new StaticHitListener(bladeManager, passiveManager, this, durationManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerDeathListener(this, bladeManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(bladeManager, this), this);
+        getServer().getPluginManager().registerEvents(new DragonHitListener(dragonAbilityTwo), this);
+
+        // Initialise the crafting listeners
+        BladeCraftListener bladeCraftListener = new BladeCraftListener(this, bladeCraftManager);
+
+        getServer().getPluginManager().registerEvents(bladeCraftListener, this);
+        getServer().getPluginManager().registerEvents(
+                new CrafterCraftListener(this, bladeCraftManager, bladeCraftListener),
+                this
+        );
     }
+
 
     // Create a getter for the recipe config
     public FileConfiguration getRecipesConfig() {
         return recipesConfig;
+    }
+
+    public void saveRecipesConfig() {
+        try {
+            recipesConfig.save(new File(getDataFolder(), "recipes.yml"));
+        } catch (IOException e) {
+            getLogger().severe("Could not save recipes.yml!");
+            e.printStackTrace();
+        }
     }
 
     @Override

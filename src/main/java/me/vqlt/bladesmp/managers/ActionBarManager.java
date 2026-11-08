@@ -25,6 +25,7 @@ public class ActionBarManager {
     private static final TextColor PULSE_COLOR = TextColor.fromHexString("#A855F7");
     private static final TextColor FORTUNE_COLOR = TextColor.fromHexString("#FFD700");
     private static final TextColor STORM_COLOR = TextColor.fromHexString("#A0C4FF");
+    private static final TextColor DRAGON_COLOR = TextColor.fromHexString("#5A189A");
 
     private static final TextColor READY_COLOR = TextColor.fromHexString("#00ff00");
     private static final TextColor ACTIVE_COLOR = TextColor.fromHexString("#ff0000");
@@ -64,6 +65,8 @@ public class ActionBarManager {
                         sendAbilityBar(player, "★ Conservation", "fortuneone", "★ Lucky Strike", "fortunetwo", FORTUNE_COLOR);
                     } else if (bladeManager.isStormBlade(hand)) {
                         sendAbilityBar(player, "⚡ Overcharge", "stormone", "⚡ Thunderfield", "stormtwo", STORM_COLOR);
+                    } else if (bladeManager.isDragonBlade(hand)) {
+                        sendAbilityBar(player, "☄ Dragon's Wrath", "dragonone", "☄ Dragon's Fury", "dragontwo", DRAGON_COLOR);
                     }
                 }
             }
