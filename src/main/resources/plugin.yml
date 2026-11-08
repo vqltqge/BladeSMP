@@ -25,3 +25,7 @@ commands:
   random:
     description: Rolls a random blade for the player specified, if none are specified it will roll a random blade for everyone
     usage: /random [player]
+
+  trust:
+    description: Can be used to add a player to, remove a player from or view the trust list
+    usage: /trust <add/remove/list> [player]

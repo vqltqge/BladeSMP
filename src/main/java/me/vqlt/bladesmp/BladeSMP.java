@@ -16,6 +16,7 @@ import java.io.IOException;
 public final class BladeSMP extends JavaPlugin {
 
     private FileConfiguration recipesConfig;
+    private TrustManager trustManager;
 
     @Override
     public void onEnable() {
@@ -34,6 +35,7 @@ public final class BladeSMP extends JavaPlugin {
         CooldownManager cooldownManager = new CooldownManager();
         RandomBladeManager randomBladeManager = new RandomBladeManager(this, bladeManager);
         BladeCraftManager bladeCraftManager = new BladeCraftManager(this);
+        trustManager = new TrustManager(this);
 
         // Initialise the recipe manager and register the custom recipes
         RecipeManager recipeManager = new RecipeManager(this, bladeManager);
@@ -60,6 +62,7 @@ public final class BladeSMP extends JavaPlugin {
         // Initialise the actionbar manager and passive task, and start them
         ActionBarManager actionBarManager = new ActionBarManager(cooldownManager, durationManager, bladeManager, this);
         actionBarManager.start();
+        trustManager.loadTrustData();
         PassiveTask passiveTask = new PassiveTask(this, passiveManager, bladeManager);
         passiveTask.start();
 
@@ -69,6 +72,7 @@ public final class BladeSMP extends JavaPlugin {
         getCommand("ability2").setExecutor(new AbilityTwoCommand(bladeManager, pulseAbilityTwo, bloomAbilityTwo, flameAbilityTwo, frostAbilityTwo, fortuneAbilityTwo, stormAbilityTwo, dragonAbilityTwo, this));
         getCommand("random").setExecutor(new RandomCommand(randomBladeManager, this));
         getCommand("cooldown").setExecutor(new CooldownCommand(cooldownManager));
+        getCommand("trust").setExecutor(new TrustCommand(trustManager));
 
         // Initialise the listeners
         getServer().getPluginManager().registerEvents(new BladesGUIListener(), this);
@@ -116,6 +120,7 @@ public final class BladeSMP extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        trustManager.saveTrustData();
     }
 }
 
