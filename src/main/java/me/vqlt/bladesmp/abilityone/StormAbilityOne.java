@@ -39,6 +39,9 @@ public class StormAbilityOne implements Listener {
     private final Set<UUID> armedPlayers = new HashSet<>();
     private final Map<UUID, Integer> hitCount = new HashMap<>();
 
+    public Set<UUID> getArmedPlayers() {
+        return armedPlayers;
+    }
 
     public StormAbilityOne(BladeSMP plugin, BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, TrustManager trustManager) {
         this.plugin = plugin;

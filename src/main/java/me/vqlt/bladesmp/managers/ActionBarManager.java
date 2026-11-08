@@ -29,7 +29,9 @@ public class ActionBarManager {
 
     private static final TextColor READY_COLOR = TextColor.fromHexString("#00ff00");
     private static final TextColor ACTIVE_COLOR = TextColor.fromHexString("#ff0000");
+    private static final TextColor CHARGED_COLOR = TextColor.fromHexString("#00BFA6");
     private static final TextColor COOLDOWN_COLOR = TextColor.color(NamedTextColor.GRAY);
+
 
     public ActionBarManager(CooldownManager cooldownManager, DurationManager durationManager, BladeManager bladeManager, BladeSMP plugin) {
         this.cooldownManager = cooldownManager;
@@ -95,6 +97,11 @@ public class ActionBarManager {
         // If the ability is already active, return the component "Active" in a red color and in bold
         if (durationManager.isActive(id, abilityKey)) {
             return Component.text("Active").color(ACTIVE_COLOR).decorate(TextDecoration.BOLD);
+        }
+
+        // If the ability is charged, return the component "Charged" in a teal color and in bold
+        if (durationManager.isCharged(id, abilityKey)) {
+            return Component.text("Charged").color(CHARGED_COLOR).decorate(TextDecoration.BOLD);
         }
 
         // If the ability is on cooldown, return the number of seconds remaining to 1dp in a gray color and in bold

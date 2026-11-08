@@ -31,11 +31,12 @@ public final class BladeSMP extends JavaPlugin {
         // Initialise managers
         BladeManager bladeManager = new BladeManager(this);
         PassiveManager passiveManager = new PassiveManager(this);
+        trustManager = new TrustManager(this);
         DurationManager durationManager = new DurationManager(this);
         CooldownManager cooldownManager = new CooldownManager();
         RandomBladeManager randomBladeManager = new RandomBladeManager(this, bladeManager);
         BladeCraftManager bladeCraftManager = new BladeCraftManager(this);
-        trustManager = new TrustManager(this);
+
 
         // Initialise the recipe manager and register the custom recipes
         RecipeManager recipeManager = new RecipeManager(this, bladeManager);
@@ -58,6 +59,10 @@ public final class BladeSMP extends JavaPlugin {
         PulseAbilityTwo pulseAbilityTwo = new PulseAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
         StormAbilityTwo stormAbilityTwo = new StormAbilityTwo(bladeManager, cooldownManager, durationManager, this, trustManager);
         DragonAbilityTwo dragonAbilityTwo = new DragonAbilityTwo(bladeManager, cooldownManager, durationManager, this);
+
+        durationManager.setStormAbilityOne(stormAbilityOne);
+        durationManager.setDragonAbilityTwo(dragonAbilityTwo);
+        durationManager.setFortuneAbilityTwo(fortuneAbilityTwo);
 
         // Initialise the actionbar manager and passive task, and start them
         ActionBarManager actionBarManager = new ActionBarManager(cooldownManager, durationManager, bladeManager, this);

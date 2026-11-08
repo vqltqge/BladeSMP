@@ -39,6 +39,10 @@ public class FortuneAbilityTwo implements Listener {
     // Set to store armed players
     private final Set<UUID> armedPlayers = new HashSet<>();
 
+    public Set<UUID> getArmedPlayers() {
+        return armedPlayers;
+    }
+
     public FortuneAbilityTwo(BladeManager bladeManager, CooldownManager cooldownManager, DurationManager durationManager, BladeSMP plugin, TrustManager trustManager) {
         this.bladeManager = bladeManager;
         this.cooldownManager = cooldownManager;
