@@ -1,5 +1,6 @@
 package me.vqlt.bladesmp.other;
 
+import me.vqlt.bladesmp.BladeSMP;
 import me.vqlt.bladesmp.managers.BladeManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -14,9 +15,11 @@ import org.jetbrains.annotations.NotNull;
 public class ChooserGUI implements InventoryHolder {
     private final Inventory inventory;
     private final BladeManager bladeManager;
+    private final BladeSMP plugin;
 
-    public ChooserGUI(BladeManager bladeManager) {
+    public ChooserGUI(BladeManager bladeManager, BladeSMP plugin) {
         this.bladeManager = bladeManager;
+        this.plugin = plugin;
 
         inventory = Bukkit.createInventory(this, 27, Component.text("Blades").color(NamedTextColor.DARK_RED).decoration(TextDecoration.BOLD, true));
 
@@ -38,6 +41,9 @@ public class ChooserGUI implements InventoryHolder {
         inventory.setItem(13, bladeManager.createBloomBlade());
         inventory.setItem(14, bladeManager.createPulseBlade());
         inventory.setItem(15, bladeManager.createFortuneBlade());
+        if (plugin.getConfig().getBoolean("dragon-blade-chooser")) {
+            inventory.setItem(16, bladeManager.createDragonBlade());
+        }
 
     }
 

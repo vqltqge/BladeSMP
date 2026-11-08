@@ -20,6 +20,10 @@ random-first-join-blade: false
 # If all players should receive a blade selector when they join for the first time
 first-join-blade-selector: false
 
+# If it is possible to obtain the dragon blade from the blade chooser or randomiser
+dragon-blade-chooser: false
+dragon-blade-randomiser: false
+
 # ==============================
 #          BLOOM BLADE
 # ==============================
