@@ -24,12 +24,6 @@ first-join-blade-selector: false
 dragon-blade-chooser: false
 dragon-blade-randomiser: false
 
-rituals-enabled: true
-# Should all blades have rituals, or only the first blade that is crafted
-first-blade-only: true
-# How many seconds should the ritual last (1800s = 30m)
-ritual-timer: 1800
-
 # ==============================
 #          BLOOM BLADE
 # ==============================
