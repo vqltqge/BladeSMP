@@ -39,7 +39,7 @@ public class DragonAbilityTwo {
 
         this.cooldown = plugin.getConfig().getLong("dragon.ability-two.cooldown", 120) * 1000L;
         this.duration = plugin.getConfig().getLong("dragon.ability-two.duration", 10) * 1000L;
-        this.chargeDuration = plugin.getConfig().getLong("dragon.ability-two.charge-duration", 10) * 1000L;
+        this.chargeDuration = plugin.getConfig().getLong("dragon.ability-two.charge-duration", 60) * 1000L;
     }
 
     public void activate(Player player) {

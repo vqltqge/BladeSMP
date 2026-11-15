@@ -260,5 +260,5 @@ dragon:
     enabled: true
     cooldown: 120
     duration: 10
-    charge-duration: 10
+    charge-duration: 60
 
